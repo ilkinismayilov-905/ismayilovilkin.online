@@ -71,6 +71,57 @@ kbd{font:inherit;font-size:.78em;border:1px solid var(--glass-border);background
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media (prefers-reduced-transparency:reduce){ .backdrop img{display:none} }
 
+/* ---------- Full-page photo background (replaces the tiny backdrop and the About photo frame) ---------- */
+.photo-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--bg);--photo-opacity:.62}
+.photo-bg picture{position:absolute;inset:0;transition:opacity .9s var(--ease)}
+.scrim-strong{position:absolute;inset:0;z-index:2;background:rgba(15,30,27,.62);transition:opacity .9s var(--ease)}
+.photo-bg[data-scrim="soft"] .scrim-strong{opacity:0}
+:root[data-theme="light"] .scrim-strong{background:rgba(233,238,232,.86)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .scrim-strong{background:rgba(233,238,232,.86)}}
+/* Over a photo the header needs a sturdier fill to keep its labels readable */
+body:has(.photo-bg) .bar.glass{background:var(--glass-strong)}
+.photo-bg picture[data-hidden]{opacity:0}
+.photo-bg img{width:100%;height:100%;object-fit:cover;object-position:85% 35%;display:block;opacity:var(--photo-opacity);
+  transform:scale(var(--settle,1.05));transform-origin:70% 40%;transition:transform .3s linear}
+/* Pine scrim: strongest behind the text column (left on landscape screens), plus top and bottom */
+.photo-bg::after{content:"";position:absolute;inset:0;z-index:1;background:
+  linear-gradient(90deg,rgba(15,30,27,.9) 0%,rgba(15,30,27,.82) 42%,rgba(15,30,27,.5) 66%,rgba(15,30,27,.32) 100%),
+  linear-gradient(180deg,rgba(15,30,27,.4) 0%,transparent 22%,transparent 78%,rgba(15,30,27,.5) 100%)}
+.photo-bg::before{content:"";position:absolute;inset:0;z-index:3;opacity:.09;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (max-aspect-ratio:1/1){
+  .photo-bg::after{background:linear-gradient(180deg,rgba(15,30,27,.76) 0%,rgba(15,30,27,.8) 35%,rgba(15,30,27,.84) 100%)}
+}
+:root[data-theme="light"] .photo-bg{--photo-opacity:.5}
+:root[data-theme="light"] .photo-bg::after{background:
+  linear-gradient(90deg,rgba(233,238,232,.92) 0%,rgba(233,238,232,.85) 42%,rgba(233,238,232,.55) 66%,rgba(233,238,232,.38) 100%),
+  linear-gradient(180deg,rgba(233,238,232,.45) 0%,transparent 22%,transparent 78%,rgba(233,238,232,.55) 100%)}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .photo-bg{--photo-opacity:.5}
+  :root:not([data-theme="dark"]) .photo-bg::after{background:
+    linear-gradient(90deg,rgba(233,238,232,.92) 0%,rgba(233,238,232,.85) 42%,rgba(233,238,232,.55) 66%,rgba(233,238,232,.38) 100%),
+    linear-gradient(180deg,rgba(233,238,232,.45) 0%,transparent 22%,transparent 78%,rgba(233,238,232,.55) 100%)}
+}
+@media (max-aspect-ratio:1/1){
+  :root[data-theme="light"] .photo-bg::after{background:linear-gradient(180deg,rgba(233,238,232,.66) 0%,rgba(233,238,232,.84) 35%,rgba(233,238,232,.88) 100%)}
+}
+@media (max-aspect-ratio:1/1) and (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .photo-bg::after{background:linear-gradient(180deg,rgba(233,238,232,.66) 0%,rgba(233,238,232,.84) 35%,rgba(233,238,232,.88) 100%)}
+}
+@media (prefers-reduced-motion:reduce){ .photo-bg img{transform:none} }
+@media (prefers-reduced-transparency:reduce){ .photo-bg picture{display:none} }
+
+.bg-caption{display:inline-block;margin:1.5rem 0 0;border-radius:var(--r-s);padding:.35rem .7rem;font-size:.8rem;color:var(--text);background:var(--glass-strong)}
+.contact > .bg-caption{margin-top:1.25rem}
+
+/* About in the prototype layout */
+.about-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.about-text .chapter{margin-bottom:clamp(2.5rem,6vh,4rem)}
+.about-text .chapter p{margin:0 0 1.2rem;max-width:36rem;font-size:clamp(1.08rem,1rem + .35vw,1.25rem)}
+.about-text .chapter p:last-of-type{margin-bottom:0}
+.about-text .chapter h3{margin:0 0 .6rem;font-family:var(--display);font-weight:650;font-size:1.35rem;font-variation-settings:"wdth" 108}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr}}
+
 /* ---------- Header ---------- */
 .bar{position:sticky;top:.75rem;z-index:30;margin:.75rem auto 0;max-width:min(82rem,calc(100% - 1.5rem));border-radius:999px}
 .bar-inner{display:flex;align-items:center;gap:1.5rem;height:3.4rem;padding-inline:1.25rem .5rem}
@@ -133,7 +184,8 @@ kbd{font:inherit;font-size:.78em;border:1px solid var(--glass-border);background
   :root:not([data-theme="dark"]) .tint::after{background:linear-gradient(180deg,rgba(24,54,49,.22),transparent 32%),linear-gradient(160deg, rgba(255,184,107,.45), transparent 45%, rgba(15,30,27,.55))}
 }
 .portrait-ring{position:absolute;inset:-14px;border-radius:999px 999px calc(var(--r-l) + 14px) calc(var(--r-l) + 14px);border:1px solid var(--glass-border);pointer-events:none}
-.tag{position:absolute;right:-.5rem;top:18%;z-index:2;border-radius:var(--r-s);padding:.5rem .75rem;font-size:.85rem;line-height:1.3;max-width:11rem}
+/* Stronger fill: the tag sits on the photo, which can be a bright wall */
+.tag{position:absolute;right:-.5rem;top:18%;z-index:2;border-radius:var(--r-s);padding:.5rem .75rem;font-size:.85rem;line-height:1.3;max-width:11rem;background:var(--glass-strong)}
 .tag strong{display:block;font-family:var(--display);font-weight:650;font-size:1rem;white-space:nowrap}
 
 @media (max-width:880px){

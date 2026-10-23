@@ -1,13 +1,15 @@
 ---
 import { getProjects, getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
+import BgCaption from './BgCaption.astro';
 
-interface Props { locale: Locale }
-const { locale } = Astro.props;
+interface Props { locale: Locale; photoBg?: boolean }
+const { locale, photoBg = false } = Astro.props;
+const bgName = (await getSingle('site', locale)).data.sectionBackgrounds.awards;
 const t = useT(locale);
 const { items } = (await getSingle('awards', locale)).data;
 const titles = new Map((await getProjects(locale)).map((p) => [projectSlug(p), p.data.title]));
 ---
-<section id="awards" aria-labelledby="aw-h">
+<section id="awards" aria-labelledby="aw-h" data-bg={bgName}>
   <div class="wrap">
     <div class="s-head"><h2 id="aw-h" tabindex="-1">{t('awards.title')}</h2></div>
     <ul class="list">
@@ -26,5 +28,6 @@ const titles = new Map((await getProjects(locale)).map((p) => [projectSlug(p), p
         </li>
       ))}
     </ul>
+    {photoBg && <BgCaption locale={locale} name={bgName} />}
   </div>
 </section>

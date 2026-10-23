@@ -7,6 +7,7 @@ import { initCaseDialog, initFilters, initPreview, type Category } from './work'
 import { initBackdrop, initNavCurrent, initStory, initTimeline } from './scroll';
 import { initPalette, type Command } from './palette';
 import { initPageTransitions } from './transitions';
+import { initPhotoBackground } from './photo-bg';
 
 export function init() {
   const d = readData();
@@ -22,6 +23,7 @@ export function init() {
   const dialog = initCaseDialog(hidePreview);
   initTimeline();
   initBackdrop();
+  initPhotoBackground();
   initStory(t);
   initPageTransitions();
 

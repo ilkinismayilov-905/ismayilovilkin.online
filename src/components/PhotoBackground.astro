@@ -1,0 +1,25 @@
+---
+import { backgroundSets } from '../lib/backgrounds';
+import { getSingle, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const site = (await getSingle('site', Astro.props.locale)).data;
+const sets = await backgroundSets(site.backgrounds);
+const first = site.sectionBackgrounds.hero;
+const s = sets[first];
+if (!s) throw new Error(`No background "${first}"`);
+const WIDE = '(min-aspect-ratio: 1/1)';
+---
+<!-- Full-page photo background: decorative, behind all content. The script adds a second layer for crossfades. -->
+<div class="photo-bg" id="photoBg" aria-hidden="true" data-current={first}>
+  <!-- Extra scrim for parts whose text runs the full width; default on, so the page stays readable without JS -->
+  <div class="scrim-strong"></div>
+  <picture>
+    <source media={WIDE} type="image/avif" srcset={s.wideAvif} sizes="100vw" />
+    <source media={WIDE} type="image/webp" srcset={s.wideWebp} sizes="100vw" />
+    <source type="image/avif" srcset={s.tallAvif} sizes="100vw" />
+    <source type="image/webp" srcset={s.tallWebp} sizes="100vw" />
+    <img src={s.fallback} alt="" decoding="async" fetchpriority="low" />
+  </picture>
+</div>
+<script type="application/json" id="bg-data" set:html={JSON.stringify(sets)} />

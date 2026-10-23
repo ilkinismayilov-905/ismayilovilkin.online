@@ -6,9 +6,9 @@ import { getSingle, useT, type Locale } from '../i18n/utils';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useT(locale);
-const { person, hero, status } = (await getSingle('site', locale)).data;
+const { person, hero, status, sectionBackgrounds } = (await getSingle('site', locale)).data;
 ---
-<div class="hero wrap" id="top" data-backdrop={heroBackdrop.src}>
+<div class="hero wrap" id="top" data-backdrop={heroBackdrop.src} data-bg={sectionBackgrounds.hero} data-scrim="soft">
   <div class="hero-copy">
     <p class="hello">{t('hero.hello')}</p>
     <h1 class="name loading" id="name">

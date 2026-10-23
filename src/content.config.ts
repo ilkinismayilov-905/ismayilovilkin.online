@@ -25,6 +25,8 @@ const site = defineCollection({
       }),
       status: z.object({ now: z.string(), focus: z.string(), next: z.string(), easterEgg: z.string() }),
       work: z.object({ note: z.string() }),
+      backgrounds: z.record(z.string(), z.strictObject({ caption: z.string(), desktop: z.string(), mobile: z.string() })),
+      sectionBackgrounds: z.strictObject({ hero: z.string(), work: z.string(), experience: z.string(), awards: z.string(), contact: z.string() }),
       contact: z.object({
         note: z.string(),
         photo: image(),
@@ -40,7 +42,7 @@ const about = defineCollection({
   schema: ({ image }) =>
     z.object({
       chapters: z
-        .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), photo: image(), alt: z.string(), caption: z.string() }))
+        .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), photo: image(), background: z.string(), alt: z.string(), caption: z.string() }))
         .length(3),
       principles: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
       // Enhancement 5: exactly the CV's skill groups and wording; no levels

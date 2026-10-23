@@ -14,6 +14,7 @@ const outDir = join(root, 'src/assets/photos');
 const MAX_EDGE = 2400;
 
 await mkdir(join(outDir, 'backdrop'), { recursive: true });
+await mkdir(join(outDir, 'bg'), { recursive: true });
 const tmp = await mkdtemp(join(tmpdir(), 'photos-'));
 
 try {
@@ -42,6 +43,25 @@ try {
       .jpeg({ quality: 90, mozjpeg: true })
       .toFile(out);
     console.log(`${p.source} -> ${p.name}.jpg ${info.width}x${info.height}`);
+
+    if (p.background) {
+      // Full-page background, one shared treatment: muted colour and a light pre-baked blur (no runtime blur).
+      const treat = (img) => img.modulate({ saturation: 0.6 }).blur(2);
+      // Wide (landscape screens): the photo flush right on a 16:10 canvas. The left side continues the photo's
+      // own left edge (a stretched, blurred strip), so the face sits away from the text column with no seam.
+      const W = 2400, H = 1500;
+      const photo = await sharp(upright.data).resize({ height: H }).toBuffer({ resolveWithObject: true });
+      const pw = photo.info.width, feather = Math.round(pw * 0.35);
+      const strip = await sharp(photo.data).extract({ left: 0, top: 0, width: Math.max(8, Math.round(pw * 0.06)), height: H }).toBuffer();
+      const base = await sharp(strip).resize(W, H, { fit: 'fill' }).blur(30).modulate({ brightness: 0.8 }).toBuffer();
+      const fade = Buffer.from(`<svg width="${pw}" height="${H}"><defs><linearGradient id="g"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="${(feather / pw).toFixed(3)}" stop-color="#fff" stop-opacity="1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`);
+      const faded = await sharp(photo.data).ensureAlpha().composite([{ input: fade, blend: 'dest-in' }]).png().toBuffer();
+      const wide = await sharp(base).composite([{ input: faded, left: W - pw, top: 0 }]).toBuffer();
+      await treat(sharp(wide)).jpeg({ quality: 86, mozjpeg: true }).toFile(join(outDir, 'bg', `${p.name}-wide.jpg`));
+      // Tall (phones): the full upright frame
+      await treat(sharp(upright.data).resize({ width: 1600, withoutEnlargement: true })).jpeg({ quality: 86, mozjpeg: true }).toFile(join(outDir, 'bg', `${p.name}-tall.jpg`));
+      console.log(`  bg/${p.name}-wide.jpg, bg/${p.name}-tall.jpg`);
+    }
 
     if (p.backdrop) {
       const b = join(outDir, 'backdrop', `${p.name}.webp`);

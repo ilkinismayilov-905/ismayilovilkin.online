@@ -5,6 +5,7 @@ chapters:
       - İşimin çoxu interfeysin arxasındadır. Ödəniş linkləri, müştəri loyallığı və marketplace-lər üçün Java və Spring Boot servisləri qururam.
       - VersePay-də 6 nəfərlik backend komandasına rəhbərlik edirəm, Jira-da sprint planlamasından code review və arxitektura qərarlarına qədər. Renter.az-da, ~100 müştərili canlı avtomobil icarəsi platformasında, həmtəsisçi kimi planlaşdırma, tapşırıq bölgüsü və koordinasiyanı idarə edirəm.
     photo: ../../assets/photos/story-build.jpg
+    background: story-build
     alt: İlkin İsmayılov qəhvəyi köynəkdə, boynunda Startup kartı ilə ekranında Renter.az saytı açıq olan noutbukun yanında dayanıb.
     caption: Renter.az, 2026
   - title: Necə öyrənirəm
@@ -12,6 +13,7 @@ chapters:
       - UNEC-də Kompüter Mühəndisliyi üzrə oxuyuram, ÜOMG 95/100. Ironhack IT SkillSprint Bootcamp-ı tam təqaüdlə, 100/100 ortalama ilə bitirmişəm.
       - Komandamızın final layihəsi Milly IT SkillSprint-in final Capstone layihəsində Web Development & AI üzrə ümumi qalib oldu. Öyrətmək də məni inkişaf etdirir. CodersAzerbaijan-da 6 junior developerə mentorluq etmişəm və 5 komanda layihəsinin tamamlanmasını təmin etmişəm.
     photo: ../../assets/photos/story-learn.jpg
+    background: story-learn
     alt: İlkin İsmayılov əlində Milly üçün IT SkillSprint mükafat lövhəsini tutub. Lövhədə Web Development & AI üzrə qalib olduğu yazılıb.
     caption: IT SkillSprint, 2026
   - title: Hakatonlar və daha çoxu
@@ -19,6 +21,7 @@ chapters:
       - Hakatonlarda komanda ilə sürətli iş qurmağı məşq edirəm. 2026-cı ildə komandalarımız TransportTech Hakatonu və Qarabağ Hakatonunda qalib oldu. PashaHackathon 6.0, PashaHackathon 5.0 və Holberton School Azerbaijan Micro SaaS Hackathon-da isə finalçı olmuşam.
       - Bakıdakı böyük tədbirlərdə könüllü kimi də iştirak edirəm, o cümlədən Formula 1 Azərbaycan Qran Prisi, Dünya Şəhər Forumu 13 və UFC Fight Night Baku.
     photo: ../../assets/photos/story-hackathons.jpg
+    background: story-hackathons
     alt: İlkin İsmayılov tədbirin sponsor divarı qarşısında AbadLand komandasının Qarabağ Hakatonu 2026 qalibi çekini tutub.
     caption: Qarabağ Hakatonu 2026
 principles:

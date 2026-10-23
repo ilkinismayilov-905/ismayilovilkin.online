@@ -32,3 +32,12 @@ contact:
   email: ilkinismayilov.dev@gmail.com
   github: https://github.com/ilkinismayilov-905
   linkedin: https://www.linkedin.com/in/ilkin-ismayilov2
+
+# Full-page background photos (names = outputs of `npm run photos`). Positions: CSS object-position.
+backgrounds:
+  hero: { caption: "PashaHackathon, 2026", desktop: "85% 30%", mobile: "50% 30%" }
+  story-build: { caption: "Renter.az, 2026", desktop: "85% 40%", mobile: "62% 40%" }
+  story-learn: { caption: "IT SkillSprint, 2026", desktop: "85% 40%", mobile: "55% 42%" }
+  story-hackathons: { caption: "Qarabağ Hakatonu 2026", desktop: "85% 45%", mobile: "45% 50%" }
+  contact: { caption: "TransportTech Hakatonu 2026", desktop: "85% 40%", mobile: "65% 40%" }
+sectionBackgrounds: { hero: hero, work: hero, experience: story-build, awards: contact, contact: contact }

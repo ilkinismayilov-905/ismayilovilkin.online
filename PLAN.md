@@ -242,20 +242,31 @@ Rendering:
 
 Interactions (baseline mechanism: IntersectionObserver + `requestAnimationFrame`, passive listeners;
 only `transform`, `opacity`, `clip-path` animate; no scroll snapping, hijacking or speed changes):
-- **A. Section-aware backdrop**: two stacked fixed layers; when a section crosses the viewport middle,
-  the next tiny image is decoded with `img.decode()`, then cross-faded over 800 ms. Mapping (as approved in Phase 0): hero/work 7545,
-  about 9431, experience 0208 (awards keeps 0208), contact 0257. `alt=""` + `aria-hidden="true"`.
-- **B. About scrollytelling**: desktop = two columns, text chapters + sticky arch frame. Chapter at viewport
-  centre → crossfade + arch-shaped `clip-path` reveal + scale 1.04 → 1; localised glass caption;
-  "2 / 3" + dots (buttons, "Show chapter 2 of 3" / AZ equivalent) that scroll to the chapter; inactive
-  chapters dimmed but ≥ 4.5:1 contrast. Mobile (< 820 px): I build both (a) sticky 40vh band and (b) inline
-  photo per chapter, show you screenshots, and keep the better one.
+- **A + B (revised 2026-10-23): full-page photo background.** Replaces the tiny blurred backdrop and the
+  About scrollytelling frame (rejected). About returns to the prototype layout: text + "How I work" glass card.
+  - **Layer**: one `position: fixed` full-viewport layer behind all content (no `background-attachment: fixed`),
+    two stacked `<picture>` layers, `object-fit: cover`, `alt=""` + `aria-hidden="true"`.
+  - **Sources** (built by `npm run photos`): per photo a *wide* variant (landscape canvas, the photo on the right,
+    a soft extension of it on the left, so the face sits away from the text column on landscape screens) and a
+    *tall* variant (portrait, phones). Both get the shared muting treatment and a light pre-baked blur
+    (no runtime blur on a full-screen layer). Served as AVIF/WebP `srcset` sized to the viewport.
+  - **Readability**: pine-tinted gradient scrim, strongest behind the text column; photo opacity per theme;
+    glass surfaces frost it. WCAG AA verified on screenshots by sampling the pixels behind every text run.
+  - **Scroll behaviour**: when a section or an About chapter is nearest the viewport centre, the background
+    crossfades (~900 ms) to its photo after `img.decode()`; a slow scale settle 1.05 → 1 follows the scroll
+    through that part. No scroll-jacking. Only the current and the next photo are loaded.
+  - **Mapping**: hero + work 7545; About chapters 0426, 9431, 0208; contact 0257; proposed: experience 0426,
+    hackathons & awards 0257 (pending approval).
+  - **Framing**: `object-position` per photo, separately for desktop and mobile, stored in content.
+  - **Caption**: small localized glass caption per part, placed in the page flow at the end of the part on the
+    text side, so it never covers text or the face (a fixed corner caption would overlap scrolling text).
+  - **Rollout**: English home page first (STOP for approval), then Azerbaijani and case-study pages.
 - **C. Hero continuity**: portrait moves up to 40 px slower than the page while leaving the hero; tint deepens slightly.
 - CSS scroll-driven animations (`animation-timeline: view()`) only as an `@supports` enhancement for C,
   after checking MDN compat data at implementation time. Everything works without them.
-- **Fallbacks**: reduced motion → instant swaps, no clip-path/parallax; reduced transparency → backdrop photo
-  hidden behind solid surfaces; no JS → each chapter shows its photo inline and static. Photo changes are
-  never announced via live regions.
+- **Fallbacks**: reduced motion → instant swaps, no scale settle, no parallax; reduced transparency → solid
+  background, no photo; no JS → the first background photo stays, static. Photo changes are never announced
+  via live regions.
 
 ---
 
