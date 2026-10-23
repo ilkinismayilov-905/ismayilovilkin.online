@@ -1,0 +1,42 @@
+---
+import { Picture } from 'astro:assets';
+import heroBackdrop from '../assets/photos/backdrop/hero.webp';
+import { getSingle, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const { person, hero, status } = (await getSingle('site', locale)).data;
+---
+<div class="hero wrap" id="top" data-backdrop={heroBackdrop.src}>
+  <div class="hero-copy">
+    <p class="hello">{t('hero.hello')}</p>
+    <h1 class="name loading" id="name">
+      <span class="sr-only">{person.name}</span>
+      {person.nameLines.map((line) => <span class="line" aria-hidden="true" data-text={line}>{line}</span>)}
+    </h1>
+    <p class="intro">{hero.intro}</p>
+    <div class="board glass" role="group" aria-label={t('board.label')}>
+      <div class="board-row"><span class="board-key">{t('board.now')}</span><span class="board-val">{status.now}</span></div>
+      <div class="board-row"><span class="board-key">{t('board.focus')}</span><span class="board-val">{status.focus}</span></div>
+      <div class="board-row"><span class="board-key">{t('board.next')}</span><span class="board-val" id="nextVal"><button class="live" id="live" type="button" aria-label={t('board.light')} tabindex="-1"></button><span id="nextText">{status.next}</span></span></div>
+    </div>
+  </div>
+
+  <figure class="portrait" id="portrait">
+    <span class="portrait-ring" aria-hidden="true"></span>
+    <div class="portrait-drift">
+      <div class="portrait-frame tint">
+        <Picture
+          src={hero.portrait}
+          formats={['avif', 'webp']}
+          widths={[360, 480, 640, 800, 960, 1200]}
+          sizes="(max-width: 880px) min(78vw, 22rem), 30rem"
+          alt={hero.portraitAlt}
+          priority
+        />
+      </div>
+    </div>
+    <div class="tag glass"><strong>{hero.tag.strong}</strong>{hero.tag.text}</div>
+  </figure>
+</div>
