@@ -1,0 +1,25 @@
+items:
+  - role: Java Backend Team Lead
+    org: VersePay
+    start: 2025-12
+    current: true
+    text: Early-stage FinTech startup with merchant payment links and a customer loyalty platform. I lead a 6-person backend team, reduced average API response time from 1000 ms to 14 ms and reached ~95% code coverage across 75 endpoints.
+  - role: Co-founder & Project Manager
+    org: Renter.az
+    current: true
+    text: Lead product planning and delivery of a live vehicle rental marketplace with ~100 customers. Roadmap, task breakdown and team coordination.
+  - role: Java Backend Mentor
+    org: CodersAzerbaijan
+    start: 2025-09
+    end: 2026-06
+    text: Mentored 6 junior developers in Core Java, Spring and Spring Boot, REST API design, secure coding and Docker deployment. Guided 5 team projects to completion through code reviews.
+  - role: Web Development & AI
+    org: Ironhack IT SkillSprint Bootcamp
+    start: 2026-01
+    end: 2026-07
+    text: Graduated with a 100/100 average. Full scholarship, selected in the top 2.5% of 1,000+ applicants.
+  - role: BSc Computer Engineering
+    org: Azerbaijan State University of Economics (UNEC)
+    start: 2023-09
+    end: 2027-06
+    text: GPA 95/100.

@@ -1,0 +1,23 @@
+items:
+  - year: 2026
+    title: TransportTech Hackathon 2026
+    text: Openwave program by IDDA & AYNA; 500+ teams applied, 14 finalists. In 2 days our team built Yolçu, a unified mobility platform for AYNA.
+    result: Winner
+    project: yolcu
+  - year: 2026
+    title: Karabakh Hackathon 2026
+    text: Ministry of Agriculture's Agrarian Innovation Center; 55 students, 14 universities. In 44 hours our team built AbadLand Qarabağ, a farmland investment portal.
+    result: Winner
+    project: abadland-qarabag
+  - title: PashaHackathon 6.0
+    text: Extended the Bravo mobile app with gamification and a loyalty/referral system.
+    result: Finalist
+  - title: PashaHackathon 5.0
+    text: Built a car insurance app focused on reliability, security, and ease of use.
+    result: Finalist
+  - title: Holberton School Azerbaijan Micro SaaS Hackathon
+    text: Built a health-focused SaaS application.
+    result: Finalist
+  - title: Volunteering
+    text: Formula 1 Azerbaijan Grand Prix (Baku City Circuit), World Urban Forum 13 (Transport Dept.), UFC Fight Night Baku (HSE team).
+    result: Volunteer

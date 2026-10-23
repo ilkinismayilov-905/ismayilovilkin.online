@@ -1,0 +1,34 @@
+meta:
+  title: Ilkin Ismayilov — Java Backend Developer
+  description: Java backend developer in Baku. I lead a 6-person backend team at an early-stage FinTech startup and build secure, well-tested Spring Boot services.
+
+person:
+  name: Ilkin Ismayilov
+  nameLines: [Ilkin, Ismayilov]
+  jobTitle: Java Backend Developer
+  location: Baku, Azerbaijan
+  description: Java Backend Developer and Computer Engineering student leading a 6-person backend team at an early-stage FinTech startup.
+
+hero:
+  intro: I lead a 6-person backend team at an early-stage FinTech startup. I build secure, well-tested Spring Boot services. Average API response time went from 1000 ms to 14 ms, with ~95% test coverage across 75 endpoints.
+  portrait: ../../assets/photos/hero.jpg
+  portraitAlt: Ilkin Ismayilov in a white PASHA Hackathon T-shirt with a name badge, standing in front of a sponsor wall.
+  tag:
+    strong: 1000 → 14 ms
+    text: average API response
+
+status:
+  now: Java Backend Team Lead at VersePay
+  focus: Payments, Spring Boot, performance and testing
+  next: Looking for a first corporate role in banking or FinTech backend
+  easterEgg: Tea first, then the next endpoint
+
+work:
+  note: Seven projects, from a multi-venue restaurant ordering platform to a browser game. Four have a full case study.
+
+contact:
+  note: Email is the fastest way to reach me.
+  photo: ../../assets/photos/contact.jpg
+  email: ilkinismayilov.dev@gmail.com
+  github: https://github.com/ilkinismayilov-905
+  linkedin: https://www.linkedin.com/in/ilkin-ismayilov2

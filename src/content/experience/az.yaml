@@ -1,0 +1,25 @@
+items:
+  - role: Java Backend Team Lead
+    org: VersePay
+    start: 2025-12
+    current: true
+    text: Erkən mərhələli FinTech startap, satıcılar üçün ödəniş linkləri və loyallıq platforması. 6 backend developerdən ibarət komandaya rəhbərlik edirəm, orta cavab müddətini 1000 ms-dən 14 ms-ə endirdim və 75 endpoint üzrə ~95% kod əhatəsinə nail oldum.
+  - role: Həmtəsisçi və Layihə Meneceri
+    org: Renter.az
+    current: true
+    text: ~100 müştərili canlı avtomobil icarəsi platformasında planlaşdırma, tapşırıq bölgüsü və koordinasiyanı idarə edirəm.
+  - role: Java Backend Mentoru
+    org: CodersAzerbaijan
+    start: 2025-09
+    end: 2026-06
+    text: 6 junior developerə Core Java, Spring və Spring Boot, REST API dizaynı, təhlükəsiz kodlaşdırma və Docker deployment üzrə mentorluq etdim. Jira-da tapşırıq izləmə və code review ilə 5 komanda layihəsinin tamamlanmasını təmin etdim.
+  - role: Web Development & AI
+    org: Ironhack IT SkillSprint Bootcamp
+    start: 2026-01
+    end: 2026-07
+    text: 100/100 ortalama ilə bitirmişəm. Tam təqaüd; 1000+ müraciətçi arasından ilk 2.5%-ə seçilmişəm.
+  - role: Kompüter Mühəndisliyi, bakalavr
+    org: Azərbaycan Dövlət İqtisad Universiteti (UNEC)
+    start: 2023-09
+    end: 2027-06
+    text: ÜOMG 95/100.

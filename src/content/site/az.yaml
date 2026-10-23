@@ -1,0 +1,34 @@
+meta:
+  title: İlkin İsmayılov — Java Backend Developer
+  description: Bakıda Java backend developer. Erkən mərhələli FinTech startapında 6 nəfərlik backend komandasına rəhbərlik edirəm, Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam.
+
+person:
+  name: İlkin İsmayılov
+  nameLines: [İlkin, İsmayılov]
+  jobTitle: Java Backend Developer
+  location: Bakı, Azərbaycan
+  description: FinTech startapında 6 nəfərlik backend komandasına rəhbərlik edən Java Backend Developer və Kompüter Mühəndisliyi tələbəsi.
+
+hero:
+  intro: Erkən mərhələli FinTech startapında 6 backend developerdən ibarət komandaya rəhbərlik edirəm. Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam. Orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsi var.
+  portrait: ../../assets/photos/hero.jpg
+  portraitAlt: İlkin İsmayılov ağ PASHA Hackathon köynəyində, boynunda ad kartı ilə sponsor divarının qarşısında dayanıb.
+  tag:
+    strong: 1000 → 14 ms
+    text: orta API cavab müddəti
+
+status:
+  now: VersePay-də Java Backend Team Lead
+  focus: Ödənişlər, Spring Boot, performans və testlər
+  next: Bank və ya FinTech backend sahəsində ilk korporativ rol axtarıram
+  easterEgg: Əvvəlcə çay, sonra növbəti endpoint
+
+work:
+  note: Yeddi layihə, çoxməkanlı restoran sifariş platformasından brauzer oyununa qədər. Dördünün ətraflı təsviri var.
+
+contact:
+  note: Mənimlə ən tez e-poçt vasitəsilə əlaqə saxlamaq olar.
+  photo: ../../assets/photos/contact.jpg
+  email: ilkinismayilov.dev@gmail.com
+  github: https://github.com/ilkinismayilov-905
+  linkedin: https://www.linkedin.com/in/ilkin-ismayilov2

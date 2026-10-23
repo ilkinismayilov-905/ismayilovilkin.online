@@ -1,0 +1,23 @@
+items:
+  - year: 2026
+    title: TransportTech Hakatonu 2026
+    text: IRIA və AYNA-nın Openwave proqramı; 500+ komanda, 14 finalçı. 2 gündə AYNA üçün vahid nəqliyyat platforması Yolçu-nu hazırladıq.
+    result: Qalib
+    project: yolcu
+  - year: 2026
+    title: Qarabağ Hakatonu 2026
+    text: Kənd Təsərrüfatı Nazirliyinin Aqrar İnnovasiya Mərkəzi; 14 universitet, 55 tələbə. 44 saatda investisiya portalı AbadLand Qarabağ-ı hazırladıq.
+    result: Qalib
+    project: abadland-qarabag
+  - title: PashaHackathon 6.0
+    text: Bravo mobil tətbiqinə qeymifikasiya və loyallıq/referal sistemi əlavə etdik.
+    result: Finalçı
+  - title: PashaHackathon 5.0
+    text: Avtomobil sığortasını daha etibarlı, təhlükəsiz və rahat edən tətbiq hazırladıq.
+    result: Finalçı
+  - title: Holberton School Azerbaijan Micro SaaS Hackathon
+    text: Sağlamlıq sahəsində SaaS tətbiqi hazırladıq.
+    result: Finalçı
+  - title: Könüllülük
+    text: Formula 1 Azərbaycan Qran Prisi, Dünya Şəhər Forumu 13, UFC Fight Night Baku.
+    result: Könüllü
