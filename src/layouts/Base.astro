@@ -1,0 +1,120 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import themeInit from '../scripts/theme-init.js?raw';
+import heroBackdrop from '../assets/photos/backdrop/hero.webp';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+import Overlays from '../components/Overlays.astro';
+import { getProjects, getSingle, href, otherLocale, projectSlug, useT, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  /** Path inside the locale, e.g. '' or 'work/milly/'. Used for canonical, hreflang and the language switch. */
+  path: string;
+  ogImage: string;
+  home?: boolean;
+  jsonLd?: Record<string, unknown>;
+  showContact?: boolean;
+  /** 404 pages: no canonical/hreflang, not indexed */
+  noindex?: boolean;
+}
+
+const { locale, title, description, path, ogImage, home = false, jsonLd, showContact = true, noindex = false } = Astro.props;
+const t = useT(locale);
+const other = otherLocale(locale);
+const site = await getSingle('site', locale);
+const projects = await getProjects(locale);
+const abs = (p: string) => new URL(p, Astro.site).href;
+const canonical = abs(href(locale, path));
+const alternates = { en: abs(href('en', path)), az: abs(href('az', path)) };
+
+// Data for client scripts. A JSON block is data, not code, so it needs no CSP hash.
+const homeHref = href(locale, '');
+const pageData = {
+  locale,
+  home,
+  homeHref,
+  email: site.data.contact.email,
+  links: { github: site.data.contact.github, linkedin: site.data.contact.linkedin, otherLocale: href(other, path) },
+  projects: projects.map((p) => ({
+    slug: projectSlug(p),
+    title: p.data.title,
+    year: p.data.year ?? null,
+    url: p.data.caseStudy ? href(locale, `work/${projectSlug(p)}/`) : null,
+  })),
+  t: Object.fromEntries(
+    ([
+      'theme.toLight', 'theme.toDark', 'theme.lightOn', 'theme.darkOn', 'egg.toast', 'count.all', 'count.one', 'count.other',
+      'cat.backend', 'cat.hackathon', 'cat.frontend', 'preview.case', 'contact.copied', 'contact.blocked', 'palette.empty',
+      'group.goto', 'group.project', 'group.filter', 'group.actions', 'nav.work', 'nav.about', 'nav.experience', 'nav.awards',
+      'nav.contact', 'cmd.filter.backend', 'cmd.filter.hackathon', 'cmd.filter.frontend', 'cmd.filter.all', 'cmd.copyEmail',
+      'cmd.github', 'cmd.linkedin', 'cmd.lang', 'story.progress', 'suggest.text', 'suggest.action',
+    ] as const).map((k) => [k, t(k)]),
+  ),
+  easterEgg: site.data.status.easterEgg,
+};
+---
+<!doctype html>
+<html lang={locale} class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <script is:inline set:html={themeInit} />
+  {noindex ? <meta name="robots" content="noindex" /> : (
+    <Fragment>
+      <link rel="canonical" href={canonical} />
+      <link rel="alternate" hreflang="en" href={alternates.en} />
+      <link rel="alternate" hreflang="az" href={alternates.az} />
+      <link rel="alternate" hreflang="x-default" href={alternates.en} />
+    </Fragment>
+  )}
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0F1E1B" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#E9EEE8" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <Font cssVariable="--font-archivo" preload />
+  <meta property="og:type" content={home ? 'profile' : 'article'} />
+  <meta property="og:site_name" content={site.data.person.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={abs(ogImage)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'az_AZ'} />
+  <meta property="og:locale:alternate" content={locale === 'en' ? 'az_AZ' : 'en_US'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+</head>
+<body>
+  <a class="skip" href="#main">{t('skip')}</a>
+  <div class="backdrop" aria-hidden="true">
+    <img id="bgA" src={heroBackdrop.src} alt="" width={heroBackdrop.width} height={heroBackdrop.height} />
+    <img id="bgB" src={heroBackdrop.src} alt="" width={heroBackdrop.width} height={heroBackdrop.height} data-hidden />
+  </div>
+
+  <aside class="suggest glass" id="suggest" lang={other} aria-label={useT(other)('suggest.label')} hidden>
+    <span>{useT(other)('suggest.text')}</span>
+    <a href={href(other, path)} hreflang={other} data-lang-switch>{useT(other)('suggest.action')}</a>
+    <button type="button" id="suggestClose">{useT(other)('suggest.dismiss')}</button>
+  </aside>
+
+  <Header locale={locale} path={path} home={home} name={site.data.person.name} />
+
+  <main id="main"><slot /></main>
+
+  {showContact && <Contact locale={locale} />}
+
+  <Overlays locale={locale} />
+  <script type="application/json" id="page-data" set:html={JSON.stringify(pageData)} />
+  <script>
+    import { init } from '../scripts/main';
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+---
+import { href, otherLocale, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale; path: string; home: boolean; name: string }
+const { locale, path, home, name } = Astro.props;
+const t = useT(locale);
+const other = otherLocale(locale);
+const tOther = useT(other);
+// On the home page, section links stay in-page; elsewhere they point back to the home page.
+const base = home ? '' : href(locale, '');
+const sections = [
+  ['work', t('nav.work')],
+  ['about', t('nav.about')],
+  ['experience', t('nav.experience')],
+  ['awards', t('nav.awards')],
+  ['contact', t('nav.contact')],
+] as const;
+---
+<header class="bar glass">
+  <div class="bar-inner">
+    <a class="brand" href={home ? '#top' : href(locale, '')}>{name}</a>
+    <nav class="nav" aria-label={t('nav.label')}>
+      {sections.map(([id, label]) => <a href={`${base}#${id}`} data-sec={id}>{label}</a>)}
+    </nav>
+    <div class="tools">
+      <button class="tool-btn js-tool" id="openPalette" type="button" aria-haspopup="dialog">{t('search')} <kbd class="kbd-hint">⌘K</kbd></button>
+      <button class="tool-btn js-tool" id="themeBtn" type="button" aria-label={t('theme.toLight')}>{t('theme')}</button>
+      <a class="tool-btn" href={href(other, path)} hreflang={other} lang={other} aria-label={`${tOther('lang.code')}, ${tOther('lang.name')}`} data-lang-switch>{tOther('lang.code')}</a>
+    </div>
+  </div>
+</header>
