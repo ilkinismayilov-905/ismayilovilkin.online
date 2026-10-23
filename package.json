@@ -1,0 +1,34 @@
+{
+  "name": "ismayilovilkin-portfolio",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:release": "RELEASE=1 astro build && node scripts/check-privacy.mjs",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "eslint . && node scripts/check-css.mjs",
+    "check": "npm run lint && npm run typecheck && node scripts/check-photos.mjs",
+    "photos": "node scripts/sanitize-photos.mjs && node scripts/check-photos.mjs",
+    "og": "node scripts/render-og.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.2",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "astro-eslint-parser": "3.2.0",
+    "eslint": "10.13.0",
+    "eslint-plugin-astro": "3.2.1",
+    "lighthouse": "13.5.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0"
+  }
+}

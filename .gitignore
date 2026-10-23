@@ -1,0 +1,25 @@
+# Originals: may contain GPS/EXIF and private data. Only sanitized copies are committed.
+/photo/
+/CV/
+# Local proofs (contain photo copies) and tool caches
+/.proof/
+/graft/
+.DS_Store
+
+# Build and dependencies
+node_modules/
+dist/
+.astro/
+
+# Env
+.env
+.env.*
+!.env.example
+/.ignore
+
+# Local privacy deny-list (contains the private values it guards against)
+.privacy-denylist
+# Test output
+test-results/
+playwright-report/
+reports/
