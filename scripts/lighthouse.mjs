@@ -22,7 +22,8 @@ for (const path of paths) {
     results.push({
       perf: c.performance.score * 100, a11y: c.accessibility.score * 100, bp: c['best-practices'].score * 100, seo: c.seo.score * 100,
       lcp: a['largest-contentful-paint'].numericValue, cls: a['cumulative-layout-shift'].numericValue, tbt: a['total-blocking-time'].numericValue,
-      lcpEl: a['largest-contentful-paint-element']?.details?.items?.[0]?.items?.[0]?.node?.snippet ?? '',
+      // Lighthouse 13 reports the LCP element in the lcp-breakdown insight (a list whose node item has the selector)
+      lcpEl: (a['lcp-breakdown-insight']?.details?.items ?? []).find((x) => x.type === 'node')?.selector ?? 'none',
     });
     if (i === runs - 1) await writeFile(`reports/lighthouse/${path.replace(/\//g, '_') || 'home'}.html`, r.report);
   }

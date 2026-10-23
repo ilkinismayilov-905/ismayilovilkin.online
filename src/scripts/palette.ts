@@ -25,8 +25,10 @@ export function initPalette(commands: Command[], emptyText: string, beforeOpen: 
     setTimeout(c.run, 10);
   };
   const render = () => {
-    const q = input.value.trim().toLocaleLowerCase();
-    shown = commands.filter((c) => `${lbl(c)} ${c.group}`.toLocaleLowerCase().includes(q));
+    // lowercase with the page language: in Azerbaijani İ → i and I → ı (the default rules turn İ into i + a dot)
+    const lang = document.documentElement.lang;
+    const q = input.value.trim().toLocaleLowerCase(lang);
+    shown = commands.filter((c) => `${lbl(c)} ${c.group}`.toLocaleLowerCase(lang).includes(q));
     active = Math.min(active, Math.max(shown.length - 1, 0));
     list.replaceChildren();
     if (!shown.length) {

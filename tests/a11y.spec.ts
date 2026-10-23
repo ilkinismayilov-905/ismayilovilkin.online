@@ -95,3 +95,30 @@ test.describe('keyboard only', () => {
     }
   });
 });
+
+test.describe('keyboard only, Azerbaijani', () => {
+  test.use({ viewport: { width: 1366, height: 860 } });
+  test('filters, dialog, palette and language switch', async ({ page }) => {
+    await page.goto('/az/');
+    await page.locator('.filters button[data-filter="all"]').focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#count')).toHaveText('4 backend layihəsi göstərilir');
+    await page.locator('.filters button[data-filter="all"]').click();
+    await page.locator('#workList a[data-case="abadland-qarabag"]').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#caseClose')).toBeFocused();
+    await expect(page.locator('#caseClose')).toHaveText('Bağla');
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#workList a[data-case="abadland-qarabag"]')).toBeFocused();
+    await page.keyboard.press('/');
+    await page.keyboard.type('təcrübə');
+    await expect(page.locator('.pal-opt[aria-selected="true"]')).toContainText('Təcrübə');
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#exp-h')).toBeFocused();
+    await page.keyboard.press('Control+k');
+    await page.keyboard.type('ingilis');
+    await page.keyboard.press('Enter');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+});
