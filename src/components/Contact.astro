@@ -19,7 +19,7 @@ const [pre, mid, post] = t('colophon.search').split(/\{k\d\}/);
     <div class="contact-card glass">
       <h2 id="ct-h" tabindex="-1">{t('contact.title')}</h2>
       <p class="s-note">{contact.note}</p>
-      <a class="email" href={`mailto:${contact.email}`}>{contact.email}</a>
+      <a class="email" href={`mailto:${contact.email}`}>{contact.email.split('@')[0]}<wbr />@{contact.email.split('@')[1]}</a>
       <div class="contact-actions">
         <button class="btn-accent" id="copyBtn" type="button">{t('contact.copy')}</button>
         <ul class="contact-links" aria-label={t('contact.linksLabel')}>

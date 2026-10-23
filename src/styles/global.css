@@ -269,7 +269,7 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 .contact-card::before{content:"";position:absolute;width:30rem;height:30rem;right:-8rem;top:-12rem;border-radius:50%;
   background:radial-gradient(circle, var(--accent-soft), transparent 70%);pointer-events:none}
 .email{display:inline-block;margin:1.75rem 0 1.5rem;font-family:var(--display);font-weight:650;font-variation-settings:"wdth" 100;
-  font-size:clamp(1.5rem,5vw,4rem);line-height:1;letter-spacing:-.02em;text-decoration:none;
+  font-size:clamp(1.15rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.02em;text-decoration:none;
   background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 3px no-repeat;padding-bottom:.08em;transition:background-size .5s var(--ease);overflow-wrap:anywhere;position:relative}
 .email:hover,.email:focus-visible{background-size:100% 3px}
 .contact-actions{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;align-items:center;position:relative}
