@@ -81,12 +81,12 @@ body:has(.photo-bg) .bar.glass,body:has(.photo-bg) .suggest.glass{background:var
 @media (max-aspect-ratio:1/1){
   .photo-bg::after{background:linear-gradient(180deg,rgba(15,30,27,.76) 0%,rgba(15,30,27,.8) 35%,rgba(15,30,27,.84) 100%)}
 }
-:root[data-theme="light"] .photo-bg{--photo-opacity:.5}
+:root[data-theme="light"] .photo-bg{--photo-opacity:.62}
 :root[data-theme="light"] .photo-bg::after{background:
   linear-gradient(90deg,rgba(233,238,232,.92) 0%,rgba(233,238,232,.85) 42%,rgba(233,238,232,.55) 66%,rgba(233,238,232,.38) 100%),
   linear-gradient(180deg,rgba(233,238,232,.45) 0%,transparent 22%,transparent 78%,rgba(233,238,232,.55) 100%)}
 @media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]) .photo-bg{--photo-opacity:.5}
+  :root:not([data-theme="dark"]) .photo-bg{--photo-opacity:.62}
   :root:not([data-theme="dark"]) .photo-bg::after{background:
     linear-gradient(90deg,rgba(233,238,232,.92) 0%,rgba(233,238,232,.85) 42%,rgba(233,238,232,.55) 66%,rgba(233,238,232,.38) 100%),
     linear-gradient(180deg,rgba(233,238,232,.45) 0%,transparent 22%,transparent 78%,rgba(233,238,232,.55) 100%)}
