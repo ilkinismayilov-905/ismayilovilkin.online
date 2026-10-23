@@ -1,0 +1,36 @@
+---
+import { Picture } from 'astro:assets';
+import backdrop from '../assets/photos/backdrop/contact.webp';
+import { getSingle, useT, type Locale } from '../i18n/utils';
+import ExternalLink from './ExternalLink.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const { contact } = (await getSingle('site', locale)).data;
+const [pre, mid, post] = t('colophon.search').split(/\{k\d\}/);
+---
+<footer class="contact wrap" id="contact" aria-labelledby="ct-h" data-backdrop={backdrop.src}>
+  <div class="contact-shell">
+    <!-- Seen through the glass card; decorative, so no alt text -->
+    <div class="contact-photo arch tint" aria-hidden="true">
+      <Picture src={contact.photo} formats={['avif', 'webp']} widths={[280, 420, 560]} sizes="17rem" alt="" class="ph" />
+    </div>
+    <div class="contact-card glass">
+      <h2 id="ct-h" tabindex="-1">{t('contact.title')}</h2>
+      <p class="s-note">{contact.note}</p>
+      <a class="email" href={`mailto:${contact.email}`}>{contact.email}</a>
+      <div class="contact-actions">
+        <button class="btn-accent" id="copyBtn" type="button">{t('contact.copy')}</button>
+        <ul class="contact-links" aria-label={t('contact.linksLabel')}>
+          <li><ExternalLink href={contact.github} locale={locale}>GitHub</ExternalLink></li>
+          <li><ExternalLink href={contact.linkedin} locale={locale}>LinkedIn</ExternalLink></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>{t('colophon.font')}</span>
+    <span class="js-only">{pre}<kbd class="kbd-hint">⌘K</kbd>{mid}<kbd>/</kbd>{post}</span>
+  </div>
+</footer>

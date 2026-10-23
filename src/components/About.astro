@@ -1,0 +1,57 @@
+---
+import { Picture } from 'astro:assets';
+import backdrop from '../assets/photos/backdrop/story-learn.webp';
+import { getSingle, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const { chapters, principles } = (await getSingle('about', locale)).data;
+const total = chapters.length;
+// Same widths/sizes for the inline photo and the sticky frame, so the browser fetches each file once.
+const pic = { formats: ['avif', 'webp'] as const, widths: [320, 480, 640, 800], sizes: '(max-width: 819px) min(100vw, 22rem), 26rem' };
+---
+<section id="about" aria-labelledby="about-h" data-backdrop={backdrop.src}>
+  <div class="wrap">
+    <div class="s-head"><h2 id="about-h" tabindex="-1">{t('about.title')}</h2></div>
+    <div class="story" id="story">
+      <div class="chapters">
+        {chapters.map((c, i) => (
+          <article class="chapter" id={`chapter-${i + 1}`} data-index={i}>
+            <figure class="chapter-photo">
+              <div class="arch tint">
+                <Picture src={c.photo} {...pic} formats={[...pic.formats]} alt={c.alt} class="ph" />
+              </div>
+              <figcaption>{c.caption}</figcaption>
+            </figure>
+            <h3>{c.title}</h3>
+            {c.text.map((p) => <p>{p}</p>)}
+          </article>
+        ))}
+        <ul class="principles glass" aria-label={t('principles.label')}>
+          {principles.map((p) => <li><strong>{p.title}</strong><span>{p.text}</span></li>)}
+        </ul>
+      </div>
+
+      <!-- Desktop: sticky arch frame. The photos duplicate the inline ones, so the frame is hidden from assistive tech. -->
+      <div class="story-aside">
+        <div class="frame" aria-hidden="true">
+          {chapters.map((c, i) => (
+            <div class:list={['shot', 'arch', 'tint', { 'is-active': i === 0 }]} data-index={i}>
+              <Picture src={c.photo} {...pic} formats={[...pic.formats]} alt="" class="ph" />
+            </div>
+          ))}
+          <p class="frame-cap glass" id="frameCap">{chapters[0]?.caption}</p>
+        </div>
+        <div class="story-progress">
+          <span id="storyCount">{t('story.progress', { n: 1, total })}</span>
+          <ul class="dots" aria-label={t('story.dots')}>
+            {chapters.map((_, i) => (
+              <li><button type="button" data-goto={i} aria-label={t('story.dot', { n: i + 1, total })} aria-current={i === 0 ? 'step' : undefined}></button></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import { getProjects, getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const { items } = (await getSingle('awards', locale)).data;
+const titles = new Map((await getProjects(locale)).map((p) => [projectSlug(p), p.data.title]));
+---
+<section id="awards" aria-labelledby="aw-h">
+  <div class="wrap">
+    <div class="s-head"><h2 id="aw-h" tabindex="-1">{t('awards.title')}</h2></div>
+    <ul class="list">
+      {items.map((a) => (
+        <li>
+          <span class="l-date">{a.year ?? ''}</span>
+          <span>
+            <span class="l-title">{a.title}</span>
+            <span class="l-text">
+              {a.text}
+              {a.project && <Fragment>{' '}<a href={href(locale, `work/${a.project}/`)}>{t('awards.project', { title: titles.get(a.project) ?? a.project })}</a></Fragment>}
+            </span>
+          </span>
+          <!-- Rows linked to a case study are the two wins; they get the accent -->
+          <span class:list={['l-result', { win: !!a.project }]}>{a.result}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

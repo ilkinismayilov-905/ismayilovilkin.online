@@ -1,0 +1,28 @@
+---
+import backdrop from '../assets/photos/backdrop/story-hackathons.webp';
+import { getSingle, monthYear, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const { items } = (await getSingle('experience', locale)).data;
+const when = (i: (typeof items)[number]) => {
+  const end = i.current ? t('exp.present') : i.end ? monthYear(locale, i.end) : '';
+  return i.start ? `${monthYear(locale, i.start)} – ${end}` : end;
+};
+---
+<section id="experience" aria-labelledby="exp-h" data-backdrop={backdrop.src}>
+  <div class="wrap">
+    <div class="s-head"><h2 id="exp-h" tabindex="-1">{t('exp.title')}</h2></div>
+    <div class="tl-wrap" id="timeline"><span class="tl-progress" aria-hidden="true"></span>
+      <ol class="timeline">
+        {items.map((i) => (
+          <li>
+            <span class="tl-when">{when(i)}</span>
+            <div><p class="tl-role">{i.role}{' '}<span class:list={['tl-org', { 'tl-org-line': locale === 'az' }]}>{t('exp.org', { org: i.org })}</span></p><p class="tl-what">{i.text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

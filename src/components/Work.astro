@@ -1,0 +1,53 @@
+---
+import heroBackdrop from '../assets/photos/backdrop/hero.webp';
+import { getProjects, getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
+import CaseStudy from './CaseStudy.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const site = await getSingle('site', locale);
+const projects = await getProjects(locale);
+const cases = projects.filter((p) => p.data.caseStudy);
+const filters = ['all', 'backend', 'hackathon', 'frontend'] as const;
+const filterLabel = { all: t('filters.all'), backend: t('filters.backend'), hackathon: t('filters.hackathon'), frontend: t('filters.frontend') };
+---
+<section id="work" aria-labelledby="work-h" data-backdrop={heroBackdrop.src}>
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2 id="work-h" tabindex="-1">{t('work.title')}</h2>
+        <p class="s-note">{site.data.work.note}</p>
+      </div>
+      <div class="filters glass" role="group" aria-label={t('filters.label')}>
+        {filters.map((f) => <button type="button" aria-pressed={f === 'all' ? 'true' : 'false'} data-filter={f}>{filterLabel[f]}</button>)}
+      </div>
+    </div>
+    <p class="count" id="count" aria-live="polite">{t('count.all', { n: projects.length })}</p>
+
+    <ul class="work" id="workList">
+      {projects.map((p) => {
+        const slug = projectSlug(p);
+        const inner = (
+          <Fragment>
+            <span class="w-year">{p.data.year ?? ''}</span>
+            <span><span class="w-title" data-vt={slug}>{p.data.title}</span>{p.data.stack && <span class="w-stack">{p.data.stack.join(', ')}</span>}</span>
+            <p class="w-desc">{p.data.summary}{p.data.caseStudy && <span class="w-more">{t('case.read')}</span>}</p>
+          </Fragment>
+        );
+        return (
+          <li data-cat={p.data.category} data-motif={p.data.motif}>
+            {p.data.caseStudy
+              ? <a class="row" href={href(locale, `work/${slug}/`)} data-case={slug}>{inner}</a>
+              : <div class="row">{inner}</div>}
+          </li>
+        );
+      })}
+    </ul>
+
+    <!-- Case studies inline: the dialog's source with JS, readable as-is without JS -->
+    <div class="cases">
+      {cases.map((p) => <CaseStudy project={p} locale={locale} heading="h3" id={`case-${projectSlug(p)}`} />)}
+    </div>
+  </div>
+</section>

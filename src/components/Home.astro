@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+import Work from './Work.astro';
+import About from './About.astro';
+import Experience from './Experience.astro';
+import Awards from './Awards.astro';
+import { assertContentReady, getSingle, href, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+await assertContentReady();
+const site = (await getSingle('site', locale)).data;
+const url = new URL(href(locale, ''), Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.person.name,
+  jobTitle: site.person.jobTitle,
+  description: site.person.description,
+  url,
+  email: `mailto:${site.contact.email}`,
+  sameAs: [site.contact.github, site.contact.linkedin],
+  address: { '@type': 'PostalAddress', addressLocality: site.person.location.split(',')[0], addressCountry: 'AZ' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Azerbaijan State University of Economics (UNEC)' },
+  knowsLanguage: ['az', 'tr', 'en'],
+  inLanguage: locale,
+};
+---
+<Base locale={locale} title={site.meta.title} description={site.meta.description} path="" ogImage={`/og/${locale}-home.png`} home jsonLd={jsonLd}>
+  <Hero locale={locale} />
+  <Work locale={locale} />
+  <About locale={locale} />
+  <Experience locale={locale} />
+  <Awards locale={locale} />
+</Base>
