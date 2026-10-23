@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSingle, href, useT, type Locale } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const site = (await getSingle('site', locale)).data;
+---
+<Base locale={locale} title={`${t('notFound.title')} — ${site.person.name}`} description={site.meta.description} path="" ogImage={`/og/${locale}-home.jpg`} showContact={false} noindex>
+  <div class="wrap not-found">
+    <h1>{t('notFound.title')}</h1>
+    <p>{t('notFound.text')}</p>
+    <p><a href={href(locale, '')}>{t('notFound.home')}</a></p>
+  </div>
+</Base>

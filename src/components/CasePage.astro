@@ -15,7 +15,7 @@ const slug = projectSlug(project);
   title={t('caseMeta.title', { title: project.data.title, name: site.person.name })}
   description={project.data.lede ?? project.data.summary}
   path={`work/${slug}/`}
-  ogImage={`/og/${locale}-${slug}.png`}
+  ogImage={`/og/${locale}-${slug}.jpg`}
 >
   <div class="wrap case-page">
     <a class="back" href={`${href(locale, '')}#work`}>{t('case.back')}</a>
