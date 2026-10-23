@@ -30,4 +30,11 @@ principles:
     text: Rate limiting, role-based access control and JWT auth go in from the start.
   - title: Make releasing routine
     text: Docker deploys run through GitHub Actions in 1–2 minutes, so shipping is a normal part of the day.
+skills:
+  - { group: Backend, items: "Java 8–21, Spring Boot, Spring Security, Spring Data JPA / Hibernate, REST API, Microservices Architecture, Spring Cloud (basic), WebSocket, OAuth2 / JWT" }
+  - { group: Data, items: "SQL, PostgreSQL, MySQL, Redis, RabbitMQ, Apache Kafka, Flyway, MinIO / S3" }
+  - { group: Testing, items: "JUnit 5, Mockito, integration testing, k6 (load/stress), Postman, Bruno" }
+  - { group: API Docs, items: "Swagger / OpenAPI" }
+  - { group: DevOps & Tools, items: "Docker, GitHub Actions (CI/CD), Linux, VPS, Railway, Git, Maven, Stripe, Jira" }
+  - { group: Languages, items: "Azerbaijani (native), Turkish (advanced), English (IELTS 7.0)" }
 ---

@@ -30,4 +30,11 @@ principles:
     text: Rate limiting, rol-əsaslı icazələndirmə (RBAC) və JWT autentifikasiyası əvvəldən tətbiq olunur.
   - title: Buraxılış adi iş olsun
     text: GitHub Actions ilə Docker deploy-u 1–2 dəqiqə çəkir, ona görə də yeni versiya çıxarmaq gündəlik işin bir hissəsidir.
+skills:
+  - { group: Backend, items: "Java 8–21, Spring Boot, Spring Security, Spring Data JPA / Hibernate, REST API, Microservices arxitekturası, Spring Cloud (əsas), WebSocket, OAuth2 / JWT" }
+  - { group: Verilənlər, items: "SQL, PostgreSQL, MySQL, Redis, RabbitMQ, Apache Kafka, Flyway, MinIO / S3" }
+  - { group: Test, items: "JUnit 5, Mockito, inteqrasiya testləri, k6 (yük/stress), Postman, Bruno" }
+  - { group: API sənədləri, items: "Swagger / OpenAPI" }
+  - { group: DevOps və alətlər, items: "Docker, GitHub Actions (CI/CD), Linux, VPS, Railway, Git, Maven, Stripe, Jira" }
+  - { group: Dillər, items: "Azərbaycan (ana dili), Türk (yüksək), İngilis (IELTS 7.0)" }
 ---

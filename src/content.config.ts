@@ -43,6 +43,8 @@ const about = defineCollection({
         .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), photo: image(), alt: z.string(), caption: z.string() }))
         .length(3),
       principles: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
+      // Enhancement 5: exactly the CV's skill groups and wording; no levels
+      skills: z.array(z.strictObject({ group: z.string(), items: z.string() })).min(1),
     }),
 });
 

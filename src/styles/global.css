@@ -267,6 +267,15 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 .principles strong{display:block;font-family:var(--display);font-weight:650;font-size:1.2rem;font-variation-settings:"wdth" 108}
 .principles span{color:var(--muted)}
 
+/* Enhancement 5: skills from the CVs, plain text in the list style */
+.skills{max-width:36rem}
+.skills h3{margin:0 0 .75rem;font-family:var(--display);font-weight:650;font-size:1.35rem;font-variation-settings:"wdth" 108}
+.skills dl{margin:0;border-top:1px solid var(--rule)}
+.skills div{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:.25rem 1.5rem;padding:.8rem 0;border-bottom:1px solid var(--rule)}
+.skills dt{color:var(--muted);font-size:.92rem}
+.skills dd{margin:0}
+@media (max-width:480px){.skills div{grid-template-columns:1fr}}
+
 /* ---------- Experience ---------- */
 .tl-wrap{position:relative}
 .timeline{list-style:none;margin:0;padding:0 0 0 2rem}

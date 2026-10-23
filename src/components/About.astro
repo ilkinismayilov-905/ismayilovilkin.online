@@ -6,7 +6,7 @@ import { getSingle, useT, type Locale } from '../i18n/utils';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useT(locale);
-const { chapters, principles } = (await getSingle('about', locale)).data;
+const { chapters, principles, skills } = (await getSingle('about', locale)).data;
 const total = chapters.length;
 // Same widths/sizes for the inline photo and the sticky frame, so the browser fetches each file once.
 const pic = { formats: ['avif', 'webp'] as const, widths: [320, 480, 640, 800], sizes: '(max-width: 819px) min(100vw, 22rem), 26rem' };
@@ -31,6 +31,10 @@ const pic = { formats: ['avif', 'webp'] as const, widths: [320, 480, 640, 800], 
         <ul class="principles glass" aria-label={t('principles.label')}>
           {principles.map((p) => <li><strong>{p.title}</strong><span>{p.text}</span></li>)}
         </ul>
+        <div class="skills">
+          <h3>{t('skills.title')}</h3>
+          <dl>{skills.map((s) => <div><dt>{s.group}</dt><dd>{s.items}</dd></div>)}</dl>
+        </div>
       </div>
 
       <!-- Desktop: sticky arch frame. The photos duplicate the inline ones, so the frame is hidden from assistive tech. -->
