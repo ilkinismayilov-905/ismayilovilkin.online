@@ -260,7 +260,8 @@ only `transform`, `opacity`, `clip-path` animate; no scroll snapping, hijacking 
     Milly 9431, Yolçu 0257, AbadLand 0208, Paygenix 7545.
   - **Two scrim levels**: soft where text sits left (hero, About chapters, case pages), strong where text runs the
     full width (work, experience, awards, contact; also the no-JS default). Header, hero tag and captions use the
-    sturdier glass fill over photos. Verified with `node scripts/contrast.mjs` (WCAG AA on rendered pixels).
+    sturdier glass fill over photos. Light theme: photo opacity as dark (0.62); strong scrim 70 % (case pages 90 %);
+    "Read the case study" and "Winner" use the text colour, because the light accent has little headroom over photos. Verified with `node scripts/contrast.mjs` (WCAG AA on rendered pixels).
   - **Framing**: `object-position` per photo, separately for desktop and mobile, stored in content.
   - **Caption**: small localized glass caption per part, placed in the page flow at the end of the part on the
     text side, so it never covers text or the face (a fixed corner caption would overlap scrolling text).

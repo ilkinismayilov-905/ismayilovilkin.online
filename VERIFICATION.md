@@ -19,7 +19,7 @@ Raw outputs are in `reports/` (gitignored).
 | 7 | Links, 404s, hreflang | **pass** — 95 internal + 5 external URLs; 404 in both languages |
 | 8 | Privacy | **pass** — no phone, no referee data, no metadata in 105 images; originals never in git |
 | — | WCAG AA text contrast on photos | **pass** — 136 positions, worst 4.51:1 |
-| — | Light-theme photo visibility | **finding** — see below; one decision open |
+| — | Light-theme photo visibility | **fixed** — matches dark except Work and hero (see below) |
 
 Automated suite: **160 Playwright tests pass** (`tests/`).
 
@@ -127,26 +127,27 @@ placeholder is the previous photo, which stays until the new one is decoded (ver
 - `photo/` and `CV/` originals: not tracked, not in git history.
 - CV download stays hidden (both PDFs contain the phone number).
 
-## Photo visibility in the light theme (finding)
+## Photo visibility in the light theme (finding → fixed)
 
-Measured with `scripts/photo-visibility.mjs` on `/az/` (mean luminance change the photo makes, 0–255;
-same number = same visibility):
+Measured with `scripts/photo-visibility.mjs` (mean luminance change the photo makes, 0–255; same number = same
+visibility). Two fixes: the light photo opacity now equals dark (0.62), and option A (approved): in the light theme
+"Read the case study" and "Winner" use the text colour, so the home-page strong scrim drops from 90 % to 70 %.
+Case pages keep 90 % (their accent labels are prototype styles). Contrast after the change: 136/136 positions AA,
+worst 4.51:1.
+
+`/` after option A:
 
 | | hero | work | about | experience | awards | contact |
 |---|---|---|---|---|---|---|
-| 1366 dark | 64.9 | 19.0 | 22.3 | 12.6 | 14.8 | 14.1 |
-| 1366 light | 30.4 | 8.8 | 26.2 | 9.3 | 11.4 | 11.5 |
-| 375 dark | 57.5 | 18.0 | 24.9 | 19.5 | 18.4 | 13.3 |
-| 375 light | 27.4 | 11.2 | 27.4 | 16.6 | 16.1 | 10.3 |
+| 1366 dark | 64.3 | 18.9 | 21.2 | 14.1 | 14.2 | 14.5 |
+| 1366 light | 29.8 | 10.5 | 25.3 | 15.2 | 14.7 | 14.0 |
+| 375 dark | 55.8 | 19.3 | 24.4 | 19.7 | 17.2 | 11.4 |
+| 375 light | 20.1 | 13.7 | 25.6 | 19.1 | 17.4 | 15.1 |
 
-- Fixed: the light theme used a lower photo opacity (0.50) than dark (0.62). Now both use 0.62; About matches.
-- Hero: a white wall over a light page changes few pixels by nature; the portrait itself is unaffected.
-- **Open**: Work, Experience, Awards and Contact stay about half as visible in light. Cause: the light accent
-  `#A84F17` reaches only 4.68:1 on the plain light background, so any photo detail behind accent text
-  ("Read the case study", "Winner", case-study labels) drops it below AA; the strong scrim is held at 90 % for that.
-  Measured option: show those two home-page labels in the text colour in the light theme only (they are additions,
-  not prototype styles) and lower the light strong scrim to 70 % → experience 13.5, awards 15.3, contact 13.6
-  (≈ dark), work 10.6, AA still holds (worst 4.62:1). Not applied — needs approval.
+(Before both fixes, light was work 8.8, experience 9.3, awards 11.4, contact 11.5 at 1366 px on `/az/`.)
+About, Experience, Awards and Contact now match dark. Remaining gaps: **Work** (~11 vs ~19) — its muted grey
+stack lines and summaries need the scrim; **hero** — a white wall over a light page changes few pixels by nature.
+The contact value varies ±3 between runs because the page end clamps the scroll position.
 
 ## Not covered
 

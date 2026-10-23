@@ -65,8 +65,16 @@ kbd{font:inherit;font-size:.78em;border:1px solid var(--glass-border);background
 .photo-bg picture{position:absolute;inset:0;transition:opacity .9s var(--ease)}
 .scrim-strong{position:absolute;inset:0;z-index:2;background:rgba(15,30,27,.62);transition:opacity .9s var(--ease)}
 .photo-bg[data-scrim="soft"] .scrim-strong{opacity:0}
-:root[data-theme="light"] .scrim-strong{background:rgba(233,238,232,.9)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .scrim-strong{background:rgba(233,238,232,.9)}}
+:root[data-theme="light"] .scrim-strong{background:rgba(233,238,232,.7)}
+/* Case pages keep a stronger light scrim: their accent labels (prototype style) need it for AA */
+:root[data-theme="light"] body:has(.case-page) .scrim-strong{background:rgba(233,238,232,.9)}
+/* Light accent #A84F17 has little contrast headroom over photos; these two labels use the text colour instead */
+:root[data-theme="light"] .w-more,:root[data-theme="light"] .l-result.win{color:var(--text)}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .scrim-strong{background:rgba(233,238,232,.7)}
+  :root:not([data-theme="dark"]) body:has(.case-page) .scrim-strong{background:rgba(233,238,232,.9)}
+  :root:not([data-theme="dark"]) .w-more,:root:not([data-theme="dark"]) .l-result.win{color:var(--text)}
+}
 /* Over a photo the header needs a sturdier fill to keep its labels readable */
 body:has(.photo-bg) .bar.glass,body:has(.photo-bg) .suggest.glass{background:var(--glass-strong)}
 .photo-bg picture[data-hidden]{opacity:0}
