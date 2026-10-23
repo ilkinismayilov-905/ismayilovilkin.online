@@ -131,7 +131,8 @@ kbd{font:inherit;font-size:.78em;border:1px solid var(--glass-border);background
 
 @media (max-width:880px){
   .hero{grid-template-columns:1fr;min-height:auto}
-  .portrait{grid-row:1;justify-self:center;width:min(78%,22rem)}
+  /* Enhancement 1: cap the portrait at 44svh (width = 44svh × 3/4) so name and intro fit the first screen */
+  .portrait{grid-row:1;justify-self:center;width:min(78%,22rem,33svh)}
   /* Approved change: keep the tag off the face on small screens */
   .tag{right:auto;left:-1rem;top:auto;bottom:14%}
 }
