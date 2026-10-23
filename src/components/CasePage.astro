@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CaseStudy from './CaseStudy.astro';
+import { getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
+
+interface Props { project: CollectionEntry<'projects'>; locale: Locale }
+const { project, locale } = Astro.props;
+const t = useT(locale);
+const site = (await getSingle('site', locale)).data;
+const slug = projectSlug(project);
+---
+<Base
+  locale={locale}
+  title={t('caseMeta.title', { title: project.data.title, name: site.person.name })}
+  description={project.data.lede ?? project.data.summary}
+  path={`work/${slug}/`}
+  ogImage={`/og/${locale}-${slug}.png`}
+>
+  <div class="wrap case-page">
+    <a class="back" href={`${href(locale, '')}#work`}>{t('case.back')}</a>
+    <CaseStudy project={project} locale={locale} heading="h1" />
+  </div>
+</Base>
