@@ -38,4 +38,9 @@ Toasts: "E-poçt kopyalandı", "Açıq tema aktivdir", "Tünd tema aktivdir", "S
 Palette: "Bölmə, layihə və ya əməliyyat axtarın", groups "Keçid", "Layihəni aç", "İşləri süz", "Əməliyyatlar" ·
 Language: "Bu səhifə Azərbaycan dilində də var." / "Azərbaycanca oxu" · 404: "Səhifə tapılmadı", "Bu ünvanda heç nə yoxdur. Saytdakı hər şey ana səhifədən başlayır."
 
+## Added on the enhancements branch
+
+- Case-study page: facts card label "Layihə haqqında qısa məlumat", navigation "Digər layihələr", "Əvvəlki: …" / "Növbəti: …".
+- Skills: heading "Bacarıqlar" and all groups and items are taken word for word from the AZ CV.
+
 The easter egg ("Əvvəlcə çay, sonra növbəti endpoint") and the Render note ("açılması bir az vaxt ala bilər") are your wording.
