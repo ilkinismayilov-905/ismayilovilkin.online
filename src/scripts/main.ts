@@ -6,6 +6,7 @@ import { initHero, initStatusLight } from './hero';
 import { initCaseDialog, initFilters, initPreview, type Category } from './work';
 import { initBackdrop, initNavCurrent, initStory, initTimeline } from './scroll';
 import { initPalette, type Command } from './palette';
+import { initPageTransitions } from './transitions';
 
 export function init() {
   const d = readData();
@@ -22,6 +23,7 @@ export function init() {
   initTimeline();
   initBackdrop();
   initStory(t);
+  initPageTransitions();
 
   // Language switch keeps the visitor on the same section
   let section = '';

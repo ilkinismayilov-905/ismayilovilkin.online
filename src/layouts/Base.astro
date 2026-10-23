@@ -2,6 +2,7 @@
 import { Font } from 'astro:assets';
 import '../styles/global.css';
 import themeInit from '../scripts/theme-init.js?raw';
+import pageReveal from '../scripts/page-reveal.js?raw';
 import heroBackdrop from '../assets/photos/backdrop/hero.webp';
 import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
@@ -65,6 +66,7 @@ const pageData = {
   <title>{title}</title>
   <meta name="description" content={description} />
   <script is:inline set:html={themeInit} />
+  <script is:inline set:html={pageReveal} />
   {noindex ? <meta name="robots" content="noindex" /> : (
     <Fragment>
       <link rel="canonical" href={canonical} />

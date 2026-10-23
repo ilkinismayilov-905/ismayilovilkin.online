@@ -349,6 +349,12 @@ dialog::backdrop{background:rgba(5,12,10,.25);-webkit-backdrop-filter:blur(3px);
 .not-found{min-height:60vh;display:grid;align-content:center;gap:1rem;padding-block:4rem}
 .not-found h1{margin:0;font-family:var(--display);font-weight:750;font-variation-settings:"wdth" 115;font-size:clamp(2.5rem,6vw,5rem);line-height:.95}
 
+/* Enhancement 4: View Transitions between list, dialog and case page (names are set by script, one per project) */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-group(*){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}

@@ -4,9 +4,13 @@ import { existsSync, readFileSync } from 'node:fs';
 import { rename, rmdir } from 'node:fs/promises';
 import { defineConfig, fontProviders } from 'astro/config';
 
-// The only inline script (applies the stored theme before first paint). Its hash goes into the CSP.
-const themeInit = readFileSync(new URL('./src/scripts/theme-init.js', import.meta.url), 'utf8');
-const themeInitHash = /** @type {`sha256-${string}`} */ (`sha256-${createHash('sha256').update(themeInit).digest('base64')}`);
+// The only inline scripts: the stored theme before first paint, and the receiving side of page view transitions
+// (pagereveal fires before deferred modules run). Their hashes go into the CSP.
+/** @param {string} file */
+const inlineHash = (file) => {
+  const code = readFileSync(new URL(`./src/scripts/${file}`, import.meta.url), 'utf8');
+  return /** @type {`sha256-${string}`} */ (`sha256-${createHash('sha256').update(code).digest('base64')}`);
+};
 
 // Astro writes src/pages/az/404.astro to az/404/index.html; hosts look for az/404.html.
 /** @type {import('astro').AstroIntegration} */
@@ -43,7 +47,7 @@ export default defineConfig({
   security: {
     csp: {
       directives: ["default-src 'self'", "img-src 'self' data:", "font-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'none'"],
-      scriptDirective: { hashes: [themeInitHash] },
+      scriptDirective: { hashes: [inlineHash('theme-init.js'), inlineHash('page-reveal.js')] },
     },
   },
   vite: {

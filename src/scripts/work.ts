@@ -2,6 +2,7 @@
 import { $, $$, fill, finePointer, reduceMotion } from './dom';
 import type { PageData } from './data';
 import { motifSvg } from '../lib/motif';
+import { morphIntoDialog } from './transitions';
 
 export type Category = 'all' | 'backend' | 'hackathon' | 'frontend';
 
@@ -33,10 +34,14 @@ export function initCaseDialog(onOpen: () => void) {
   const open = (slug: string) => {
     const art = document.getElementById(`case-${slug}`);
     if (!dlg || !body || !art) return false;
-    body.innerHTML = art.innerHTML;
-    onOpen();
-    dlg.showModal();
-    dlg.scrollTop = 0;
+    const show = () => {
+      body.innerHTML = art.innerHTML;
+      onOpen();
+      dlg.showModal();
+      dlg.scrollTop = 0;
+      return $('h3', body);
+    };
+    if (!morphIntoDialog(slug, show)) show();
     return true;
   };
   for (const a of $$<HTMLAnchorElement>('#workList a[data-case]')) {
