@@ -11,7 +11,7 @@ facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: "[NEEDS INPUT]" }
   - { label: Stack, value: "[NEEDS INPUT]" }
-  - { label: Award, value: Winner, TransportTech Hackathon 2026 }
+  - { label: Award, value: "Winner, TransportTech Hackathon 2026" }
 live: { url: "https://yolcu.onrender.com/map/", coldStart: true }
 sections:
   problem: "[NEEDS INPUT]"

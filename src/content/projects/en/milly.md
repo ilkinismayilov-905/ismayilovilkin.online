@@ -11,7 +11,7 @@ caseStudy: true
 facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: Team of 5 }
-  - { label: Award, value: Overall winner, IT SkillSprint final Capstone (Web Development & AI) }
+  - { label: Award, value: "Overall winner, IT SkillSprint final Capstone (Web Development & AI)" }
 live: { url: "https://milly-front.vercel.app" }
 sections:
   problem: "[NEEDS INPUT]"

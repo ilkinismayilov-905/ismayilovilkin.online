@@ -11,7 +11,7 @@ facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: "[NEEDS INPUT]" }
   - { label: Stack, value: "[NEEDS INPUT]" }
-  - { label: Award, value: Winner, Karabakh Hackathon 2026 }
+  - { label: Award, value: "Winner, Karabakh Hackathon 2026" }
 live: { url: "https://abadlandkarabakh.onrender.com", coldStart: true }
 sections:
   problem: "[NEEDS INPUT]"

@@ -90,7 +90,8 @@ const projects = defineCollection({
     lede: z.string().optional(),
     motif: z.enum(['lines', 'blocks', 'rings', 'grid', 'wave']),
     caseStudy: z.boolean(),
-    facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+    // strict: an unquoted comma in YAML flow style would otherwise silently cut the value short
+    facts: z.array(z.strictObject({ label: z.string(), value: z.string() })).default([]),
     live: z.object({ url: z.url(), coldStart: z.boolean().default(false) }).optional(),
     // Case studies only. Headings come from ui.ts so their level fits the page (h2 standalone, h4 in the home page).
     sections: z.object({ problem: z.string(), did: z.string(), decision: z.string(), result: z.string() }).optional(),
