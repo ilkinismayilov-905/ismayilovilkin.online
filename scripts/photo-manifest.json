@@ -1,10 +1,36 @@
 {
-  "$comment": "Originals live in photo/ (gitignored). crop = [x, y, width, height] as fractions of the upright original. backdrop = tiny pre-blurred variant (old backdrop). background = wide + tall full-page background variants.",
+  "$comment": "Originals live in photo/ (gitignored). crop = [x, y, width, height] as fractions of the upright original; only cropped entries also get a <name>.jpg (the hero arch portrait). background = wide + tall full-page background variants.",
   "photos": [
-    { "source": "IMG_7545 2.jpg", "name": "hero", "background": true, "crop": [0.1, 0.1, 0.8, 0.8], "backdrop": true },
-    { "source": "IMG_0426.JPG", "name": "story-build", "background": true, "crop": [0.4, 0.3, 0.5, 0.4444] },
-    { "source": "IMG_9431.jpg", "name": "story-learn", "background": true, "crop": [0.13, 0.23, 0.77, 0.77], "backdrop": true },
-    { "source": "IMG_0208.HEIC", "name": "story-hackathons", "background": true, "crop": [0.2, 0.36, 0.5, 0.5], "backdrop": true },
-    { "source": "IMG_0257.HEIC", "name": "contact", "background": true, "crop": [0.5, 0.3, 0.5, 0.5], "backdrop": true }
+    {
+      "source": "IMG_7545 2.jpg",
+      "name": "hero",
+      "background": true,
+      "crop": [
+        0.1,
+        0.1,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "source": "IMG_0426.JPG",
+      "name": "story-build",
+      "background": true
+    },
+    {
+      "source": "IMG_9431.jpg",
+      "name": "story-learn",
+      "background": true
+    },
+    {
+      "source": "IMG_0208.HEIC",
+      "name": "story-hackathons",
+      "background": true
+    },
+    {
+      "source": "IMG_0257.HEIC",
+      "name": "contact",
+      "background": true
+    }
   ]
 }

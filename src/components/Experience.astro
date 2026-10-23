@@ -1,10 +1,9 @@
 ---
-import backdrop from '../assets/photos/backdrop/story-hackathons.webp';
 import { getSingle, monthYear, useT, type Locale } from '../i18n/utils';
 import BgCaption from './BgCaption.astro';
 
-interface Props { locale: Locale; photoBg?: boolean }
-const { locale, photoBg = false } = Astro.props;
+interface Props { locale: Locale }
+const { locale } = Astro.props;
 const bgName = (await getSingle('site', locale)).data.sectionBackgrounds.experience;
 const t = useT(locale);
 const { items } = (await getSingle('experience', locale)).data;
@@ -13,7 +12,7 @@ const when = (i: (typeof items)[number]) => {
   return i.start ? `${monthYear(locale, i.start)} – ${end}` : end;
 };
 ---
-<section id="experience" aria-labelledby="exp-h" data-backdrop={backdrop.src} data-bg={bgName}>
+<section id="experience" aria-labelledby="exp-h" data-bg={bgName}>
   <div class="wrap">
     <div class="s-head"><h2 id="exp-h" tabindex="-1">{t('exp.title')}</h2></div>
     <div class="tl-wrap" id="timeline"><span class="tl-progress" aria-hidden="true"></span>
@@ -26,6 +25,6 @@ const when = (i: (typeof items)[number]) => {
         ))}
       </ol>
     </div>
-    {photoBg && <BgCaption locale={locale} name={bgName} />}
+    <BgCaption locale={locale} name={bgName} />
   </div>
 </section>

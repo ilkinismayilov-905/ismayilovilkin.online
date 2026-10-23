@@ -8,6 +8,7 @@ summary: QR kodla sifariş və ödəniş, real-time personal paneli.
 lede: Çoxməkanlı restoran sifariş platforması. IT SkillSprint-in final Capstone layihəsində Web Development & AI üzrə ümumi qalib.
 motif: blocks
 caseStudy: true
+background: story-learn
 facts:
   - { label: Rol, value: "[NEEDS INPUT]" }
   - { label: Komanda, value: 5 nəfərlik komanda }

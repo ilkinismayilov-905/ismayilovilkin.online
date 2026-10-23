@@ -255,12 +255,17 @@ only `transform`, `opacity`, `clip-path` animate; no scroll snapping, hijacking 
   - **Scroll behaviour**: when a section or an About chapter is nearest the viewport centre, the background
     crossfades (~900 ms) to its photo after `img.decode()`; a slow scale settle 1.05 → 1 follows the scroll
     through that part. No scroll-jacking. Only the current and the next photo are loaded.
-  - **Mapping**: hero + work 7545; About chapters 0426, 9431, 0208; contact 0257; proposed: experience 0426,
-    hackathons & awards 0257 (pending approval).
+  - **Mapping**: hero + work 7545; About chapters 0426, 9431, 0208; experience 0426; hackathons & awards 0257;
+    contact 0257. Case-study pages use the project's own event photo (`background` in the project file):
+    Milly 9431, Yolçu 0257, AbadLand 0208, Paygenix 7545.
+  - **Two scrim levels**: soft where text sits left (hero, About chapters, case pages), strong where text runs the
+    full width (work, experience, awards, contact; also the no-JS default). Header, hero tag and captions use the
+    sturdier glass fill over photos. Verified with `node scripts/contrast.mjs` (WCAG AA on rendered pixels).
   - **Framing**: `object-position` per photo, separately for desktop and mobile, stored in content.
   - **Caption**: small localized glass caption per part, placed in the page flow at the end of the part on the
     text side, so it never covers text or the face (a fixed corner caption would overlap scrolling text).
-  - **Rollout**: English home page first (STOP for approval), then Azerbaijani and case-study pages.
+  - **Rollout**: approved on the English home page (2026-10-23), now on every page. The About photo frame and the
+    tiny backdrops are removed.
 - **C. Hero continuity**: portrait moves up to 40 px slower than the page while leaving the hero; tint deepens slightly.
 - CSS scroll-driven animations (`animation-timeline: view()`) only as an `@supports` enhancement for C,
   after checking MDN compat data at implementation time. Everything works without them.

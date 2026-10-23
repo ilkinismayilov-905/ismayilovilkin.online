@@ -29,7 +29,6 @@ const site = defineCollection({
       sectionBackgrounds: z.strictObject({ hero: z.string(), work: z.string(), experience: z.string(), awards: z.string(), contact: z.string() }),
       contact: z.object({
         note: z.string(),
-        photo: image(),
         email: z.email(),
         github: z.url(),
         linkedin: z.url(),
@@ -39,10 +38,9 @@ const site = defineCollection({
 
 const about = defineCollection({
   loader: glob({ base: './src/content/about', pattern: '*.md' }),
-  schema: ({ image }) =>
-    z.object({
+  schema: z.object({
       chapters: z
-        .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), photo: image(), background: z.string(), alt: z.string(), caption: z.string() }))
+        .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), background: z.string() }))
         .length(3),
       principles: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
       // Enhancement 5: exactly the CV's skill groups and wording; no levels
@@ -94,6 +92,8 @@ const projects = defineCollection({
     lede: z.string().optional(),
     motif: z.enum(['lines', 'blocks', 'rings', 'grid', 'wave']),
     caseStudy: z.boolean(),
+    // case studies: page background photo (a name from the site's `backgrounds`)
+    background: z.string().optional(),
     // strict: an unquoted comma in YAML flow style would otherwise silently cut the value short
     facts: z.array(z.strictObject({ label: z.string(), value: z.string() })).default([]),
     live: z.object({ url: z.url(), coldStart: z.boolean().default(false) }).optional(),

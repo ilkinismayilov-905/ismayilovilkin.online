@@ -55,7 +55,7 @@ export async function assertContentReady() {
 
   const [pen, paz] = await Promise.all([getProjects('en'), getProjects('az')]);
   const key = (p: CollectionEntry<'projects'>) =>
-    JSON.stringify([projectSlug(p), p.data.order, p.data.year, p.data.category, p.data.caseStudy, p.data.motif, p.data.facts.length, p.data.live?.url, p.data.live?.coldStart, !!p.data.sections, p.data.stack?.length]);
+    JSON.stringify([projectSlug(p), p.data.order, p.data.year, p.data.category, p.data.caseStudy, p.data.motif, p.data.facts.length, p.data.live?.url, p.data.live?.coldStart, !!p.data.sections, p.data.stack?.length, p.data.background]);
   const enKeys = new Set(pen.map(key));
   for (const p of paz) if (!enKeys.has(key(p))) problems.push(`projects: az/${projectSlug(p)} has no matching en entry`);
   if (pen.length !== paz.length) problems.push(`projects: ${pen.length} en vs ${paz.length} az`);

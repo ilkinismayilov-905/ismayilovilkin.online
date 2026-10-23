@@ -57,7 +57,18 @@ Not conflicts, only different detail levels (each page uses its own CV): volunte
 - **Photo captions**: "Renter.az, 2026" (year from the photo's date), "IT SkillSprint, 2026", "Karabakh Hackathon 2026".
 - **Experience order**: work first (VersePay, Renter.az, CodersAzerbaijan), then education (Ironhack, UNEC), each newest first.
 
-## 6. Drafts in your voice (from CV facts) — edit freely
+## 6. Photo background (approved 2026-10-23)
+
+- Mapping: hero + work 7545, About chapters 0426 / 9431 / 0208, experience 0426, hackathons & awards 0257, contact 0257.
+- **Case-study pages (my choice, please confirm)**: each uses the photo from its own event: Milly → IT SkillSprint
+  (9431), Yolçu → TransportTech (0257), AbadLand Qarabağ → Karabakh Hackathon (0208). Paygenix has no event photo,
+  so it uses the hero photo (7545). Change with `background:` in `src/content/projects/{en,az}/<slug>.md`.
+- **Hero caption "PashaHackathon, 2026"**: the badge shows PASHA Hackathon, the year comes from the photo's date;
+  which edition (5.0 or 6.0) is not known. Captions live in `backgrounds` in `src/content/site/{en,az}.yaml`.
+- The photos are decorative backgrounds now, so they have no alt text; the earlier story alt texts were removed
+  with the About photo frame.
+
+## 7. Drafts in your voice (from CV facts) — edit freely
 
 All in `src/content/…/{en,az}`:
 - Hero intro, status "Next" line (from the AZ CV goal), meta descriptions, JSON-LD description.
@@ -66,7 +77,7 @@ All in `src/content/…/{en,az}`:
 - Contact note: "Email is the fastest way to reach me." (no reply-time promise, since none is in the CVs).
 - Project one-line summaries and case-study ledes; image alt texts.
 
-## 7. Privacy and downloads
+## 8. Privacy and downloads
 
 - Phone number and referee: not published anywhere. `npm run build:release` greps `dist/` for phone patterns and a
   local deny-list (`.privacy-denylist`, gitignored).

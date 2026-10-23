@@ -7,6 +7,7 @@ summary: A unified mobility platform for AYNA, built in 2 days. Winner of the Tr
 lede: A unified mobility platform for AYNA with a live traffic map, AI bus-interval optimization and Mobility Hub proposals.
 motif: lines
 caseStudy: true
+background: contact
 facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: "[NEEDS INPUT]" }

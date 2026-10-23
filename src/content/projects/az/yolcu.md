@@ -7,6 +7,7 @@ summary: AYNA üçün 2 gündə hazırlanmış vahid nəqliyyat platforması. Tr
 lede: AYNA üçün vahid nəqliyyat platforması. Canlı tıxac xəritəsi, AI interval tövsiyəsi, Mobility Hub təklifləri.
 motif: lines
 caseStudy: true
+background: contact
 facts:
   - { label: Rol, value: "[NEEDS INPUT]" }
   - { label: Komanda, value: "[NEEDS INPUT]" }

@@ -3,7 +3,6 @@ import { Font } from 'astro:assets';
 import '../styles/global.css';
 import themeInit from '../scripts/theme-init.js?raw';
 import pageReveal from '../scripts/page-reveal.js?raw';
-import heroBackdrop from '../assets/photos/backdrop/hero.webp';
 import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 import Overlays from '../components/Overlays.astro';
@@ -22,11 +21,11 @@ interface Props {
   showContact?: boolean;
   /** 404 pages: no canonical/hreflang, not indexed */
   noindex?: boolean;
-  /** Full-page photo background (rolled out on the English home page first) */
-  photoBackground?: boolean;
+  /** Background photo shown first (default: the hero's) */
+  background?: string;
 }
 
-const { locale, title, description, path, ogImage, home = false, jsonLd, showContact = true, noindex = false, photoBackground = false } = Astro.props;
+const { locale, title, description, path, ogImage, home = false, jsonLd, showContact = true, noindex = false, background } = Astro.props;
 const t = useT(locale);
 const other = otherLocale(locale);
 const site = await getSingle('site', locale);
@@ -55,7 +54,7 @@ const pageData = {
       'cat.backend', 'cat.hackathon', 'cat.frontend', 'preview.case', 'contact.copied', 'contact.blocked', 'palette.empty',
       'group.goto', 'group.project', 'group.filter', 'group.actions', 'nav.work', 'nav.about', 'nav.experience', 'nav.awards',
       'nav.contact', 'cmd.filter.backend', 'cmd.filter.hackathon', 'cmd.filter.frontend', 'cmd.filter.all', 'cmd.copyEmail',
-      'cmd.github', 'cmd.linkedin', 'cmd.lang', 'story.progress', 'suggest.text', 'suggest.action',
+      'cmd.github', 'cmd.linkedin', 'cmd.lang', 'suggest.text', 'suggest.action',
     ] as const).map((k) => [k, t(k)]),
   ),
   easterEgg: site.data.status.easterEgg,
@@ -98,12 +97,7 @@ const pageData = {
 </head>
 <body>
   <a class="skip" href="#main">{t('skip')}</a>
-  {photoBackground ? <PhotoBackground locale={locale} /> : (
-    <div class="backdrop" aria-hidden="true">
-      <img id="bgA" src={heroBackdrop.src} alt="" width={heroBackdrop.width} height={heroBackdrop.height} />
-      <img id="bgB" src={heroBackdrop.src} alt="" width={heroBackdrop.width} height={heroBackdrop.height} data-hidden />
-    </div>
-  )}
+  <PhotoBackground locale={locale} first={background} />
 
   <aside class="suggest glass" id="suggest" lang={other} aria-label={useT(other)('suggest.label')} hidden>
     <span>{useT(other)('suggest.text')}</span>
@@ -115,7 +109,7 @@ const pageData = {
 
   <main id="main"><slot /></main>
 
-  {showContact && <Contact locale={locale} photoBg={photoBackground} />}
+  {showContact && <Contact locale={locale} />}
 
   <Overlays locale={locale} />
   <script type="application/json" id="page-data" set:html={JSON.stringify(pageData)} />

@@ -13,12 +13,12 @@ UI strings live in `src/i18n/ui.ts`; content in `src/content/*/az*`.
 | Organisation after a role | Role on one line, organisation on the next (no "at") | Azerbaijani needs a case suffix that depends on the name ("VersePay-də", "UNEC-də"); a separate line avoids wrong suffixes. |
 | "Case study" | "Layihə haqqında" / "Ətraflı oxu" | "Keys araşdırması" sounds forced; tell me if you prefer another term. |
 | New tab note | "(yeni vərəqdə açılır)" | Screen-reader text for external links. |
-| Story dots | "1. fəsli göstər (cəmi 3)" | Avoids ordinal suffixes (-ci/-cü) that change with the number. |
 
 ## Content passages (not in the AZ CV word for word)
 
+- Photo captions: "Qarabağ Hakatonu 2026", "TransportTech Hakatonu 2026" (from the AZ CV event names); the others are names and years.
 - Hero intro: "Erkən mərhələli FinTech startapında 6 backend developerdən ibarət komandaya rəhbərlik edirəm. Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam. Orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsi var."
-- Meta description, JSON-LD description, hero portrait alt text, all story alt texts.
+- Meta description, JSON-LD description, hero portrait alt text.
 - Status board: "VersePay-də Java Backend Team Lead", "Ödənişlər, Spring Boot, performans və testlər", "Bank və ya FinTech backend sahəsində ilk korporativ rol axtarıram".
 - Hero tag: "orta API cavab müddəti".
 - Work note: "Yeddi layihə, çoxməkanlı restoran sifariş platformasından brauzer oyununa qədər. Dördünün ətraflı təsviri var."

@@ -8,6 +8,7 @@ summary: Diners scan a table QR code to order and pay from their phone; staff ma
 lede: A multi-venue restaurant ordering platform, and the overall winner of the IT SkillSprint final Capstone (Web Development & AI).
 motif: blocks
 caseStudy: true
+background: story-learn
 facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: Team of 5 }

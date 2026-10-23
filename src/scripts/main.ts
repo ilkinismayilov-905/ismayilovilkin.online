@@ -4,7 +4,7 @@ import { toast } from './toast';
 import { initTheme } from './theme';
 import { initHero, initStatusLight } from './hero';
 import { initCaseDialog, initFilters, initPreview, type Category } from './work';
-import { initBackdrop, initNavCurrent, initStory, initTimeline } from './scroll';
+import { initNavCurrent, initTimeline } from './scroll';
 import { initPalette, type Command } from './palette';
 import { initPageTransitions } from './transitions';
 import { initPhotoBackground } from './photo-bg';
@@ -22,9 +22,7 @@ export function init() {
   const hidePreview = initPreview(t);
   const dialog = initCaseDialog(hidePreview);
   initTimeline();
-  initBackdrop();
   initPhotoBackground();
-  initStory(t);
   initPageTransitions();
 
   // Language switch keeps the visitor on the same section

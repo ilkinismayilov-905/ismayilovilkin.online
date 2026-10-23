@@ -7,6 +7,7 @@ summary: A farmland investment portal for the liberated territories, built in 44
 lede: A farmland investment portal for the liberated territories, with a plot map and digital passports, AI land analysis, a 3D terrain view and online applications.
 motif: grid
 caseStudy: true
+background: story-hackathons
 facts:
   - { label: Role, value: "[NEEDS INPUT]" }
   - { label: Team, value: "[NEEDS INPUT]" }

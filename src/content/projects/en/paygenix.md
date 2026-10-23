@@ -7,6 +7,7 @@ summary: A client's full mobile banking backend, built solo.
 lede: A full mobile banking backend for a client, delivered solo, with JWT and PIN auth, cards, transfers, transactions and payments.
 motif: rings
 caseStudy: true
+background: hero
 facts:
   - { label: Role, value: Solo }
 sections:

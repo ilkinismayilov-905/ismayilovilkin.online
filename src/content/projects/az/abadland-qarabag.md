@@ -7,6 +7,7 @@ summary: 44 saatda hazırlanmış investisiya portalı. Qarabağ Hakatonu 2026 q
 lede: İnvestisiya portalı. Sahə xəritəsi və rəqəmsal pasportlar, peyk və iqlim məlumatına əsaslanan AI torpaq analizi, 3D relyef görünüşü, onlayn müraciət.
 motif: grid
 caseStudy: true
+background: story-hackathons
 facts:
   - { label: Rol, value: "[NEEDS INPUT]" }
   - { label: Komanda, value: "[NEEDS INPUT]" }

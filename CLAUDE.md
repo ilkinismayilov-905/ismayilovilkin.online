@@ -23,12 +23,16 @@ Full plan and rationale: `PLAN.md`. Open content questions: `CONTENT_REVIEW.md`.
   Do not set a frontmatter `slug` (it replaces the id and would collide across locales).
 - Client code: one typed module per behaviour in `src/scripts/`, exported `init*()`; animate only `transform`, `opacity`, `clip-path`;
   passive scroll listeners, IntersectionObserver + rAF; respect `prefers-reduced-motion` and `prefers-reduced-transparency`.
-- No inline `style=""` in markup and no `is:inline` scripts (CSP). The single exception is the pre-paint theme snippet, whose hash is computed in `astro.config.mjs`.
+- No inline `style=""` in markup and no `is:inline` scripts (CSP). The exceptions are `src/scripts/theme-init.js` (pre-paint theme) and `src/scripts/page-reveal.js`
+  (pagereveal must run before first render); their hashes are computed in `astro.config.mjs`.
   Pass data to scripts via `<script type="application/json">`.
 - `localStorage` only inside try/catch; the page must work without it.
 - External links: `target="_blank" rel="noopener noreferrer"` + visually hidden "(opens in a new tab)" text in the page's language.
 - Astro 7 gotcha: `compressHTML` defaults to `'jsx'`, which collapses whitespace between inline elements. Check spacing in rendered output.
 - Glass budget: at most 4 `backdrop-filter` layers visible at once; every glass surface needs the solid fallbacks.
+- Page background = full-page photo (`PhotoBackground.astro` + `src/scripts/photo-bg.ts`). Any part that should switch
+  the photo gets `data-bg="<name>"` (names from `backgrounds` in `src/content/site/*.yaml`) and `data-scrim="soft"` only
+  if its text sits in the left column. After changing photos, scrims or colours run `node scripts/contrast.mjs`.
 - Commits: small, conventional (`feat(hero): …`). Enhancements live on the `enhancements` branch until approved.
 
 ## Commands

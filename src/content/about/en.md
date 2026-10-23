@@ -4,26 +4,17 @@ chapters:
     text:
       - Most of my work sits behind the interface. I build Java and Spring Boot services for payment links, customer loyalty and marketplaces.
       - At VersePay I lead a 6-person backend team, from sprint planning in Jira to code reviews and architecture decisions. At Renter.az, a live vehicle rental marketplace with about 100 customers, I lead product planning and delivery as co-founder.
-    photo: ../../assets/photos/story-build.jpg
     background: story-build
-    alt: Ilkin Ismayilov in a brown T-shirt and a Startup badge, standing next to a laptop that shows the Renter.az website.
-    caption: Renter.az, 2026
   - title: How I learn
     text:
       - I study Computer Engineering at UNEC, with a GPA of 95/100. I graduated from the Ironhack IT SkillSprint bootcamp with a 100/100 average, on a full scholarship.
       - Our capstone, Milly, was the overall winner of the IT SkillSprint final Capstone (Web Development & AI). Teaching keeps me sharp too. At CodersAzerbaijan I mentored 6 junior developers and guided 5 team projects to completion.
-    photo: ../../assets/photos/story-learn.jpg
     background: story-learn
-    alt: Ilkin Ismayilov holding an IT SkillSprint award board for Milly, winner of the Web Development & AI capstone.
-    caption: IT SkillSprint, 2026
   - title: Hackathons and beyond
     text:
       - Hackathons are where I practise building fast with a team. In 2026 our teams won the TransportTech Hackathon and the Karabakh Hackathon. I was also a finalist at PashaHackathon 6.0, PashaHackathon 5.0 and the Holberton School Azerbaijan Micro SaaS Hackathon.
       - I also volunteer at big events in Baku, including the Formula 1 Azerbaijan Grand Prix, World Urban Forum 13 and UFC Fight Night Baku.
-    photo: ../../assets/photos/story-hackathons.jpg
     background: story-hackathons
-    alt: Ilkin Ismayilov holding the Karabakh Hackathon 2026 winner's cheque for AbadLand in front of the event's sponsor wall.
-    caption: Karabakh Hackathon 2026
 principles:
   - title: Measure, then fix
     text: Response time went from 1000 ms to 14 ms by fixing N+1 queries, adding Redis caching and the right database indexes.

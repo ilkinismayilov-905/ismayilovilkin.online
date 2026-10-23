@@ -7,7 +7,7 @@
   --accent:#FFB86B; --accent-ink:#1B1208; --accent-soft:rgba(255,184,107,.16);
   --glass:rgba(18,38,34,.42); --glass-strong:rgba(14,30,27,.66); --glass-border:rgba(255,255,255,.14);
   --glass-hi:rgba(255,255,255,.07); --shadow:0 30px 80px rgba(0,0,0,.35);
-  --backdrop-opacity:.38; --focus:#FFB86B;
+  --focus:#FFB86B;
   --display:var(--font-archivo),"Helvetica Neue",Arial,sans-serif;
   --body:var(--font-archivo),"Helvetica Neue",Arial,sans-serif;
   --r-s:10px; --r-m:18px; --r-l:28px; --ease:cubic-bezier(.2,.7,.2,1);
@@ -19,8 +19,7 @@
   --text:#0F1E1B; --muted:#475A53; --rule:rgba(15,30,27,.14);
   --accent:#A84F17; --accent-ink:#FFFFFF; --accent-soft:rgba(168,79,23,.12);
   --glass:rgba(255,255,255,.45); --glass-strong:rgba(250,252,250,.72); --glass-border:rgba(15,30,27,.12);
-  --glass-hi:rgba(255,255,255,.6); --shadow:0 30px 80px rgba(15,30,27,.18);
-  --backdrop-opacity:.28; --focus:#A84F17; color-scheme:light;
+  --glass-hi:rgba(255,255,255,.6); --shadow:0 30px 80px rgba(15,30,27,.18); --focus:#A84F17; color-scheme:light;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
@@ -29,7 +28,7 @@
     --accent:#A84F17; --accent-ink:#FFFFFF; --accent-soft:rgba(168,79,23,.12);
     --glass:rgba(255,255,255,.45); --glass-strong:rgba(250,252,250,.72); --glass-border:rgba(15,30,27,.12);
     --glass-hi:rgba(255,255,255,.6); --shadow:0 30px 80px rgba(15,30,27,.18);
-    --backdrop-opacity:.28; --focus:#A84F17; color-scheme:light;
+    --focus:#A84F17; color-scheme:light;
   }
 }
 /* Glass budget: lighter blur on touch devices */
@@ -61,25 +60,15 @@ kbd{font:inherit;font-size:.78em;border:1px solid var(--glass-border);background
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){ .glass{background:var(--glass-strong)} }
 @media (prefers-reduced-transparency:reduce){ .glass,dialog{background:var(--bg)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important} }
 
-/* ---------- Page backdrop: pre-blurred photo layers, plus grain ---------- */
-.backdrop{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.backdrop img{position:absolute;right:-10%;top:-10%;width:75%;height:120%;object-fit:cover;opacity:var(--backdrop-opacity);transform:scale(1.1);transition:opacity .8s var(--ease);
-  /* The image is pre-blurred; the mask gives it the soft edges the prototype got from a runtime blur */
-  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 55% 42%,#000 35%,transparent 100%);mask-image:radial-gradient(ellipse 62% 58% at 55% 42%,#000 35%,transparent 100%)}
-.backdrop img[data-hidden]{opacity:0}
-.backdrop::after{content:"";position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-@media (prefers-reduced-transparency:reduce){ .backdrop img{display:none} }
-
-/* ---------- Full-page photo background (replaces the tiny backdrop and the About photo frame) ---------- */
+/* ---------- Full-page photo background ---------- */
 .photo-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--bg);--photo-opacity:.62}
 .photo-bg picture{position:absolute;inset:0;transition:opacity .9s var(--ease)}
 .scrim-strong{position:absolute;inset:0;z-index:2;background:rgba(15,30,27,.62);transition:opacity .9s var(--ease)}
 .photo-bg[data-scrim="soft"] .scrim-strong{opacity:0}
-:root[data-theme="light"] .scrim-strong{background:rgba(233,238,232,.86)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .scrim-strong{background:rgba(233,238,232,.86)}}
+:root[data-theme="light"] .scrim-strong{background:rgba(233,238,232,.9)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .scrim-strong{background:rgba(233,238,232,.9)}}
 /* Over a photo the header needs a sturdier fill to keep its labels readable */
-body:has(.photo-bg) .bar.glass{background:var(--glass-strong)}
+body:has(.photo-bg) .bar.glass,body:has(.photo-bg) .suggest.glass{background:var(--glass-strong)}
 .photo-bg picture[data-hidden]{opacity:0}
 .photo-bg img{width:100%;height:100%;object-fit:cover;object-position:85% 35%;display:block;opacity:var(--photo-opacity);
   transform:scale(var(--settle,1.05));transform-origin:70% 40%;transition:transform .3s linear}
@@ -113,14 +102,6 @@ body:has(.photo-bg) .bar.glass{background:var(--glass-strong)}
 
 .bg-caption{display:inline-block;margin:1.5rem 0 0;border-radius:var(--r-s);padding:.35rem .7rem;font-size:.8rem;color:var(--text);background:var(--glass-strong)}
 .contact > .bg-caption{margin-top:1.25rem}
-
-/* About in the prototype layout */
-.about-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
-.about-text .chapter{margin-bottom:clamp(2.5rem,6vh,4rem)}
-.about-text .chapter p{margin:0 0 1.2rem;max-width:36rem;font-size:clamp(1.08rem,1rem + .35vw,1.25rem)}
-.about-text .chapter p:last-of-type{margin-bottom:0}
-.about-text .chapter h3{margin:0 0 .6rem;font-family:var(--display);font-weight:650;font-size:1.35rem;font-variation-settings:"wdth" 108}
-@media (max-width:820px){.about-grid{grid-template-columns:1fr}}
 
 /* ---------- Header ---------- */
 .bar{position:sticky;top:.75rem;z-index:30;margin:.75rem auto 0;max-width:min(82rem,calc(100% - 1.5rem));border-radius:999px}
@@ -172,7 +153,7 @@ body:has(.photo-bg) .bar.glass{background:var(--glass-strong)}
 .portrait-drift{position:absolute;inset:0;transform:translate3d(0,var(--drift,0px),0)}
 .portrait-frame{position:absolute;inset:0;border-radius:999px 999px var(--r-l) var(--r-l);overflow:hidden;
   transform:translate3d(var(--px,0),var(--py,0),0);transition:transform .6s var(--ease);box-shadow:var(--shadow)}
-.portrait-frame img,.arch img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
+.portrait-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
 .tint::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
   background:linear-gradient(160deg, rgba(255,184,107,.45), transparent 45%, rgba(15,30,27,.55))}
 .portrait-frame::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(15,30,27,1);opacity:var(--deepen,0)}
@@ -276,45 +257,13 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
   .case-facts{position:static;order:-1}
 }
 
-/* ---------- About + scroll story ---------- */
-.story{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
-.chapters{display:grid;gap:clamp(3rem,10vh,6rem)}
-.chapter h3{margin:0 0 .6rem;font-family:var(--display);font-weight:650;font-size:1.35rem;font-variation-settings:"wdth" 108}
-.chapter p{margin:0 0 1.2rem;max-width:36rem;font-size:clamp(1.08rem,1rem + .35vw,1.25rem)}
-.js .chapter{transition:opacity .5s var(--ease)}
-.js .story.ready .chapter:not(.is-active){opacity:.72}
-.chapter-photo{margin:0 0 1.25rem}
-.chapter-photo .arch{position:relative;width:min(100%,22rem);aspect-ratio:3/4}
-.chapter-photo figcaption{color:var(--muted);font-size:.88rem;margin-top:.6rem}
-.arch{border-radius:999px 999px var(--r-l) var(--r-l);overflow:hidden;box-shadow:var(--shadow)}
-.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-
-.story-aside{position:sticky;top:6rem;display:none}
-.frame{position:relative;width:min(100%,26rem);aspect-ratio:3/4;margin-left:auto}
-.frame .shot{position:absolute;inset:0;opacity:0;clip-path:inset(100% 0 0 0 round 999px 999px var(--r-l) var(--r-l));transform:scale(1.04);
-  transition:opacity .8s var(--ease),clip-path .9s var(--ease),transform .9s var(--ease)}
-.frame .shot.is-active{opacity:1;clip-path:inset(0 0 0 0 round 999px 999px var(--r-l) var(--r-l));transform:scale(1);z-index:1}
-.frame .shot picture,.frame .shot img{display:block;width:100%;height:100%}
-.frame-cap{position:absolute;left:-1rem;bottom:1.25rem;z-index:3;border-radius:var(--r-s);padding:.45rem .75rem;font-size:.85rem;max-width:80%}
-.story-progress{display:flex;align-items:center;gap:.75rem;justify-content:flex-end;margin-top:1rem;font-size:.9rem;color:var(--muted)}
-.dots{display:flex;gap:.4rem;list-style:none;margin:0;padding:0}
-.dots button{width:.75rem;height:.75rem;border-radius:50%;border:1px solid var(--muted);background:transparent;padding:0}
-.dots button[aria-current="step"]{background:var(--accent);border-color:var(--accent)}
-.dots button::after{content:"";position:absolute;inset:-.6rem}
-.dots li{position:relative}
-
-/* Desktop with JS: one sticky arch frame; inline photos stay for screen readers only */
-@media (min-width:820px){
-  .js .story-aside{display:block}
-  .js .chapter-photo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-}
-@media (max-width:819px){
-  .story{grid-template-columns:1fr}
-  /* Mobile: each photo inline above its chapter, revealed once (chosen over a sticky 40vh band) */
-  .js .chapter-photo{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .js .chapter-photo.seen{opacity:1;transform:none}
-}
-
+/* ---------- About ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.about-text .chapter{margin-bottom:clamp(2.5rem,6vh,4rem)}
+.about-text .chapter p{margin:0 0 1.2rem;max-width:36rem;font-size:clamp(1.08rem,1rem + .35vw,1.25rem)}
+.about-text .chapter p:last-of-type{margin-bottom:0}
+.about-text .chapter h3{margin:0 0 .6rem;font-family:var(--display);font-weight:650;font-size:1.35rem;font-variation-settings:"wdth" 108}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr}}
 .principles{margin:0;list-style:none;border-radius:var(--r-m);padding:1.5rem 1.5rem .3rem;max-width:36rem}
 .principles li{margin-bottom:1.3rem}
 .principles strong{display:block;font-family:var(--display);font-weight:650;font-size:1.2rem;font-variation-settings:"wdth" 108}
@@ -359,8 +308,6 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 
 /* ---------- Contact ---------- */
 .contact{padding-block:clamp(3rem,7vw,6rem) 2rem}
-.contact-shell{position:relative}
-.contact-photo{position:absolute;right:clamp(1rem,6vw,5rem);top:50%;width:min(34%,17rem);aspect-ratio:3/4;transform:translateY(-50%)}
 .contact-card{border-radius:var(--r-l);padding:clamp(1.75rem,5vw,4rem);position:relative;overflow:hidden}
 .contact-card::before{content:"";position:absolute;width:30rem;height:30rem;right:-8rem;top:-12rem;border-radius:50%;
   background:radial-gradient(circle, var(--accent-soft), transparent 70%);pointer-events:none}
@@ -374,7 +321,6 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 .contact-links{display:flex;flex-wrap:wrap;gap:1.25rem;list-style:none;margin:0;padding:0}
 .colophon{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.86rem;padding-top:2rem}
 .no-js .js-only{display:none}
-@media (max-width:720px){.contact-photo{display:none}}
 
 /* ---------- Popups: frosted glass ---------- */
 dialog{border:1px solid var(--glass-border);padding:0;color:var(--text);border-radius:var(--r-m);

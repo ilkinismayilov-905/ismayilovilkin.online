@@ -1,16 +1,18 @@
 // WCAG contrast measured on rendered pixels (text over photos), not on token values.
 // For each scroll position: screenshot with text hidden (background only), then compare every visible text run's
 // colour against the pixels behind it (5th-percentile worst case). Requires a running preview.
-// Usage: node scripts/contrast.mjs [--path /] [--widths 1366,375] [--themes dark,light]
+// Usage: node scripts/contrast.mjs [--paths /,/az/,/work/milly/] [--widths 1366,375] [--themes dark,light]
 import { chromium, devices } from '@playwright/test';
 import sharp from 'sharp';
 
 const arg = (n, f) => { const i = process.argv.indexOf(`--${n}`); return i > -1 ? process.argv[i + 1] : f; };
 const base = arg('base', 'http://localhost:4321');
-const path = arg('path', '/');
+const paths = arg('paths', arg('path', '/')).split(',');
 const widths = arg('widths', '1366,375').split(',').map(Number);
 const themes = arg('themes', 'dark,light').split(',');
-const stops = ['#top', '#work', '.about-text .chapter:nth-of-type(1)', '.about-text .chapter:nth-of-type(2)', '.about-text .chapter:nth-of-type(3)', '.skills', '#experience', '#awards', '#contact'];
+// Positions to measure; selectors missing on a page are skipped (home page and case-study pages share the list)
+const stops = ['#top', '#work', '.about-text .chapter:nth-of-type(1)', '.about-text .chapter:nth-of-type(2)', '.about-text .chapter:nth-of-type(3)', '.skills', '#experience', '#awards',
+  '.case-rich h1', '.case-main h2:nth-of-type(2)', '.case-nav', '#contact'];
 
 const lum = (r, g, b) => { const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
 const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
@@ -18,7 +20,7 @@ const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 const browser = await chromium.launch({ channel: 'chrome' });
 const report = [];
 let worstOverall = Infinity;
-for (const width of widths) for (const theme of themes) {
+for (const path of paths) for (const width of widths) for (const theme of themes) {
   const mobile = width < 768;
   // bypassCSP only so the measurement can inject the "hide text" stylesheet
   const ctx = await browser.newContext({ ...(mobile ? devices['iPhone 13'] : {}), viewport: { width, height: mobile ? 812 : 860 }, colorScheme: theme, bypassCSP: true, reducedMotion: 'reduce', locale: 'en-US' });
@@ -41,6 +43,9 @@ for (const width of widths) for (const theme of themes) {
         const range = document.createRange(); range.selectNodeContents(n);
         for (const r of range.getClientRects()) {
           if (r.width < 4 || r.height < 6 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) continue;
+          // skip text covered by something else (a fixed pill, the header): it isn't what the visitor reads there
+          const top = document.elementFromPoint(Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2)), Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2)));
+          if (top && !el.contains(top) && !top.contains(el)) continue;
           const m = cs.color.match(/[\d.]+/g).map(Number);
           const size = parseFloat(cs.fontSize), weight = Number(cs.fontWeight);
           out.push({ text: text.slice(0, 40), x: r.left, y: r.top, w: r.width, h: r.height, rgb: m.slice(0, 3), large: size >= 24 || (size >= 18.66 && weight >= 700) });
@@ -67,7 +72,7 @@ for (const width of widths) for (const theme of themes) {
       if (c < need) fails.push(`${c.toFixed(2)} < ${need} "${run.text}"`);
     }
     worstOverall = Math.min(worstOverall, worst);
-    report.push(`${width} ${theme} ${stop.padEnd(36)} runs=${String(runs.length).padStart(3)} worst=${worst.toFixed(2)}${fails.length ? `  FAIL ${fails.length}: ${[...new Set(fails)].slice(0, 4).join(' | ')}` : '  ok'}`);
+    report.push(`${path} ${width} ${theme} ${stop.padEnd(36)} runs=${String(runs.length).padStart(3)} worst=${worst.toFixed(2)}${fails.length ? `  FAIL ${fails.length}: ${[...new Set(fails)].slice(0, 4).join(' | ')}` : '  ok'}`);
   }
   await ctx.close();
 }

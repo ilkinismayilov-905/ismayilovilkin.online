@@ -7,6 +7,7 @@ summary: Sifarişçi üçün tam mobil bank backend-i, fərdi layihə.
 lede: Sifarişçi üçün tam mobil bank backend-i. JWT və PIN ilə giriş, kartlar, köçürmələr, tranzaksiyalar, ödənişlər.
 motif: rings
 caseStudy: true
+background: hero
 facts:
   - { label: Rol, value: Fərdi }
 sections:

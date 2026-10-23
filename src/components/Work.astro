@@ -1,11 +1,10 @@
 ---
-import heroBackdrop from '../assets/photos/backdrop/hero.webp';
 import { getProjects, getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
 import CaseStudy from './CaseStudy.astro';
 import BgCaption from './BgCaption.astro';
 
-interface Props { locale: Locale; photoBg?: boolean }
-const { locale, photoBg = false } = Astro.props;
+interface Props { locale: Locale }
+const { locale } = Astro.props;
 const bgName = (await getSingle('site', locale)).data.sectionBackgrounds.work;
 const t = useT(locale);
 const site = await getSingle('site', locale);
@@ -14,7 +13,7 @@ const cases = projects.filter((p) => p.data.caseStudy);
 const filters = ['all', 'backend', 'hackathon', 'frontend'] as const;
 const filterLabel = { all: t('filters.all'), backend: t('filters.backend'), hackathon: t('filters.hackathon'), frontend: t('filters.frontend') };
 ---
-<section id="work" aria-labelledby="work-h" data-backdrop={heroBackdrop.src} data-bg={bgName}>
+<section id="work" aria-labelledby="work-h" data-bg={bgName}>
   <div class="wrap">
     <div class="s-head">
       <div>
@@ -51,6 +50,6 @@ const filterLabel = { all: t('filters.all'), backend: t('filters.backend'), hack
     <div class="cases">
       {cases.map((p) => <CaseStudy project={p} locale={locale} heading="h3" id={`case-${projectSlug(p)}`} />)}
     </div>
-    {photoBg && <BgCaption locale={locale} name={bgName} />}
+    <BgCaption locale={locale} name={bgName} />
   </div>
 </section>

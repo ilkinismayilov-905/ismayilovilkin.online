@@ -2,10 +2,10 @@
 import { backgroundSets } from '../lib/backgrounds';
 import { getSingle, type Locale } from '../i18n/utils';
 
-interface Props { locale: Locale }
+interface Props { locale: Locale; first?: string | undefined }
 const site = (await getSingle('site', Astro.props.locale)).data;
 const sets = await backgroundSets(site.backgrounds);
-const first = site.sectionBackgrounds.hero;
+const first = Astro.props.first ?? site.sectionBackgrounds.hero;
 const s = sets[first];
 if (!s) throw new Error(`No background "${first}"`);
 const WIDE = '(min-aspect-ratio: 1/1)';
