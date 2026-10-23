@@ -1,0 +1,1 @@
+(function(){var d=document.documentElement;d.classList.replace('no-js','js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t}catch{}})();
