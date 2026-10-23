@@ -180,6 +180,8 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 .preview.on{opacity:1}
 .preview svg{display:block;width:100%;height:auto;border-radius:var(--r-s);background:var(--glass-hi)}
 .preview p{margin:.6rem .2rem 0;font-size:.85rem;color:var(--muted)}
+.motif{color:var(--text)}
+.motif .a{color:var(--accent)}
 
 /* ---------- Case study ---------- */
 .case h3,.case-page h1{margin:0;font-family:var(--display);font-weight:750;font-variation-settings:"wdth" 112;font-size:clamp(2rem,5vw,3.2rem);line-height:.98;letter-spacing:-.02em}
@@ -196,6 +198,30 @@ a.row:hover .w-title,a.row:focus-visible .w-title{font-variation-settings:"wdth"
 
 .case-page{padding-block:clamp(3rem,7vw,6rem)}
 .back{display:inline-block;margin-bottom:1.5rem;color:var(--muted)}
+
+/* Enhancement 3: standalone case-study page (the dialog keeps the baseline layout) */
+.case-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,18rem);gap:1.5rem 3rem;align-items:end;margin-bottom:clamp(1.5rem,4vw,3rem)}
+.case-head .lede{margin-bottom:0}
+.case-motif svg{display:block;width:100%;height:auto;border-radius:var(--r-m);background:var(--glass-hi);border:1px solid var(--glass-border)}
+.case-grid{display:grid;grid-template-columns:minmax(0,1fr) 20rem;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.case-main > :first-child{margin-top:0}
+.case-main .live-link{display:flex}
+.case-facts{position:sticky;top:6rem;border-radius:var(--r-m);padding:1.25rem 1.35rem}
+.case-facts dl{margin:0}
+.case-facts div{padding:.7rem 0;border-bottom:1px solid var(--rule)}
+.case-facts div:first-child{padding-top:0}
+.case-facts div:last-child{border-bottom:0;padding-bottom:0}
+.case-facts dt{color:var(--muted);font-size:.84rem}
+.case-facts dd{margin:.15rem 0 0;font-weight:600}
+.case-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:clamp(3rem,7vw,5rem);padding-top:1.5rem;border-top:1px solid var(--rule)}
+.case-nav a{font-family:var(--display);font-weight:600;font-size:1.15rem;font-variation-settings:"wdth" 104}
+.case-nav .next{margin-left:auto;text-align:right}
+@media (max-width:900px){
+  .case-head{grid-template-columns:1fr}
+  .case-motif{order:-1;width:min(100%,16rem)}
+  .case-grid{grid-template-columns:1fr}
+  .case-facts{position:static;order:-1}
+}
 
 /* ---------- About + scroll story ---------- */
 .story{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}

@@ -2,13 +2,17 @@
 import type { CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CaseStudy from './CaseStudy.astro';
-import { getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
+import { getProjects, getSingle, href, projectSlug, useT, type Locale } from '../i18n/utils';
 
 interface Props { project: CollectionEntry<'projects'>; locale: Locale }
 const { project, locale } = Astro.props;
 const t = useT(locale);
 const site = (await getSingle('site', locale)).data;
 const slug = projectSlug(project);
+const cases = (await getProjects(locale)).filter((p) => p.data.caseStudy);
+const i = cases.findIndex((p) => projectSlug(p) === slug);
+const prev = cases[i - 1];
+const next = cases[i + 1];
 ---
 <Base
   locale={locale}
@@ -20,5 +24,11 @@ const slug = projectSlug(project);
   <div class="wrap case-page">
     <a class="back" href={`${href(locale, '')}#work`}>{t('case.back')}</a>
     <CaseStudy project={project} locale={locale} heading="h1" />
+    {(prev || next) && (
+      <nav class="case-nav" aria-label={t('case.more')}>
+        {prev && <a class="prev" href={href(locale, `work/${projectSlug(prev)}/`)} rel="prev">{t('case.prev', { title: prev.data.title })}</a>}
+        {next && <a class="next" href={href(locale, `work/${projectSlug(next)}/`)} rel="next">{t('case.next', { title: next.data.title })}</a>}
+      </nav>
+    )}
   </div>
 </Base>
