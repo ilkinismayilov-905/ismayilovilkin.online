@@ -21,7 +21,7 @@ test('hreflang pairs, canonical and html lang on every page', async ({ page }) =
 });
 
 test('JSON-LD Person on both home pages', async ({ page }) => {
-  for (const [path, name] of [['/', 'Ilkin Ismayilov'], ['/az/', 'İlkin İsmayılov']]) {
+  for (const [path, name] of [['/', 'Ilkin Ismayilov'], ['/az/', 'İlkin İsmayılov']] as const) {
     await page.goto(path);
     const data = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}');
     expect(data['@type']).toBe('Person');
@@ -31,7 +31,7 @@ test('JSON-LD Person on both home pages', async ({ page }) => {
 });
 
 test('404 pages in both languages, with status 404 and noindex', async ({ page }) => {
-  for (const [missing, heading] of [['/nope/', 'Page not found'], ['/az/nope/', 'Səhifə tapılmadı']]) {
+  for (const [missing, heading] of [['/nope/', 'Page not found'], ['/az/nope/', 'Səhifə tapılmadı']] as const) {
     // astro preview serves the root 404; the built az/404.html is checked directly
     const r = await page.request.get(missing);
     expect(r.status()).toBe(404);
@@ -75,7 +75,7 @@ test('every internal link and asset resolves', async ({ page, request }) => {
 });
 
 test('external links open in a new tab safely, with a localized hint', async ({ page }) => {
-  for (const [path, hint] of [['/', '(opens in a new tab)'], ['/az/', '(yeni vərəqdə açılır)']]) {
+  for (const [path, hint] of [['/', '(opens in a new tab)'], ['/az/', '(yeni vərəqdə açılır)']] as const) {
     await page.goto(path);
     const ext = page.locator('a[href^="http"]:not([href*="localhost"])');
     const n = await ext.count();

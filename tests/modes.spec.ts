@@ -7,8 +7,8 @@ test('reduced motion: no load animation, no scale, instant swaps, no smooth scro
   await page.goto('/');
   await expect(page.locator('#name')).not.toHaveClass(/loading/);
   const s = await page.evaluate(() => ({
-    scale: getComputedStyle(document.querySelector('#photoBg img')!).transform,
-    fade: getComputedStyle(document.querySelector('#photoBg picture')!).transitionDuration,
+    scale: getComputedStyle(document.querySelector('#photoBg img') as Element).transform,
+    fade: getComputedStyle(document.querySelector('#photoBg picture') as Element).transitionDuration,
     scroll: getComputedStyle(document.documentElement).scrollBehavior,
   }));
   expect(s.scale).toBe('none');
@@ -22,9 +22,9 @@ test('reduced transparency: solid surfaces, no photo', async ({ page }) => {
   await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-transparency', value: 'reduce' }] });
   await page.goto('/');
   const s = await page.evaluate(() => ({
-    photo: getComputedStyle(document.querySelector('#photoBg picture')!).display,
-    header: getComputedStyle(document.querySelector('.bar')!).backdropFilter,
-    board: getComputedStyle(document.querySelector('.board')!).backgroundColor,
+    photo: getComputedStyle(document.querySelector('#photoBg picture') as Element).display,
+    header: getComputedStyle(document.querySelector('.bar') as Element).backdropFilter,
+    board: getComputedStyle(document.querySelector('.board') as Element).backgroundColor,
   }));
   expect(s.photo).toBe('none');
   expect(s.header).toBe('none');
