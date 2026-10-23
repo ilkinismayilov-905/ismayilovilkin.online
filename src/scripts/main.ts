@@ -26,10 +26,16 @@ export function init() {
   initPageTransitions();
 
   // Language switch keeps the visitor on the same section
-  let section = '';
-  initNavCurrent((id) => { section = id; });
+  initNavCurrent(() => {});
+  const section = () => {
+    const mid = innerHeight / 2;
+    const hit = ['work', 'about', 'experience', 'awards', 'contact']
+      .map((id) => document.getElementById(id))
+      .find((el) => { const r = el?.getBoundingClientRect(); return !!r && r.top <= mid && r.bottom >= mid; });
+    return hit?.id ?? '';
+  };
   for (const a of $$<HTMLAnchorElement>('[data-lang-switch]')) {
-    a.addEventListener('click', () => { a.href = a.href.split('#')[0] + (section ? `#${section}` : ''); });
+    a.addEventListener('click', () => { const s = section(); a.href = a.href.split('#')[0] + (s ? `#${s}` : ''); });
   }
   initLangSuggestion(d.locale);
 
@@ -73,7 +79,7 @@ export function init() {
       : []),
     { group: t('group.actions'), label: t('cmd.copyEmail'), run: () => void copyEmail() },
     { group: t('group.actions'), label: theme.label, run: theme.toggle },
-    { group: t('group.actions'), label: t('cmd.lang'), run: () => { location.href = d.links.otherLocale + (section ? `#${section}` : ''); } },
+    { group: t('group.actions'), label: t('cmd.lang'), run: () => { const s = section(); location.href = d.links.otherLocale + (s ? `#${s}` : ''); } },
     { group: t('group.actions'), label: t('cmd.github'), run: () => openTab(d.links.github) },
     { group: t('group.actions'), label: t('cmd.linkedin'), run: () => openTab(d.links.linkedin) },
   ];
