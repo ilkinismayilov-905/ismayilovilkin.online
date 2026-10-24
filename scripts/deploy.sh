@@ -61,7 +61,7 @@ fi
 step "Upload → $HOST:$INCOMING"
 ssh "$HOST" "test ! -e '$REL' && test ! -e '$INCOMING' && mkdir -p '$INCOMING'"
 "${RSYNC[@]}" --stats
-ssh "$HOST" "mv -T '$INCOMING' '$REL'"   # complete: becomes a release
+ssh "$HOST" "mv -T '$INCOMING' '$REL' && printf '%s\\n' '$TS' > '$REL/release.txt'"   # complete: becomes a release; /release.txt names it
 
 step "Health check of the new release (http://127.0.0.1:8080 on the server)"
 ssh "$HOST" bash -s -- "$BASE" "$REL" <<'CHECK'
@@ -80,6 +80,7 @@ expect /nope/            404
 expect /az/nope/         404
 curl -s http://127.0.0.1:8080/az/nope/ | grep -q 'Səhifə tapılmadı' && echo "ok   Azerbaijani 404 page" || { echo "FAIL /az/nope/ is not the Azerbaijani 404"; fail=1; }
 curl -s http://127.0.0.1:8080/ | grep -q 'http-equiv="content-security-policy"' && echo "ok   CSP meta present" || { echo "FAIL no CSP meta"; fail=1; }
+[[ "$(curl -s http://127.0.0.1:8080/release.txt)" == "$(basename "$REL")" ]] && echo "ok   /release.txt names this release" || { echo "FAIL /release.txt"; fail=1; }
 exit "$fail"
 CHECK
 

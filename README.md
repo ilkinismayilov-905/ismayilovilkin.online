@@ -175,7 +175,8 @@ scripts/deploy.sh
 It stops at the first error: `npm ci` → `npm run build:release` (fails on `[NEEDS INPUT]` or private data) →
 `npm run check` → Playwright tests → link check → upload into a hidden `releases/.incoming-<ts>/` folder, renamed to `releases/<ts>/` only when the transfer is
 complete (unchanged files are hard-linked to the previous release) → health check on the server (home, `/az/`, a case study, both 404s, the CSP) → switch `current`
-→ delete releases older than the newest 5 (never the live one).
+→ delete releases older than the newest 5 (never the live one). Each release gets `/release.txt` with its timestamp,
+so `curl https://ismayilovilkin.online/release.txt` shows which release is live.
 
 ### Roll back
 
