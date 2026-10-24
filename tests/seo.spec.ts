@@ -63,7 +63,7 @@ test('every internal link and asset resolves', async ({ page, request }) => {
     ]);
     for (const u of urls) {
       const url = new URL(u);
-      if (url.origin !== 'http://localhost:4321' || seen.has(url.pathname)) continue;
+      if (url.origin !== 'http://127.0.0.1:4323' || seen.has(url.pathname)) continue;
       seen.add(url.pathname);
       expect((await request.get(url.pathname)).status(), `${url.pathname} (from ${path})`).toBe(200);
       if (url.hash.length > 1 && url.pathname === new URL(page.url()).pathname) {
