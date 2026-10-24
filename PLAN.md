@@ -159,10 +159,11 @@ facts:                       # only CV facts or owner answers; otherwise [NEEDS 
   role: …
   team: …
   award: …
-live: { url: https://milly-front.vercel.app, coldStart: false }
+live: { url: https://example.com, coldStart: false }   (example)
 ```
 Body (case studies only): `## Problem`, `## What I did`, `## The decision that mattered`, `## Result`.
-Live links: Milly, Yolçu (`https://yolcu.onrender.com/map/`), AbadLand (`https://abadlandkarabakh.onrender.com`).
+Live links: Yolçu (`https://yolcu.onrender.com/map/`), AbadLand (`https://abadlandkarabakh.onrender.com`).
+Milly's link was removed on 2026-10-24 (deployment gone); the owner re-adds it after redeploying.
 No links for Paygenix, Space Shooter, ManageableUni, HR Management System, Renter.az.
 No individual GitHub repositories, only the profile `github.com/ilkinismayilov-905`.
 External links: `target="_blank" rel="noopener noreferrer"` plus a visually hidden "(opens in a new tab)".

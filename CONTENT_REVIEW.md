@@ -35,6 +35,9 @@ Not conflicts, only different detail levels (each page uses its own CV): volunte
 Filled on 2026-10-24 from your answers: Milly (role, problem, decision), Yolçu and AbadLand Qarabağ (role, team of 4,
 stack, problem, your part, decision). The stack now sits in each project's `stack:` list, so it also shows in the work list.
 
+**Milly live link** (2026-10-24): removed — the Vercel deployment no longer exists. When it is redeployed, add
+`live: { url: "https://…" }` to `src/content/projects/en/milly.md` and `az/milly.md` (see README).
+
 **Paygenix** (2026-10-24, your answer): a learning project, not built around a problem, so it is a list entry only —
 title, one-line summary and stack, no case-study page. Nothing blocks `npm run build:release` any more.
 

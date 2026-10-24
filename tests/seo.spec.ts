@@ -79,7 +79,7 @@ test('external links open in a new tab safely, with a localized hint', async ({ 
     await page.goto(path);
     const ext = page.locator('a[href^="http"]:not([href*="localhost"])');
     const n = await ext.count();
-    expect(n).toBeGreaterThanOrEqual(5); // GitHub, LinkedIn, 3 live projects
+    expect(n).toBeGreaterThanOrEqual(4); // GitHub, LinkedIn, Yolçu, AbadLand
     for (let i = 0; i < n; i++) {
       await expect(ext.nth(i)).toHaveAttribute('target', '_blank');
       await expect(ext.nth(i)).toHaveAttribute('rel', 'noopener noreferrer');
