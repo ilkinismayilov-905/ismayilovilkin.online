@@ -9,6 +9,8 @@ questions), `TRANSLATION_REVIEW.md` (Azerbaijani text to check), `VERIFICATION.m
 ## Local setup
 
 Requirements: Node ≥ 22.23.4 and npm. Tests, screenshots and Lighthouse use the installed **Google Chrome**.
+Deploying needs **GNU rsync** (`brew install rsync`): macOS's built-in `openrsync` uploads to the server at about
+1 KB/s, so `scripts/deploy.sh` refuses to use it.
 Regenerating photos needs **macOS** (HEIC conversion uses the built-in `sips`).
 
 ```bash
@@ -171,8 +173,8 @@ scripts/deploy.sh
 ```
 
 It stops at the first error: `npm ci` → `npm run build:release` (fails on `[NEEDS INPUT]` or private data) →
-`npm run check` → Playwright tests → link check → upload to a new release (unchanged files are hard-linked to the
-previous release) → health check on the server (home, `/az/`, a case study, both 404s, the CSP) → switch `current`
+`npm run check` → Playwright tests → link check → upload into a hidden `releases/.incoming-<ts>/` folder, renamed to `releases/<ts>/` only when the transfer is
+complete (unchanged files are hard-linked to the previous release) → health check on the server (home, `/az/`, a case study, both 404s, the CSP) → switch `current`
 → delete releases older than the newest 5 (never the live one).
 
 ### Roll back

@@ -19,6 +19,15 @@ DRY_RUN=0
 cd "$(dirname "$0")/.."
 step() { printf '\n== %s\n' "$*"; }
 
+# GNU rsync only: macOS ships openrsync, which transfers to a GNU rsync server at ~1 KB/s (seen on the first deploy).
+RSYNC_BIN="${RSYNC_BIN:-}"
+if [[ -z "$RSYNC_BIN" ]]; then
+  for c in /opt/homebrew/bin/rsync /usr/local/bin/rsync rsync; do
+    command -v "$c" >/dev/null 2>&1 && ! "$c" --version 2>&1 | grep -qi openrsync && { RSYNC_BIN="$c"; break; }
+  done
+fi
+[[ -n "$RSYNC_BIN" ]] || { echo "GNU rsync not found (macOS openrsync is too slow against the server). Install it: brew install rsync" >&2; exit 1; }
+
 step "Install"
 npm ci
 
@@ -32,25 +41,27 @@ npm run links
 
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 REL="$BASE/releases/$TS"
+# Upload into a hidden folder and rename it only when the transfer is complete: a broken upload can never look
+# like a release (rollback.sh and the cleanup only see timestamped names).
+INCOMING="$BASE/releases/.incoming-$TS"
 PREV="$(ssh "$HOST" "readlink -e '$BASE/current' 2>/dev/null || true")"   # -e: empty if there is no live release yet
 # Unchanged files are hard-linked from the live release, so uploads are small. The target is always a new, empty
 # folder: no --delete is needed, and nothing outside the release can be removed.
 LINK_DEST=()
 [[ -n "$PREV" ]] && LINK_DEST=(--link-dest="$PREV")
 # ${arr[@]+…} form: macOS bash 3.2 treats an empty array as unbound under set -u.
-# No --chmod: macOS ships openrsync, which lacks it; permissions are normalised on the server after upload.
-RSYNC=(rsync -a ${LINK_DEST[@]+"${LINK_DEST[@]}"} dist/ "$HOST:$REL/")
+RSYNC=("$RSYNC_BIN" -a --chmod=D755,F644 ${LINK_DEST[@]+"${LINK_DEST[@]}"} dist/ "$HOST:$INCOMING/")
 
 if (( DRY_RUN )); then
-  step "rsync dry run → $HOST:$REL (nothing is changed)"
+  step "rsync dry run → $HOST:$INCOMING (nothing is changed)"
   "${RSYNC[@]}" --dry-run --itemize-changes --stats
   exit 0
 fi
 
-step "Upload → $HOST:$REL"
-ssh "$HOST" "test ! -e '$REL' && mkdir -p '$REL'"
+step "Upload → $HOST:$INCOMING"
+ssh "$HOST" "test ! -e '$REL' && test ! -e '$INCOMING' && mkdir -p '$INCOMING'"
 "${RSYNC[@]}" --stats
-ssh "$HOST" "chmod -R u=rwX,go=rX '$REL'"   # inside the new release only: readable by nginx, writable by owner
+ssh "$HOST" "mv -T '$INCOMING' '$REL'"   # complete: becomes a release
 
 step "Health check of the new release (http://127.0.0.1:8080 on the server)"
 ssh "$HOST" bash -s -- "$BASE" "$REL" <<'CHECK'
