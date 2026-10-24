@@ -15,7 +15,8 @@ Full plan and rationale: `PLAN.md`. Open content questions: `CONTENT_REVIEW.md`.
 - **Azerbaijani**: reuse the AZ CV wording; anything self-translated is logged in `TRANSLATION_REVIEW.md`. Keep tech names in their original form. Never use `text-transform: uppercase` (breaks i/İ, ı/I casing).
 - **Production server** (`ssh myserver`, root login): every change on it needs the owner's explicit approval, with the exact
   command shown first; back up any config before editing; never touch SSH settings, firewall, other sites or keys;
-  `nginx -t` before every reload, reload not restart. Deploy only with `scripts/deploy.sh`; config lives in `deploy/nginx/`.
+  `nginx -t` before every reload, reload not restart. Deploy only with `scripts/deploy.sh` (CI runs it on every push to
+  `main` via `.github/workflows/deploy.yml`); config lives in `deploy/nginx/`.
 - **Pinned versions** (`save-exact`). TypeScript stays on 6.x until `@astrojs/check` and `typescript-eslint` support 7.
 - Ask before adding any dependency. No React/Vue/etc., no `<ClientRouter />` (breaks CSP).
 

@@ -1,0 +1,93 @@
+# Pull requests: the full check suite. Pushes to main (a merged PR is one): the same checks, then deploy to the
+# server with scripts/deploy.sh. Deploys never overlap; a failed check or health check leaves the live site as it was.
+name: Deploy
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('check-{0}', github.ref) || 'deploy-production' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Privacy deny-list (optional secret)
+        env:
+          PRIVACY_DENYLIST: ${{ secrets.PRIVACY_DENYLIST }}
+        run: if [ -n "$PRIVACY_DENYLIST" ]; then printf '%s\n' "$PRIVACY_DENYLIST" > .privacy-denylist; fi
+      - run: npm run build:release
+      - run: npm run check
+      - run: npx playwright test --reporter=line   # uses the runner's installed Google Chrome
+      - run: npm run links
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment:
+      name: production
+      url: https://ismayilovilkin.online
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: SSH to the server (dedicated deploy user, pinned host key)
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          [ -n "$DEPLOY_SSH_KEY" ] || { echo "Secret DEPLOY_SSH_KEY is missing"; exit 1; }
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cp deploy/known_hosts ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<'EOF'
+          Host portfolio-server
+            HostName 13.140.152.249
+            User deploy
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+            ConnectTimeout 20
+            ServerAliveInterval 15
+          EOF
+
+      - name: Privacy deny-list (optional secret)
+        env:
+          PRIVACY_DENYLIST: ${{ secrets.PRIVACY_DENYLIST }}
+        run: if [ -n "$PRIVACY_DENYLIST" ]; then printf '%s\n' "$PRIVACY_DENYLIST" > .privacy-denylist; fi
+
+      # install → build:release → check → tests → links → upload → health check → switch → keep 5 releases
+      - name: Deploy
+        run: scripts/deploy.sh
+        env:
+          DEPLOY_HOST: portfolio-server
+
+      - name: Live check
+        run: |
+          live="$(curl -fsS --max-time 30 https://ismayilovilkin.online/release.txt)"
+          echo "live release: $live"
+          curl -fsS -o /dev/null --max-time 30 https://ismayilovilkin.online/az/
+
+      - name: Remove the key from the runner
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

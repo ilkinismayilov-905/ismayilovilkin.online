@@ -441,4 +441,4 @@ IPv6 2a02:c207:2368:9412::1). Found empty: no web server, no `portfolio` folder,
 | CSP | header carries only `frame-ancestors` + directives identical to the meta CSP, no `script-src`/`style-src` → no conflict with Astro's per-page hashes |
 | Deploy | `scripts/deploy.sh` (install → `build:release` → checks/tests/links → rsync to a new release with `--link-dest` → health check → atomic switch → keep 5); `scripts/rollback.sh` |
 | Not touched | SSH (ports 22 and 2222), firewall (ufw inactive), other users and files |
-| Later, proposal only | GitHub Actions deploys with a dedicated, limited `deploy` user and key |
+| CI/CD | `.github/workflows/deploy.yml`: PRs run the checks; pushes to `main` run `scripts/deploy.sh` as the server user `deploy` (no sudo, owns `/var/www/portfolio` only) with a dedicated key; host key pinned in `deploy/known_hosts` |

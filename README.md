@@ -181,6 +181,26 @@ complete (unchanged files are hard-linked to the previous release) → health ch
 → delete releases older than the newest 5 (never the live one). Each release gets `/release.txt` with its timestamp,
 so `curl https://ismayilovilkin.online/release.txt` shows which release is live.
 
+### Automatic deploys (GitHub Actions)
+
+`.github/workflows/deploy.yml`:
+
+- **Pull request to `main`**: install, `build:release`, `check`, Playwright tests, link check. No deploy.
+- **Push to `main`** (merging a PR is a push): the same checks inside `scripts/deploy.sh`, then upload, health
+  check, switch and cleanup, then a live check of `https://ismayilovilkin.online/release.txt`. Deploys never overlap.
+- **Manual**: Actions → Deploy → *Run workflow*.
+
+The runner connects as the server user **`deploy`** (no password, no sudo, owns only `/var/www/portfolio`) with a key
+used for nothing else. The server's host key is pinned in `deploy/known_hosts`. Repository secrets:
+
+| Secret | Content |
+|---|---|
+| `DEPLOY_SSH_KEY` | the private half of the deploy key (its public half is in `/home/deploy/.ssh/authorized_keys`) |
+| `PRIVACY_DENYLIST` | optional: the lines of your local `.privacy-denylist`, so CI also blocks those exact values |
+
+A failed check or health check stops the run before `current` is switched; the live site stays as it was.
+To revoke CI access: remove the key's line from `/home/deploy/.ssh/authorized_keys` on the server.
+
 ### Roll back
 
 ```bash
