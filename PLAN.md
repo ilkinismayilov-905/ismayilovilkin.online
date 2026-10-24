@@ -101,7 +101,6 @@ URL map (`trailingSlash: 'always'`, `build.format: 'directory'`):
 | `/work/milly/` | `/az/work/milly/` |
 | `/work/yolcu/` | `/az/work/yolcu/` |
 | `/work/abadland-qarabag/` | `/az/work/abadland-qarabag/` |
-| `/work/paygenix/` | `/az/work/paygenix/` |
 | `/404.html` | `/az/404.html` |
 | `/cv/ilkin-ismayilov-cv-en.pdf` | `/cv/ilkin-ismayilov-cv-az.pdf` |
 
@@ -155,7 +154,7 @@ category: backend            # backend | hackathon | frontend  (filters: All / B
 stack: [Java 21, Spring Boot 4, PostgreSQL, Flyway, WebSocket (STOMP), OAuth2]
 summary: …                   # one line for the list
 motif: lines                 # hover-preview SVG motif
-caseStudy: true              # Milly, Yolçu, AbadLand, Paygenix only
+caseStudy: true              # Milly, Yolçu, AbadLand only (Paygenix is a list entry: a learning project)
 facts:                       # only CV facts or owner answers; otherwise [NEEDS INPUT]
   role: …
   team: …
@@ -257,7 +256,7 @@ only `transform`, `opacity`, `clip-path` animate; no scroll snapping, hijacking 
     through that part. No scroll-jacking. Only the current and the next photo are loaded.
   - **Mapping**: hero + work 7545; About chapters 0426, 9431, 0208; experience 0426; hackathons & awards 0257;
     contact 0257. Case-study pages use the project's own event photo (`background` in the project file):
-    Milly 9431, Yolçu 0257, AbadLand 0208, Paygenix 7545.
+    Milly 9431, Yolçu 0257, AbadLand 0208.
   - **Two scrim levels**: soft where text sits left (hero, About chapters, case pages), strong where text runs the
     full width (work, experience, awards, contact; also the no-JS default). Header, hero tag and captions use the
     sturdier glass fill over photos. Light theme: photo opacity as dark (0.62); strong scrim 70 % (case pages 90 %);

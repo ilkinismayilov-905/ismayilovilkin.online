@@ -35,12 +35,12 @@ Not conflicts, only different detail levels (each page uses its own CV): volunte
 Filled on 2026-10-24 from your answers: Milly (role, problem, decision), Yolçu and AbadLand Qarabağ (role, team of 4,
 stack, problem, your part, decision). The stack now sits in each project's `stack:` list, so it also shows in the work list.
 
-Still open (blocks `npm run build:release`):
+**Paygenix** (2026-10-24, your answer): a learning project, not built around a problem, so it is a list entry only —
+title, one-line summary and stack, no case-study page. Nothing blocks `npm run build:release` any more.
 
-| Project | Field |
-|---|---|
-| Paygenix | Problem |
-| Paygenix | The decision that mattered |
+**Please confirm the Paygenix summary.** It still says "A client's full mobile banking backend, built solo" /
+"Sifarişçi üçün tam mobil bank backend-i, fərdi layihə", which is the wording from your CV. You described it as a
+project to show what you learned; if "client" is wrong, tell me the line you want.
 
 Note: your answers give "Web Developer" as your role on all three projects, while the CVs title you "Java Backend
 Developer". The site shows "Web Developer" on those three case studies, as you wrote.
@@ -63,8 +63,7 @@ Developer". The site shows "Web Developer" on those three case studies, as you w
 
 - Mapping: hero + work 7545, About chapters 0426 / 9431 / 0208, experience 0426, hackathons & awards 0257, contact 0257.
 - **Case-study pages (my choice, please confirm)**: each uses the photo from its own event: Milly → IT SkillSprint
-  (9431), Yolçu → TransportTech (0257), AbadLand Qarabağ → Karabakh Hackathon (0208). Paygenix has no event photo,
-  so it uses the hero photo (7545). Change with `background:` in `src/content/projects/{en,az}/<slug>.md`.
+  (9431), Yolçu → TransportTech (0257), AbadLand Qarabağ → Karabakh Hackathon (0208). Change with `background:` in `src/content/projects/{en,az}/<slug>.md`.
 - **Hero caption "PashaHackathon, 2026"**: the badge shows PASHA Hackathon, the year comes from the photo's date;
   which edition (5.0 or 6.0) is not known. Captions live in `backgrounds` in `src/content/site/{en,az}.yaml`.
 - The photos are decorative backgrounds now, so they have no alt text; the earlier story alt texts were removed

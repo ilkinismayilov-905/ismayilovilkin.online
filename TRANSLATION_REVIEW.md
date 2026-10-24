@@ -25,7 +25,7 @@ UI strings live in `src/i18n/ui.ts`; content in `src/content/*/az*`.
 - About chapter titles: "Nə qururam", "Necə öyrənirəm", "Hakatonlar və daha çoxu", and the chapter texts (built from AZ CV phrases).
 - Principles: "Əvvəl ölç, sonra düzəlt", "Testlər kodla birlikdə gəlir", "Təhlükəsizlik ilk versiyanın bir hissəsidir", "Buraxılış adi iş olsun" and their sentences.
 - Project summaries for Yolçu, AbadLand, Space Shooter, Paygenix (shortened from CV lines); case-study sentences
-  "Mənim payım: …", "Platforma milly-front.vercel.app ünvanında işləyir.", "Layihəni OpenAPI (Swagger) sənədləri ilə təhvil verdim."
+  "Mənim payım: …", "Platforma milly-front.vercel.app ünvanında işləyir."
 - Awards: row title "Könüllülük"; result labels "Qalib", "Finalçı", "Könüllü".
 - Contact note: "Mənimlə ən tez e-poçt vasitəsilə əlaqə saxlamaq olar."
 - Section heading "Hakatonlar və mükafatlar" (your EN wording "Hackathons & awards"; the AZ CV heading is "Hakatonlar və fəaliyyətlər").

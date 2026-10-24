@@ -9,7 +9,7 @@ const root = new URL('..', import.meta.url).pathname;
 const b64 = async (p) => (await readFile(root + p)).toString('base64');
 const font = await b64('src/assets/fonts/Archivo-wdth-wght.woff2');
 const photo = await b64('src/assets/photos/hero.jpg');
-const slugs = ['milly', 'yolcu', 'abadland-qarabag', 'paygenix'];
+const slugs = ['milly', 'yolcu', 'abadland-qarabag'];
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
 const card = ({ kicker, title, sub, name, lang }) => `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><style>
