@@ -154,3 +154,36 @@ The contact value varies ±3 between runs because the page end clamps the scroll
 - Safari / Firefox and a real phone (all runs: Chrome, emulated devices).
 - Cross-document View Transitions only verified in Chrome (Safari 18.2 should support them; Firefox does not).
 - A Render cold start was not observed (instances were awake).
+
+## Phase 6 — live verification on https://ismayilovilkin.online (2026-10-24)
+
+Server: `myserver` (Ubuntu 24.04.5, nginx 1.24 + brotli, certbot 2.9), release `20261024T162941Z`.
+DNS: apex and www → 13.140.152.249 on Spaceship's nameservers and on 1.1.1.1 / 8.8.8.8 / 9.9.9.9; no AAAA.
+13.140.152.249 is configured statically on the server's `eth0` (no DHCP lease) and is its public egress IP.
+
+| Check | Result |
+|---|---|
+| http → https | `http://ismayilovilkin.online/` → 301 `https://ismayilovilkin.online/` |
+| www → apex | `http://www…/az/?a=1` → 301 `https://ismayilovilkin.online/az/?a=1`; `https://www…/work/yolcu/` → 301 apex (path and query kept) |
+| Trailing slash | `/work/milly` → 301 `/work/milly/` |
+| Status codes | `/`, `/az/`, three case studies in each language → 200; `/nope/`, `/az/nope/`, `/work/paygenix/` → 404 |
+| Localized 404 | `/nope/` "Page not found", `/az/nope/` "Səhifə tapılmadı" |
+| Security headers | CSP (frame-ancestors, object-src, base-uri, form-action), nosniff, Referrer-Policy, Permissions-Policy, COOP, X-Frame-Options DENY; `Server: nginx` without version |
+| Cache | HTML `public, max-age=0, must-revalidate`; `/_astro/*` `public, max-age=31536000, immutable`; `/og/*` 1 day |
+| Compression | brotli on CSS/JS (`content-encoding: br`) |
+| TLS | Let's Encrypt (YE2) for apex + www, valid to 2027-01-22, verify OK for both names; HTTP/2; TLS 1.1 refused |
+| Renewal | `certbot.timer` active; `certbot renew --dry-run` → "all simulated renewals succeeded"; renewal reloads nginx |
+| CSP / console | 10 pages × 2 themes, scrolled and palette opened: no console or CSP errors |
+| Mobile Lighthouse (live, median of 3) | `/` 99 / 100 / 100 / 100, LCP 2.18 s, CLS 0.003, TBT 0 ms · `/az/` 99 / 100 / 100 / 100, LCP 2.07 s, CLS 0.001, TBT 0 ms · LCP element: hero portrait |
+| Privacy (live crawl) | 18 text responses + 79 images: no phone number, no referee data, no image metadata |
+| Rollback test | **pending** — needs a second production deploy (awaiting approval) |
+| HSTS | **pending** — enabled after the rollback test |
+
+Incidents during deployment (all resolved, nothing live was affected):
+- macOS `openrsync` transferred at ~1 KB/s → `deploy.sh` now requires GNU rsync (`brew install rsync`).
+- From the owner's home network and a phone hotspot, bulk SSH transfers to the server stalled (TCP data stalled
+  both ways while ping and small requests worked; the server's own internet was fast). Over Cloudflare WARP the
+  same 200 KB took 1.7 s and the deploy succeeded. Route/provider issue between the client networks and Contabo.
+- `http2 on;` is not supported by nginx 1.24 → `listen … ssl http2`; `nginx -t` caught it and the previous
+  config was restored automatically.
+- One certbot dry run hung on an outbound connection and was stopped; the rerun succeeded.
