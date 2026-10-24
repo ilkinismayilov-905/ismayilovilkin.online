@@ -176,8 +176,8 @@ DNS: apex and www → 13.140.152.249 on Spaceship's nameservers and on 1.1.1.1 /
 | CSP / console | 10 pages × 2 themes, scrolled and palette opened: no console or CSP errors |
 | Mobile Lighthouse (live, median of 3) | `/` 99 / 100 / 100 / 100, LCP 2.18 s, CLS 0.003, TBT 0 ms · `/az/` 99 / 100 / 100 / 100, LCP 2.07 s, CLS 0.001, TBT 0 ms · LCP element: hero portrait |
 | Privacy (live crawl) | 18 text responses + 79 images: no phone number, no referee data, no image metadata |
-| Rollback test | **pending** — needs a second production deploy (awaiting approval) |
-| HSTS | **pending** — enabled after the rollback test |
+| Rollback test | Deployed B `20261024T164728Z` (`/release.txt` → 200 B) → `rollback.sh` → A `20261024T162941Z` live (`/release.txt` 404, pages 200) → `rollback.sh 20261024T164728Z` → B live again. The test found and fixed a bug: plain `rollback.sh` failed safely (nothing switched) when ssh dropped the empty argument |
+| HSTS | `strict-transport-security: max-age=31536000; includeSubDomains` on every HTTPS response (200, 301, 404); none on plain HTTP |
 
 Incidents during deployment (all resolved, nothing live was affected):
 - macOS `openrsync` transferred at ~1 KB/s → `deploy.sh` now requires GNU rsync (`brew install rsync`).

@@ -162,6 +162,9 @@ Every deploy is a new folder; the live site is a symlink, so switching and rolli
 
 ### Deploy
 
+Turn on **Cloudflare WARP** first: from the owner's home network and phone hotspot, large SSH transfers to the server
+stall (route problem to Contabo); over WARP a deploy takes a few minutes.
+
 ```bash
 scripts/deploy.sh --dry-run
 ```
@@ -193,9 +196,9 @@ live; `scripts/rollback.sh 20261024T150000Z` picks one. Nothing is deleted, so y
 |---|---|---|
 | Site (HTTPS, redirects, health-check server) | `deploy/nginx/ismayilovilkin.online.conf` | `/etc/nginx/sites-available/ismayilovilkin.online` (linked from `sites-enabled/`) |
 | How files are served, 404s, compression, cache rules | `deploy/nginx/portfolio-site.conf` | `/etc/nginx/snippets/portfolio-site.conf` |
-| Security headers | `deploy/nginx/portfolio-headers.conf` | `/etc/nginx/snippets/portfolio-headers.conf` |
+| Security headers (incl. HSTS, 1 year) | `deploy/nginx/portfolio-headers.conf` | `/etc/nginx/snippets/portfolio-headers.conf` |
 | TLS settings | `deploy/nginx/portfolio-tls.conf` | `/etc/nginx/snippets/portfolio-tls.conf` |
-| Bootstrap (HTTP only, before the certificate) | `deploy/nginx/ismayilovilkin.online.http-only.conf` | (replaced by the final config) |
+| Bootstrap (HTTP only, before the certificate) | `deploy/nginx/ismayilovilkin.online.http-only.conf` | not used any more: HSTS is on, never switch back to HTTP |
 
 To change the config: edit the file in `deploy/nginx/`, copy it to the server with a timestamped backup of the old
 one next to it, then `nginx -t` and `systemctl reload nginx` (reload, not restart). Never edit only on the server:

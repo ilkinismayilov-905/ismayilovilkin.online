@@ -50,7 +50,8 @@ PREV="$(ssh "$HOST" "readlink -e '$BASE/current' 2>/dev/null || true")"   # -e: 
 LINK_DEST=()
 [[ -n "$PREV" ]] && LINK_DEST=(--link-dest="$PREV")
 # ${arr[@]+…} form: macOS bash 3.2 treats an empty array as unbound under set -u.
-RSYNC=("$RSYNC_BIN" -a --chmod=D755,F644 ${LINK_DEST[@]+"${LINK_DEST[@]}"} dist/ "$HOST:$INCOMING/")
+# --no-owner/--no-group: files belong to the server account, not to the uid of whoever deploys
+RSYNC=("$RSYNC_BIN" -a --no-owner --no-group --chmod=D755,F644 ${LINK_DEST[@]+"${LINK_DEST[@]}"} dist/ "$HOST:$INCOMING/")
 
 if (( DRY_RUN )); then
   step "rsync dry run → $HOST:$INCOMING (nothing is changed)"

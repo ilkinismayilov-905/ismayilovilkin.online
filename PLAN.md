@@ -437,7 +437,7 @@ IPv6 2a02:c207:2368:9412::1). Found empty: no web server, no `portfolio` folder,
 | URLs | no `try_files`: nginx's static module serves `index.html` for `/dir/`, 301s `/dir` → `/dir/`, 404s the rest; `/az/` has its own `error_page` |
 | Health check | `127.0.0.1:8080` serves `next` with the same snippet; checked before `current` switches |
 | TLS | `certbot certonly --webroot -w /var/www/letsencrypt` for apex + www, deploy hook `systemctl reload nginx`; renewal by `certbot.timer` |
-| HSTS | added only after HTTPS is verified for both names |
+| HSTS | on since 2026-10-24 (`max-age=31536000; includeSubDomains`, no preload), after HTTPS was verified |
 | CSP | header carries only `frame-ancestors` + directives identical to the meta CSP, no `script-src`/`style-src` → no conflict with Astro's per-page hashes |
 | Deploy | `scripts/deploy.sh` (install → `build:release` → checks/tests/links → rsync to a new release with `--link-dest` → health check → atomic switch → keep 5); `scripts/rollback.sh` |
 | Not touched | SSH (ports 22 and 2222), firewall (ufw inactive), other users and files |
