@@ -32,16 +32,18 @@ Not conflicts, only different detail levels (each page uses its own CV): volunte
 
 ## 3. `[NEEDS INPUT]` on the site
 
-| Project | Field | Note |
-|---|---|---|
-| Milly | Role | CV lists the modules you built, not a role title |
-| Milly | Problem | |
-| Milly | The decision that mattered | CV mentions clean architecture and venue-scoped roles; which one was *the* decision? |
-| Yolçu | Role, Team size, Stack | not in the CVs |
-| Yolçu | Problem, My part, The decision that mattered | |
-| AbadLand Qarabağ | Role, Team size, Stack | not in the CVs |
-| AbadLand Qarabağ | Problem, My part, The decision that mattered | |
-| Paygenix | Problem, The decision that mattered | |
+Filled on 2026-10-24 from your answers: Milly (role, problem, decision), Yolçu and AbadLand Qarabağ (role, team of 4,
+stack, problem, your part, decision). The stack now sits in each project's `stack:` list, so it also shows in the work list.
+
+Still open (blocks `npm run build:release`):
+
+| Project | Field |
+|---|---|
+| Paygenix | Problem |
+| Paygenix | The decision that mattered |
+
+Note: your answers give "Web Developer" as your role on all three projects, while the CVs title you "Java Backend
+Developer". The site shows "Web Developer" on those three case studies, as you wrote.
 
 ## 4. Missing data shown as blank (not invented)
 

@@ -44,3 +44,20 @@ Language: "Bu səhifə Azərbaycan dilində də var." / "Azərbaycanca oxu" · 4
 - Skills: heading "Bacarıqlar" and all groups and items are taken word for word from the AZ CV.
 
 The easter egg ("Əvvəlcə çay, sonra növbəti endpoint") and the Render note ("açılması bir az vaxt ala bilər") are your wording.
+
+## English translated from your Azerbaijani answers (2026-10-24)
+
+Your Azerbaijani text is used word for word on the AZ pages. The English below is my translation; please check it.
+
+| Project | Field | English on the site |
+|---|---|---|
+| Milly | Problem | Milly digitises how restaurants take and manage orders and how guests and staff communicate. It speeds up service and brings the operations together on one platform. |
+| Milly | The decision that mattered | Using STOMP over WebSocket alongside the REST API, so restaurant staff see every change in an order's status in real time. |
+| Yolçu | Problem | Yolçu makes transport services easier to manage and to access, through one digital platform. |
+| Yolçu | My part | I built the whole web application on my own and was fully responsible for its architecture, its features and its integration with the other parts of the system. |
+| Yolçu | The decision that mattered | Building the web application on one architecture from start to finish, which kept the integration with the rest of the system simple and sped up development. |
+| AbadLand Qarabağ | Problem | People who want to invest in farmland in Karabakh find it hard to locate plots, judge their investment potential and manage their applications. AbadLand Qarabağ solves this with one digital platform. |
+| AbadLand Qarabağ | My part | I built the whole web side of the project on my own: the investor and admin dashboards, the interactive maps, plot comparison, the 3D view and the screens for tracking applications. |
+| AbadLand Qarabağ | The decision that mattered | Choosing server-side rendering with Spring Boot and Thymeleaf instead of a separate frontend app. It made connecting the web interfaces to the backend simpler and got the MVP built faster. |
+
+Small change on the AZ pages: after "Mənim payım:" your sentence starts with a lowercase letter ("layihənin …"), because it continues the sentence. "Team of 4" is "4 nəfərlik komanda", the same form as Milly.
