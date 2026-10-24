@@ -84,7 +84,11 @@ test.describe('keyboard only', () => {
 
   test('focus is always visible', async ({ page }) => {
     await page.goto('/');
-    for (let i = 0; i < 24; i++) { // 24 controls on the home page; one more Tab leaves the document
+    // Tab through every control on the page (counted, not hard-coded: content changes the number)
+    const count = await page.evaluate(() => [...document.querySelectorAll<HTMLElement>('a[href], button, input, [tabindex]:not([tabindex="-1"])')]
+      .filter((el) => el.tabIndex >= 0 && !el.closest('dialog:not([open]), [hidden]') && el.getClientRects().length > 0).length);
+    expect(count).toBeGreaterThan(15);
+    for (let i = 0; i < count; i++) {
       await page.keyboard.press('Tab');
       const outline = await page.evaluate(() => {
         const el = document.activeElement as HTMLElement;
