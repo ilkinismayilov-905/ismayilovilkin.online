@@ -13,7 +13,9 @@ Full plan and rationale: `PLAN.md`. Open content questions: `CONTENT_REVIEW.md`.
 - **Images enter the repo only through `npm run photos`** (metadata stripped). `npm run check` must stay green.
 - **Both locales always.** A new UI string goes into both `en` and `az` in `src/i18n/ui.ts`; a new content entry needs its twin. The build fails otherwise.
 - **Azerbaijani**: reuse the AZ CV wording; anything self-translated is logged in `TRANSLATION_REVIEW.md`. Keep tech names in their original form. Never use `text-transform: uppercase` (breaks i/İ, ı/I casing).
-- **Host-agnostic static output.** No host-specific config files until the owner sends deployment instructions.
+- **Production server** (`ssh myserver`, root login): every change on it needs the owner's explicit approval, with the exact
+  command shown first; back up any config before editing; never touch SSH settings, firewall, other sites or keys;
+  `nginx -t` before every reload, reload not restart. Deploy only with `scripts/deploy.sh`; config lives in `deploy/nginx/`.
 - **Pinned versions** (`save-exact`). TypeScript stays on 6.x until `@astrojs/check` and `typescript-eslint` support 7.
 - Ask before adding any dependency. No React/Vue/etc., no `<ClientRouter />` (breaks CSP).
 

@@ -146,12 +146,83 @@ pyftsubset archivo.ttf --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+
 
 Source: `google/fonts`, `ofl/archivo/Archivo[wdth,wght].ttf` (SIL OFL 1.1, licence next to the font file).
 
-## Deployment
+## Deployment (own server)
 
-**On hold** until hosting is chosen. The build is plain static output in `dist/`; any static host works.
-The host must provide what `PLAN.md` §12 lists: HTTPS and `www` → apex redirects, `/az/404.html` for missing
-`/az/*` paths, the security headers (including `frame-ancestors`, which a `<meta>` CSP cannot set), and the cache rules.
-Canonical origin: `https://ismayilovilkin.online`.
+The site runs on your own server (`ssh myserver`, Ubuntu 24.04) behind nginx with a Let's Encrypt certificate.
+Every deploy is a new folder; the live site is a symlink, so switching and rolling back are instant.
+
+```
+/var/www/portfolio/
+├── releases/20261024T150000Z/   one folder per deploy (UTC timestamp), the newest 5 are kept
+├── current -> releases/…        what https://ismayilovilkin.online serves
+└── next    -> releases/…        the release being health-checked (127.0.0.1:8080, server-local only)
+```
+
+### Deploy
+
+```bash
+scripts/deploy.sh --dry-run
+```
+
+builds, runs every check and shows what rsync would upload, without changing the server. Then:
+
+```bash
+scripts/deploy.sh
+```
+
+It stops at the first error: `npm ci` → `npm run build:release` (fails on `[NEEDS INPUT]` or private data) →
+`npm run check` → Playwright tests → link check → upload to a new release (unchanged files are hard-linked to the
+previous release) → health check on the server (home, `/az/`, a case study, both 404s, the CSP) → switch `current`
+→ delete releases older than the newest 5 (never the live one).
+
+### Roll back
+
+```bash
+scripts/rollback.sh
+```
+
+points the site at the release before the live one. `scripts/rollback.sh --list` shows all releases and which is
+live; `scripts/rollback.sh 20261024T150000Z` picks one. Nothing is deleted, so you can roll forward the same way.
+
+### Server configuration
+
+| What | In the repo | On the server |
+|---|---|---|
+| Site (HTTPS, redirects, health-check server) | `deploy/nginx/ismayilovilkin.online.conf` | `/etc/nginx/sites-available/ismayilovilkin.online` (linked from `sites-enabled/`) |
+| How files are served, 404s, compression, cache rules | `deploy/nginx/portfolio-site.conf` | `/etc/nginx/snippets/portfolio-site.conf` |
+| Security headers | `deploy/nginx/portfolio-headers.conf` | `/etc/nginx/snippets/portfolio-headers.conf` |
+| TLS settings | `deploy/nginx/portfolio-tls.conf` | `/etc/nginx/snippets/portfolio-tls.conf` |
+| Bootstrap (HTTP only, before the certificate) | `deploy/nginx/ismayilovilkin.online.http-only.conf` | (replaced by the final config) |
+
+To change the config: edit the file in `deploy/nginx/`, copy it to the server with a timestamped backup of the old
+one next to it, then `nginx -t` and `systemctl reload nginx` (reload, not restart). Never edit only on the server:
+the repo is the source of truth.
+
+### Certificates
+
+- Location: `/etc/letsencrypt/live/ismayilovilkin.online/` (one certificate for the apex and www).
+- Issued with `certbot certonly --webroot -w /var/www/letsencrypt`; nginx serves `/.well-known/acme-challenge/` from there.
+- Renewal is automatic: Ubuntu's `certbot.timer` runs twice a day, and a deploy hook reloads nginx after a renewal.
+- Check on the server:
+
+```bash
+ssh myserver certbot certificates
+```
+
+```bash
+ssh myserver systemctl list-timers certbot.timer
+```
+
+```bash
+ssh myserver certbot renew --dry-run
+```
+
+### DNS (Spaceship)
+
+| Type | Host | Value |
+|---|---|---|
+| A | `@` and `www` | 13.140.152.249 |
+| AAAA | `@` and `www` | 2a02:c207:2368:9412::1 |
 
 ## Pinned versions
 

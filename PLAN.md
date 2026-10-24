@@ -18,7 +18,7 @@ Where something is inferred from source and not yet proven by a build, it says *
 | Title | `Java Backend Developer` in both languages |
 | Default language | English at `/`, Azerbaijani at `/az/`, `x-default` → `/` |
 | Canonical origin | `https://ismayilovilkin.online` |
-| Hosting | Undecided. Build is plain static output, host-agnostic. No host config files. |
+| Hosting | Own server (`ssh myserver`, Ubuntu 24.04, 13.140.152.249 / 2a02:c207:2368:9412::1), nginx + Let's Encrypt. See §17. |
 | Font | **Archivo** (replaces Mona Sans, which lacks Ə/ə). Everything else in the design is unchanged. |
 | Analytics | None |
 | Phone, referee | Never published, anywhere |
@@ -355,7 +355,7 @@ for the filter count and toasts; status light is a real button with a label; sto
   base-uri 'self'; form-action 'none'`.
 - No secrets in client code. `.env.example` only if a variable is ever needed (none planned).
 
-**Requirements for whichever host you choose later** (to configure in Phase 6):
+**Server requirements** (implemented in `deploy/nginx/`, §17):
 
 | Requirement | Value |
 |---|---|
@@ -424,8 +424,21 @@ As specified in the brief, run against `astro build` + `astro preview`, plus:
   before anything is reported as broken.
 - Privacy grep of `dist/`.
 
-## 17. Phase 6
+## 17. Phase 6 — own server
 
-On hold until you send hosting instructions. `README.md` is written at the end of Phase 4/5
-(setup, editing content in both languages, adding a UI string, changing a photo, theme tokens,
-pinned versions); the deployment section waits.
+Decided 2026-10-24. Server: `ssh myserver` (Ubuntu 24.04.5, Contabo `vmi3689412`, IPv4 13.140.152.249,
+IPv6 2a02:c207:2368:9412::1). Found empty: no web server, no `portfolio` folder, no certificates. DNS at Spaceship.
+
+| Part | Choice |
+|---|---|
+| Web server | nginx 1.24 (Ubuntu) + `libnginx-mod-http-brotli-filter/-static`; default site disabled |
+| Site files | `/var/www/portfolio/releases/<UTC timestamp>/`, `current` → live release, `next` → release under test |
+| Config (repo → server) | `deploy/nginx/ismayilovilkin.online.conf` → `/etc/nginx/sites-available/ismayilovilkin.online`; `portfolio-site.conf`, `portfolio-headers.conf`, `portfolio-tls.conf` → `/etc/nginx/snippets/`; bootstrap `…http-only.conf` until the certificate exists |
+| URLs | no `try_files`: nginx's static module serves `index.html` for `/dir/`, 301s `/dir` → `/dir/`, 404s the rest; `/az/` has its own `error_page` |
+| Health check | `127.0.0.1:8080` serves `next` with the same snippet; checked before `current` switches |
+| TLS | `certbot certonly --webroot -w /var/www/letsencrypt` for apex + www, deploy hook `systemctl reload nginx`; renewal by `certbot.timer` |
+| HSTS | added only after HTTPS is verified for both names |
+| CSP | header carries only `frame-ancestors` + directives identical to the meta CSP, no `script-src`/`style-src` → no conflict with Astro's per-page hashes |
+| Deploy | `scripts/deploy.sh` (install → `build:release` → checks/tests/links → rsync to a new release with `--link-dest` → health check → atomic switch → keep 5); `scripts/rollback.sh` |
+| Not touched | SSH (ports 22 and 2222), firewall (ufw inactive), other users and files |
+| Later, proposal only | GitHub Actions deploys with a dedicated, limited `deploy` user and key |
