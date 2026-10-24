@@ -11,7 +11,7 @@ BASE="/var/www/portfolio"
 
 ssh "$HOST" bash -s -- "$BASE" "${1:-}" <<'ROLLBACK'
 set -euo pipefail
-BASE="$1"; WANT="$2"
+BASE="$1"; WANT="${2:-}"   # ssh drops an empty argument, so $2 may be missing
 cd "$BASE/releases"
 live="$(basename "$(readlink -f "$BASE/current")")"
 mapfile -t all < <(ls -1d 20*Z 2>/dev/null | sort)
