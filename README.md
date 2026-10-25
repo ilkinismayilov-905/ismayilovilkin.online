@@ -218,6 +218,10 @@ live; `scripts/rollback.sh 20261024T150000Z` picks one. Nothing is deleted, so y
 | How files are served, 404s, compression, cache rules | `deploy/nginx/portfolio-site.conf` | `/etc/nginx/snippets/portfolio-site.conf` |
 | Security headers (incl. HSTS, 1 year) | `deploy/nginx/portfolio-headers.conf` | `/etc/nginx/snippets/portfolio-headers.conf` |
 | TLS settings | `deploy/nginx/portfolio-tls.conf` | `/etc/nginx/snippets/portfolio-tls.conf` |
+| Real visitor IP behind Cloudflare | `deploy/nginx/cloudflare-realip.conf` | `/etc/nginx/conf.d/cloudflare-realip.conf` |
+| SSH: key only, no root password, short limits | `deploy/server/sshd-00-hardening.conf` | `/etc/ssh/sshd_config.d/00-hardening.conf` |
+| fail2ban (SSH port only, single IPs) | `deploy/server/fail2ban-jail.local` | `/etc/fail2ban/jail.local` |
+| Kernel network settings | `deploy/server/sysctl-99-hardening.conf` | `/etc/sysctl.d/99-hardening.conf` |
 | Bootstrap (HTTP only, before the certificate) | `deploy/nginx/ismayilovilkin.online.http-only.conf` | not used any more: HSTS is on, never switch back to HTTP |
 
 To change the config: edit the file in `deploy/nginx/`, copy it to the server with a timestamped backup of the old
@@ -243,12 +247,28 @@ ssh myserver systemctl list-timers certbot.timer
 ssh myserver certbot renew --dry-run
 ```
 
-### DNS (Spaceship)
+### DNS and Cloudflare
 
-| Type | Host | Value |
-|---|---|---|
-| A | `@` and `www` | 13.140.152.249 |
-| AAAA | `@` and `www` | 2a02:c207:2368:9412::1 |
+The domain is registered at Spaceship; its nameservers point to Cloudflare, which serves DNS and proxies the site
+(orange cloud, SSL mode **Full (strict)**). Both `@` and `www` are proxied A records to 13.140.152.249; keep every
+record proxied, since a grey-cloud record publishes the server IP. The Let's Encrypt certificate stays on the server
+(trusted by browsers too, so the proxy can be switched off at any time).
+
+### Firewall (ufw)
+
+Incoming traffic is denied by default. Open: 22/tcp (SSH) from anywhere, 80/443 only from Cloudflare's ranges
+(comment `cloudflare`), so the server cannot be reached directly, bypassing Cloudflare. nginx also answers a bare-IP
+or unknown host name with no certificate and no response (`default_server` in the site config).
+There is no Docker on the server (Docker would bypass ufw).
+
+Cloudflare rarely changes its ranges. Every few months, from the repo root:
+
+```bash
+deploy/cloudflare-ips.sh            # shows whether the ranges changed
+deploy/cloudflare-ips.sh --apply    # rewrites cloudflare-realip.conf, updates nginx and ufw; then commit it
+```
+
+Check bans: `ssh myserver fail2ban-client status sshd`
 
 ## Pinned versions
 

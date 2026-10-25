@@ -1,0 +1,18 @@
+# Only SSH is watched; single IPs, never subnets; 80/443 are never touched (Cloudflare fronts the site).
+[DEFAULT]
+ignoreip = 127.0.0.1/8 ::1
+bantime  = 1h
+findtime = 10m
+maxretry = 5
+bantime.increment = true
+bantime.maxtime   = 1w
+banaction = nftables-multiport
+
+[sshd]
+enabled = true
+port    = ssh
+# key-only SSH: attackers end with "Connection closed … [preauth]", which only this mode counts
+mode    = aggressive
+backend = systemd
+# Ubuntu names the unit ssh.service; the stock filter only reads sshd.service
+journalmatch = _SYSTEMD_UNIT=ssh.service + _COMM=sshd
