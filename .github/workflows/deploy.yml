@@ -82,11 +82,13 @@ jobs:
         env:
           DEPLOY_HOST: portfolio-server
 
+      # On the server, past Cloudflare (Bot Fight Mode answers runner IPs with 403): tests the live nginx config and
+      # the certificate. --resolve keeps the real host name, so SNI and certificate verification are those of the site.
       - name: Live check
         run: |
-          live="$(curl -fsS --max-time 30 https://ismayilovilkin.online/release.txt)"
-          echo "live release: $live"
-          curl -fsS -o /dev/null --max-time 30 https://ismayilovilkin.online/az/
+          ssh portfolio-server 'set -e; r="--resolve ismayilovilkin.online:443:127.0.0.1"
+            live="$(curl -fsS --max-time 30 $r https://ismayilovilkin.online/release.txt)"; echo "live release: $live"
+            for p in / /az/; do curl -fsS -o /dev/null --max-time 30 $r "https://ismayilovilkin.online$p" || exit 1; echo "ok   $p"; done'
 
       - name: Remove the key from the runner
         if: always()
