@@ -23,3 +23,19 @@ dist/
 test-results/
 playwright-report/
 reports/
+
+# Ruflo local secrets and runtime data
+.env.local
+.env.*.local
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+
+# Local AI tooling (ruflo / claude-flow): runtime state and machine-specific config, never committed
+.agents/
+.claude-flow/
+.swarm/
+.mcp.json
+ruvector.db
+.claude/*
+!.claude/launch.json
