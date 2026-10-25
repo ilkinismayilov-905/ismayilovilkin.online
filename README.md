@@ -51,7 +51,7 @@ stops with "Locale parity check failed" if an entry, field or list length differ
 
 | What | English | Azerbaijani |
 |---|---|---|
-| Name, meta, hero intro, status board, tag, contact, background photos | `site/en.yaml` | `site/az.yaml` |
+| Name, meta, hero intro, status board, contact, background photos | `site/en.yaml` | `site/az.yaml` |
 | About chapters, "How I work", skills | `about/en.md` | `about/az.md` |
 | Experience timeline | `experience/en.yaml` | `experience/az.yaml` |
 | Hackathons & awards | `awards/en.yaml` | `awards/az.yaml` |

@@ -13,9 +13,6 @@ hero:
   intro: "I build backend systems with Java and Spring Boot. At VersePay I led a 6-person backend team: average response time went from 1000 ms to 14 ms, and we reached ~95% test coverage across 75 endpoints."
   portrait: ../../assets/photos/hero.jpg
   portraitAlt: Ilkin Ismayilov in a white PASHA Hackathon T-shirt with a name badge, standing in front of a sponsor wall.
-  tag:
-    strong: 1000 → 14 ms
-    text: average API response
 
 status:
   now: Co-founder & CMO at Renter.az · student at UNEC

@@ -13,9 +13,6 @@ hero:
   intro: "Java və Spring Boot ilə backend sistemlər qururam. VersePay-də 6 nəfərlik backend komandasına rəhbərlik etdim: orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsinə çatdıq."
   portrait: ../../assets/photos/hero.jpg
   portraitAlt: İlkin İsmayılov ağ PASHA Hackathon köynəyində, boynunda ad kartı ilə sponsor divarının qarşısında dayanıb.
-  tag:
-    strong: 1000 → 14 ms
-    text: orta API cavab müddəti
 
 status:
   now: Renter.az-da həmtəsisçi və CMO · UNEC-də tələbə

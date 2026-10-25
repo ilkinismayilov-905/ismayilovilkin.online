@@ -173,17 +173,12 @@ body:has(.photo-bg) .bar.glass,body:has(.photo-bg) .suggest.glass{background:var
   :root:not([data-theme="dark"]) .tint::after{background:linear-gradient(180deg,rgba(24,54,49,.22),transparent 32%),linear-gradient(160deg, rgba(255,184,107,.45), transparent 45%, rgba(15,30,27,.55))}
 }
 .portrait-ring{position:absolute;inset:-14px;border-radius:999px 999px calc(var(--r-l) + 14px) calc(var(--r-l) + 14px);border:1px solid var(--glass-border);pointer-events:none}
-/* Stronger fill: the tag sits on the photo, which can be a bright wall */
-.tag{position:absolute;right:-.5rem;top:18%;z-index:2;border-radius:var(--r-s);padding:.5rem .75rem;font-size:.85rem;line-height:1.3;max-width:11rem;background:var(--glass-strong)}
-.tag strong{display:block;font-family:var(--display);font-weight:650;font-size:1rem;white-space:nowrap}
 
 @media (max-width:880px){
   .hero{grid-template-columns:1fr;min-height:auto}
   /* Enhancement 1: cap the portrait at 38svh (width = 38svh × 3/4) so name and intro fit the first screen.
      44svh was measured as a no-op on 375–390px phones (78% already gives the same size). */
   .portrait{grid-row:1;justify-self:center;width:min(78%,22rem,28.5svh)}
-  /* Approved change: keep the tag off the face on small screens */
-  .tag{right:auto;left:-1rem;top:auto;bottom:14%}
 }
 
 /* ---------- Sections ---------- */

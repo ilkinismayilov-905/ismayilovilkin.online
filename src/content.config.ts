@@ -21,7 +21,6 @@ const site = defineCollection({
         intro: z.string(),
         portrait: image(),
         portraitAlt: z.string(),
-        tag: z.object({ strong: z.string(), text: z.string() }),
       }),
       status: z.object({ now: z.string(), focus: z.string(), next: z.string(), easterEgg: z.string() }),
       work: z.object({ note: z.string() }),

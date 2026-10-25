@@ -22,7 +22,6 @@ UI strings live in `src/i18n/ui.ts`; content in `src/content/*/az*`.
 - JSON-LD description (2026-10-26): "Java Backend Developer, Renter.az-ın həmtəsisçisi və Kompüter Mühəndisliyi tələbəsi."
 - Hero portrait alt text.
 - Status board (2026-10-26): "Renter.az-da həmtəsisçi və CMO · UNEC-də tələbə" and "Java, Spring Boot, API dizaynı, performans və testlər" (your wording from the new status card), "Bank və FinTech sahəsində Java backend rolları axtarıram" (shortened from your availability text).
-- Hero tag: "orta API cavab müddəti".
 - Work note: "Yeddi layihə, çoxməkanlı restoran sifariş platformasından brauzer oyununa qədər. Dördünün ətraflı təsviri var."
 - About (2026-10-26): intro, status card, "Təcrübə" and "Təhsil və nailiyyətlər" chapters, cards and the Renter.az / VersePay timeline texts are **your own wording** (not translated). One sentence added by your decision: "…və 5 komanda layihəsinin tamamlanmasını təmin etmişəm" (AZ CV wording). Chapter "Hakatonlar və daha çoxu" unchanged.
 - UI labels added 2026-10-26: "İş statusu", "Əlaqə saxla", "Hazırda", "Əvvəl", "hazırda", "keçmiş", "Nəticələr"; the timeline section and its nav link are now "Karyera".

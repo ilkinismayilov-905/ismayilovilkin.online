@@ -17,8 +17,8 @@ for (const width of widths) for (const theme of ['dark', 'light'] as const) {
             if (el.closest('.sr-only, .skip, #photoBg, dialog:not([open]), .preview, .toast, #suggest[hidden]')) continue;
             const r = el.getBoundingClientRect();
             if (!r.width || !r.height) continue;
-            // the hero tag deliberately hangs over the arch edge; the arch ring is decorative
-            if (el.closest('.tag, .portrait-ring')) continue;
+            // the arch ring is decorative and deliberately larger than the portrait
+            if (el.closest('.portrait-ring')) continue;
             if (r.right > vw + 1 || r.left < -1) bad.push(`${el.tagName.toLowerCase()}.${el.className} ${Math.round(r.left)}..${Math.round(r.right)}`);
             if (getComputedStyle(el).whiteSpace === 'nowrap' && el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflow !== 'visible') bad.push(`clipped: ${el.className}`);
           }
