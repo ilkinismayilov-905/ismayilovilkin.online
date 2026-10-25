@@ -1,16 +1,16 @@
 meta:
   title: Ilkin Ismayilov — Java Backend Developer
-  description: Java backend developer in Baku. I lead a 6-person backend team at an early-stage FinTech startup and build secure, well-tested Spring Boot services.
+  description: Java backend developer in Baku. I build fast, well-tested APIs with Spring Boot. I led a 6-person backend team at VersePay and I'm looking for Java backend roles in banking and FinTech.
 
 person:
   name: Ilkin Ismayilov
   nameLines: [Ilkin, Ismayilov]
   jobTitle: Java Backend Developer
   location: Baku, Azerbaijan
-  description: Java Backend Developer and Computer Engineering student leading a 6-person backend team at an early-stage FinTech startup.
+  description: Java Backend Developer, co-founder of Renter.az and Computer Engineering student.
 
 hero:
-  intro: I lead a 6-person backend team at an early-stage FinTech startup. I build secure, well-tested Spring Boot services. Average API response time went from 1000 ms to 14 ms, with ~95% test coverage across 75 endpoints.
+  intro: "I build backend systems with Java and Spring Boot. At VersePay I led a 6-person backend team: average response time went from 1000 ms to 14 ms, and we reached ~95% test coverage across 75 endpoints."
   portrait: ../../assets/photos/hero.jpg
   portraitAlt: Ilkin Ismayilov in a white PASHA Hackathon T-shirt with a name badge, standing in front of a sponsor wall.
   tag:
@@ -18,9 +18,9 @@ hero:
     text: average API response
 
 status:
-  now: Java Backend Team Lead at VersePay
-  focus: Payments, Spring Boot, performance and testing
-  next: Looking for a first corporate role in banking or FinTech backend
+  now: Co-founder & CMO at Renter.az · student at UNEC
+  focus: Java, Spring Boot, API design, performance and testing
+  next: Looking for Java backend roles in banking and FinTech
   easterEgg: Tea first, then the next endpoint
 
 work:

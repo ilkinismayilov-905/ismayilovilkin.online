@@ -1,13 +1,13 @@
 items:
+  - role: Co-founder & CMO
+    org: Renter.az
+    current: true
+    text: Responsible for marketing and growth of a car rental platform with ~100 customers.
   - role: Java Backend Team Lead
     org: VersePay
     start: 2025-12
-    current: true
-    text: Early-stage FinTech startup with merchant payment links and a customer loyalty platform. I lead a 6-person backend team, reduced average API response time from 1000 ms to 14 ms and reached ~95% code coverage across 75 endpoints.
-  - role: Co-founder & Project Manager
-    org: Renter.az
-    current: true
-    text: Lead product planning and delivery of a live vehicle rental marketplace with ~100 customers. Roadmap, task breakdown and team coordination.
+    end: 2026-10
+    text: Led a 6-person team. Average response time went from 1000 ms to 14 ms, and we reached ~95% test coverage across 75 endpoints.
   - role: Java Backend Mentor
     org: CodersAzerbaijan
     start: 2025-09

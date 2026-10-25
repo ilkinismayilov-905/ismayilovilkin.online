@@ -11,7 +11,7 @@ const paths = arg('paths', arg('path', '/')).split(',');
 const widths = arg('widths', '1366,375').split(',').map(Number);
 const themes = arg('themes', 'dark,light').split(',');
 // Positions to measure; selectors missing on a page are skipped (home page and case-study pages share the list)
-const stops = ['#top', '#work', '.about-text .chapter:nth-of-type(1)', '.about-text .chapter:nth-of-type(2)', '.about-text .chapter:nth-of-type(3)', '.skills', '#experience', '#awards',
+const stops = ['#top', '#work', '.about-intro', '.roles', '.stats-4', '.about-text .chapter:nth-of-type(1)', '.about-text .chapter:nth-of-type(2)', '.about-text .chapter:nth-of-type(3)', '.skills', '#experience', '#awards',
   '.case-rich h1', '.case-main h2:nth-of-type(2)', '.case-nav', '#contact'];
 
 const lum = (r, g, b) => { const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };

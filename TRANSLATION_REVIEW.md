@@ -17,12 +17,15 @@ UI strings live in `src/i18n/ui.ts`; content in `src/content/*/az*`.
 ## Content passages (not in the AZ CV word for word)
 
 - Photo captions: "Qarabağ Hakatonu 2026", "TransportTech Hakatonu 2026" (from the AZ CV event names); the others are names and years.
-- Hero intro: "Erkən mərhələli FinTech startapında 6 backend developerdən ibarət komandaya rəhbərlik edirəm. Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam. Orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsi var."
-- Meta description, JSON-LD description, hero portrait alt text.
-- Status board: "VersePay-də Java Backend Team Lead", "Ödənişlər, Spring Boot, performans və testlər", "Bank və ya FinTech backend sahəsində ilk korporativ rol axtarıram".
+- Hero intro (2026-10-26, after leaving VersePay): "Java və Spring Boot ilə backend sistemlər qururam. VersePay-də 6 nəfərlik backend komandasına rəhbərlik etdim: orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsinə çatdıq." (first sentence is yours; the rest is the old intro in the past tense).
+- Meta description (2026-10-26): "Bakıda Java backend developer. Spring Boot ilə sürətli və testlərlə qorunan API-lər qururam. VersePay-də 6 nəfərlik backend komandasına rəhbərlik etmişəm, bank və FinTech sahəsində Java backend rolları axtarıram."
+- JSON-LD description (2026-10-26): "Java Backend Developer, Renter.az-ın həmtəsisçisi və Kompüter Mühəndisliyi tələbəsi."
+- Hero portrait alt text.
+- Status board (2026-10-26): "Renter.az-da həmtəsisçi və CMO · UNEC-də tələbə" and "Java, Spring Boot, API dizaynı, performans və testlər" (your wording from the new status card), "Bank və FinTech sahəsində Java backend rolları axtarıram" (shortened from your availability text).
 - Hero tag: "orta API cavab müddəti".
 - Work note: "Yeddi layihə, çoxməkanlı restoran sifariş platformasından brauzer oyununa qədər. Dördünün ətraflı təsviri var."
-- About chapter titles: "Nə qururam", "Necə öyrənirəm", "Hakatonlar və daha çoxu", and the chapter texts (built from AZ CV phrases).
+- About (2026-10-26): intro, status card, "Təcrübə" and "Təhsil və nailiyyətlər" chapters, cards and the Renter.az / VersePay timeline texts are **your own wording** (not translated). One sentence added by your decision: "…və 5 komanda layihəsinin tamamlanmasını təmin etmişəm" (AZ CV wording). Chapter "Hakatonlar və daha çoxu" unchanged.
+- UI labels added 2026-10-26: "İş statusu", "Əlaqə saxla", "Hazırda", "Əvvəl", "hazırda", "keçmiş", "Nəticələr"; the timeline section and its nav link are now "Karyera".
 - Principles: "Əvvəl ölç, sonra düzəlt", "Testlər kodla birlikdə gəlir", "Təhlükəsizlik ilk versiyanın bir hissəsidir", "Buraxılış adi iş olsun" and their sentences.
 - Project summaries for Yolçu, AbadLand, Space Shooter, Paygenix (shortened from CV lines); case-study sentences
   "Mənim payım: …", "Platforma milly-front.vercel.app ünvanında işləyir."
@@ -32,7 +35,7 @@ UI strings live in `src/i18n/ui.ts`; content in `src/content/*/az*`.
 
 ## UI strings (all of `az` in `src/i18n/ui.ts`)
 
-Navigation: İşlər, Haqqımda, Təcrübə, Hakatonlar, Əlaqə · Buttons: Axtar, Tema, E-poçtu kopyala, Bağla ·
+Navigation: İşlər, Haqqımda, Karyera, Hakatonlar, Əlaqə · Buttons: Axtar, Tema, E-poçtu kopyala, Bağla ·
 Filters: Hamısı, Backend, Hakatonlar, Frontend · Count: "Bütün 7 layihə göstərilir", "2 hakaton layihəsi göstərilir" ·
 Toasts: "E-poçt kopyalandı", "Açıq tema aktivdir", "Tünd tema aktivdir", "Status işığını tapdın." ·
 Palette: "Bölmə, layihə və ya əməliyyat axtarın", groups "Keçid", "Layihəni aç", "İşləri süz", "Əməliyyatlar" ·

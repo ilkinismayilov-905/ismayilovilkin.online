@@ -18,7 +18,7 @@ const when = (i: (typeof items)[number]) => {
     <div class="tl-wrap" id="timeline"><span class="tl-progress" aria-hidden="true"></span>
       <ol class="timeline">
         {items.map((i) => (
-          <li>
+          <li class:list={[{ current: i.current }]}>
             <span class="tl-when">{when(i)}</span>
             <div><p class="tl-role">{i.role}{' '}<span class:list={['tl-org', { 'tl-org-line': locale === 'az' }]}>{t('exp.org', { org: i.org })}</span></p><p class="tl-what">{i.text}</p></div>
           </li>

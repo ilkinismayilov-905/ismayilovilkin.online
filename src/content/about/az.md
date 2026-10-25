@@ -1,14 +1,37 @@
 ---
+intro:
+  lead: Java və Spring Boot ilə backend sistemlər qururam. Sürətli işləyən API-lər, testlərlə qorunan kod və sonradan böyüməyə hazır arxitektura məni ən çox maraqlandıran mövzulardır.
+  text: Komandaya rəhbərlik etmişəm, indi isə Renter.az-ın həmtəsisçisi kimi məhsula biznes tərəfdən də baxıram. Kodun arxasında hansı problemin dayandığını anlamaq mənim üçün kodun özü qədər vacibdir.
+availability:
+  title: İş və internship təkliflərinə açığam
+  text: "Bank və FinTech sahəsində Java backend rolları axtarıram: tam ştat və ya internship."
+status:
+  focus: Java, Spring Boot, API dizaynı, performans və testlər
+  now: Renter.az-da həmtəsisçi və CMO · UNEC-də tələbə
+  before: VersePay-də Java Backend Team Lead
 chapters:
-  - title: Nə qururam
-    text:
-      - İşimin çoxu interfeysin arxasındadır. Ödəniş linkləri, müştəri loyallığı və marketplace-lər üçün Java və Spring Boot servisləri qururam.
-      - VersePay-də 6 nəfərlik backend komandasına rəhbərlik edirəm, Jira-da sprint planlamasından code review və arxitektura qərarlarına qədər. Renter.az-da, ~100 müştərili canlı avtomobil icarəsi platformasında, həmtəsisçi kimi planlaşdırma, tapşırıq bölgüsü və koordinasiyanı idarə edirəm.
+  - title: Təcrübə
+    subtitle: Komanda, məhsul və rəqəmlər
+    roles:
+      - title: Java Backend Team Lead · VersePay
+        text: "6 nəfərlik backend komandasına rəhbərlik etdim. Ödəniş linkləri, müştəri loyallığı və marketplace servisləri üzərində işlədik: sprint planlamasından code review və arxitektura qərarlarına qədər."
+        stats:
+          - { value: 14 ms, label: "orta cavab müddəti, əvvəl 1000 ms" }
+          - { value: "~95%", label: 75 endpoint üzrə test əhatəsi }
+          - { value: "6", label: developerdən ibarət komanda }
+      - title: Həmtəsisçi və CMO · Renter.az
+        current: true
+        text: ~100 müştərili avtomobil icarəsi platformasının marketinq strategiyasına, brendinə və yeni müştəri cəlbinə cavabdehəm. Bu rol texniki qərarların biznesə necə təsir etdiyini yaxından görməyimə kömək edir.
     background: story-build
-  - title: Necə öyrənirəm
+  - title: Təhsil və nailiyyətlər
+    subtitle: Öyrənmək və öyrətmək
     text:
-      - UNEC-də Kompüter Mühəndisliyi üzrə oxuyuram, ÜOMG 95/100. Ironhack IT SkillSprint Bootcamp-ı tam təqaüdlə, 100/100 ortalama ilə bitirmişəm.
-      - Komandamızın final layihəsi Milly IT SkillSprint-in final Capstone layihəsində Web Development & AI üzrə ümumi qalib oldu. Öyrətmək də məni inkişaf etdirir. CodersAzerbaijan-da 6 junior developerə mentorluq etmişəm və 5 komanda layihəsinin tamamlanmasını təmin etmişəm.
+      - "UNEC-də Kompüter Mühəndisliyi üzrə oxuyuram. Ironhack IT SkillSprint Bootcamp-ı tam təqaüdlə bitirmişəm, komandamızın final layihəsi isə Capstone müsabiqəsində qalib oldu. Öyrətməyi də öyrənməyin bir hissəsi sayıram: CodersAzerbaijan-da junior developerlərə mentorluq etmişəm və 5 komanda layihəsinin tamamlanmasını təmin etmişəm."
+    cards:
+      - { value: 95/100, title: ÜOMG, text: "UNEC, Kompüter Mühəndisliyi" }
+      - { value: 100/100, title: Bootcamp ortalaması, text: "Ironhack IT SkillSprint, tam təqaüd" }
+      - { value: Qalib, title: Final Capstone, text: "Web Development & AI, ümumi birincilik" }
+      - { value: "6", title: junior developer, text: CodersAzerbaijan-da mentorluq }
     background: story-learn
   - title: Hakatonlar və daha çoxu
     text:

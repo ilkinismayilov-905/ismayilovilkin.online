@@ -69,10 +69,10 @@ test.describe('keyboard only', () => {
     await page.keyboard.press('Escape');
     await expect(page.locator('#workList a[data-case="yolcu"]')).toBeFocused();
 
-    // palette: arrows + Enter run a command (go to Experience)
+    // palette: arrows + Enter run a command (go to Career)
     await page.keyboard.press('Control+k');
     await expect(page.locator('#palInput')).toBeFocused();
-    await page.keyboard.type('experience');
+    await page.keyboard.type('career');
     await page.keyboard.press('Enter');
     await expect(page.locator('#exp-h')).toBeFocused();
 
@@ -116,8 +116,8 @@ test.describe('keyboard only, Azerbaijani', () => {
     await page.keyboard.press('Escape');
     await expect(page.locator('#workList a[data-case="abadland-qarabag"]')).toBeFocused();
     await page.keyboard.press('/');
-    await page.keyboard.type('təcrübə');
-    await expect(page.locator('.pal-opt[aria-selected="true"]')).toContainText('Təcrübə');
+    await page.keyboard.type('karyera');
+    await expect(page.locator('.pal-opt[aria-selected="true"]')).toContainText('Karyera');
     await page.keyboard.press('Enter');
     await expect(page.locator('#exp-h')).toBeFocused();
     await page.keyboard.press('Control+k');

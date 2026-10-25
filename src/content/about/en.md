@@ -1,14 +1,37 @@
 ---
+intro:
+  lead: I build backend systems with Java and Spring Boot. Fast APIs, code protected by tests and an architecture that is ready to grow are the topics that interest me most.
+  text: I have led a team, and now, as co-founder of Renter.az, I also look at the product from the business side. Understanding the problem behind the code matters to me as much as the code itself.
+availability:
+  title: Open to job and internship offers
+  text: "I'm looking for Java backend roles in banking and FinTech: full-time or internship."
+status:
+  focus: Java, Spring Boot, API design, performance and testing
+  now: Co-founder & CMO at Renter.az · student at UNEC
+  before: Java Backend Team Lead at VersePay
 chapters:
-  - title: What I build
-    text:
-      - Most of my work sits behind the interface. I build Java and Spring Boot services for payment links, customer loyalty and marketplaces.
-      - At VersePay I lead a 6-person backend team, from sprint planning in Jira to code reviews and architecture decisions. At Renter.az, a live vehicle rental marketplace with about 100 customers, I lead product planning and delivery as co-founder.
+  - title: Experience
+    subtitle: Team, product and numbers
+    roles:
+      - title: Java Backend Team Lead · VersePay
+        text: "I led a 6-person backend team. We worked on payment links, customer loyalty and marketplace services: from sprint planning to code reviews and architecture decisions."
+        stats:
+          - { value: 14 ms, label: "average response time, down from 1000 ms" }
+          - { value: "~95%", label: test coverage across 75 endpoints }
+          - { value: "6", label: developers on the team }
+      - title: Co-founder & CMO · Renter.az
+        current: true
+        text: I'm responsible for marketing strategy, brand and customer acquisition at a car rental platform with ~100 customers. The role shows me up close how technical decisions affect the business.
     background: story-build
-  - title: How I learn
+  - title: Education & achievements
+    subtitle: Learning and teaching
     text:
-      - I study Computer Engineering at UNEC, with a GPA of 95/100. I graduated from the Ironhack IT SkillSprint bootcamp with a 100/100 average, on a full scholarship.
-      - Our capstone, Milly, was the overall winner of the IT SkillSprint final Capstone (Web Development & AI). Teaching keeps me sharp too. At CodersAzerbaijan I mentored 6 junior developers and guided 5 team projects to completion.
+      - "I study Computer Engineering at UNEC. I graduated from the Ironhack IT SkillSprint Bootcamp on a full scholarship, and our team's final project won the Capstone competition. I see teaching as part of learning: at CodersAzerbaijan I mentored junior developers and guided 5 team projects to completion."
+    cards:
+      - { value: 95/100, title: GPA, text: "UNEC, Computer Engineering" }
+      - { value: 100/100, title: Bootcamp average, text: "Ironhack IT SkillSprint, full scholarship" }
+      - { value: Winner, title: Final Capstone, text: "Web Development & AI, overall winner" }
+      - { value: "6", title: junior developers, text: mentored at CodersAzerbaijan }
     background: story-learn
   - title: Hackathons and beyond
     text:

@@ -1,13 +1,13 @@
 items:
+  - role: Həmtəsisçi və CMO
+    org: Renter.az
+    current: true
+    text: ~100 müştərili avtomobil icarəsi platformasının marketinqinə və böyüməsinə cavabdehəm.
   - role: Java Backend Team Lead
     org: VersePay
     start: 2025-12
-    current: true
-    text: Erkən mərhələli FinTech startap, satıcılar üçün ödəniş linkləri və loyallıq platforması. 6 backend developerdən ibarət komandaya rəhbərlik edirəm, orta cavab müddətini 1000 ms-dən 14 ms-ə endirdim və 75 endpoint üzrə ~95% kod əhatəsinə nail oldum.
-  - role: Həmtəsisçi və Layihə Meneceri
-    org: Renter.az
-    current: true
-    text: ~100 müştərili canlı avtomobil icarəsi platformasında planlaşdırma, tapşırıq bölgüsü və koordinasiyanı idarə edirəm.
+    end: 2026-10
+    text: 6 nəfərlik komandaya rəhbərlik etdim. Orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsinə çatdıq.
   - role: Java Backend Mentoru
     org: CodersAzerbaijan
     start: 2025-09

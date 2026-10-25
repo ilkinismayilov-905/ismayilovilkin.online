@@ -39,8 +39,30 @@ const site = defineCollection({
 const about = defineCollection({
   loader: glob({ base: './src/content/about', pattern: '*.md' }),
   schema: z.object({
+      intro: z.strictObject({ lead: z.string(), text: z.string() }),
+      availability: z.strictObject({ title: z.string(), text: z.string() }),
+      status: z.strictObject({ focus: z.string(), now: z.string(), before: z.string() }),
+      // Each chapter has text and/or cards; its photo becomes the page background
       chapters: z
-        .array(z.object({ title: z.string(), text: z.array(z.string()).min(1), background: z.string() }))
+        .array(
+          z.strictObject({
+            title: z.string(),
+            subtitle: z.string().optional(),
+            text: z.array(z.string()).default([]),
+            roles: z
+              .array(
+                z.strictObject({
+                  title: z.string(),
+                  current: z.boolean().default(false),
+                  text: z.string(),
+                  stats: z.array(z.strictObject({ value: z.string(), label: z.string() })).default([]),
+                }),
+              )
+              .default([]),
+            cards: z.array(z.strictObject({ value: z.string(), title: z.string(), text: z.string() })).default([]),
+            background: z.string(),
+          }),
+        )
         .length(3),
       principles: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
       // Enhancement 5: exactly the CV's skill groups and wording; no levels

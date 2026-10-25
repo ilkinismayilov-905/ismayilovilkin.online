@@ -78,6 +78,7 @@ All in `src/content/…/{en,az}`:
 - Hero intro, status "Next" line (from the AZ CV goal), meta descriptions, JSON-LD description.
 - Work note: "Seven projects, … Four have a full case study."
 - The three About chapters and the four "How I work" principles.
+- 2026-10-26: the English versions of your new Azerbaijani About texts (intro, status card, Experience and Education chapters, cards), the Renter.az / VersePay timeline entries, hero intro, status board, meta and JSON-LD descriptions are my translations; the timeline section is now "Career"; role title "Co-founder & CMO".
 - Contact note: "Email is the fastest way to reach me." (no reply-time promise, since none is in the CVs).
 - Project one-line summaries and case-study ledes; image alt texts.
 
@@ -89,3 +90,12 @@ All in `src/content/…/{en,az}`:
   palette entry. Export versions without the phone number (and without the referee block) and I will add them,
   with metadata stripped.
 - Photos: only metadata-free copies are in the repository (`npm run photos`, checked by `check-photos`).
+
+## 9. Role changes (2026-10-26, from your answers)
+
+- VersePay: left in **October 2026** (timeline "Dec 2025 – Oct 2026"; the status card says "Before").
+- Renter.az: role is **Co-founder & CMO** (both CVs still say "Co-founder & Project Manager"); responsible for
+  marketing strategy, brand and customer acquisition. No start date (none in the CVs).
+- Availability: open to full-time and internship Java backend roles in banking and FinTech.
+- The CVs in `CV/` still say VersePay "hazırda / Present" and Renter.az "Layihə Meneceri / Project Manager": update
+  them before you send them anywhere, or the site and the CV will disagree.

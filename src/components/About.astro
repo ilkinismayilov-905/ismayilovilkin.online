@@ -1,22 +1,64 @@
 ---
-// About in the prototype's layout (text + "How I work" glass card); each chapter switches the page background.
+// About: intro + status card, then the photo-story chapters (text, role cards, numbers) and the "How I work" glass card.
 import { getSingle, useT, type Locale } from '../i18n/utils';
 import BgCaption from './BgCaption.astro';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useT(locale);
-const { chapters, principles, skills } = (await getSingle('about', locale)).data;
+const { intro, availability, status, chapters, principles, skills } = (await getSingle('about', locale)).data;
 ---
 <section id="about" aria-labelledby="about-h">
   <div class="wrap">
     <div class="s-head"><h2 id="about-h" tabindex="-1">{t('about.title')}</h2></div>
+    <div class="about-intro">
+      <div>
+        <p class="about-lead">{intro.lead}</p>
+        <p class="about-sub">{intro.text}</p>
+      </div>
+      <aside class="status-card glass" aria-label={t('status.label')}>
+        <div class="avail">
+          <p class="avail-title"><span class="dot" aria-hidden="true"></span>{availability.title}</p>
+          <p class="avail-text">{availability.text}</p>
+          <a class="btn-accent a-btn" href="#contact">{t('status.contact')}</a>
+        </div>
+        <dl class="status-list">
+          <div><dt>{t('board.focus')}</dt><dd>{status.focus}</dd></div>
+          <div><dt>{t('status.now')}</dt><dd>{status.now}</dd></div>
+          <div><dt>{t('status.before')}</dt><dd>{status.before}</dd></div>
+        </dl>
+      </aside>
+    </div>
     <div class="about-grid">
       <div class="about-text">
         {chapters.map((c) => (
           <div class="chapter" data-bg={c.background} data-scrim="soft">
             <h3>{c.title}</h3>
+            {c.subtitle && <p class="ch-sub">{c.subtitle}</p>}
             {c.text.map((p) => <p>{p}</p>)}
+            {c.roles.length > 0 && (
+              <ul class="roles">
+                {c.roles.map((r) => (
+                  <li class="role">
+                    <div class="role-head">
+                      <h4>{r.title}</h4>
+                      <span class:list={['role-badge', { current: r.current }]}>{r.current ? t('role.current') : t('role.past')}</span>
+                    </div>
+                    <p>{r.text}</p>
+                    {r.stats.length > 0 && (
+                      <ul class="stats" aria-label={t('role.stats')}>
+                        {r.stats.map((s) => <li><strong>{s.value}</strong><span>{s.label}</span></li>)}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {c.cards.length > 0 && (
+              <ul class="stats stats-4">
+                {c.cards.map((k) => <li><strong>{k.value}</strong><span class="stat-title">{k.title}</span><span>{k.text}</span></li>)}
+              </ul>
+            )}
             <BgCaption locale={locale} name={c.background} />
           </div>
         ))}

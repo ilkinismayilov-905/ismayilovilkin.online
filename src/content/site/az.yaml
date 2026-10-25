@@ -1,16 +1,16 @@
 meta:
   title: İlkin İsmayılov — Java Backend Developer
-  description: Bakıda Java backend developer. Erkən mərhələli FinTech startapında 6 nəfərlik backend komandasına rəhbərlik edirəm, Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam.
+  description: Bakıda Java backend developer. Spring Boot ilə sürətli və testlərlə qorunan API-lər qururam. VersePay-də 6 nəfərlik backend komandasına rəhbərlik etmişəm, bank və FinTech sahəsində Java backend rolları axtarıram.
 
 person:
   name: İlkin İsmayılov
   nameLines: [İlkin, İsmayılov]
   jobTitle: Java Backend Developer
   location: Bakı, Azərbaycan
-  description: FinTech startapında 6 nəfərlik backend komandasına rəhbərlik edən Java Backend Developer və Kompüter Mühəndisliyi tələbəsi.
+  description: Java Backend Developer, Renter.az-ın həmtəsisçisi və Kompüter Mühəndisliyi tələbəsi.
 
 hero:
-  intro: Erkən mərhələli FinTech startapında 6 backend developerdən ibarət komandaya rəhbərlik edirəm. Spring Boot ilə təhlükəsiz və testlərlə əhatə olunmuş servislər qururam. Orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsi var.
+  intro: "Java və Spring Boot ilə backend sistemlər qururam. VersePay-də 6 nəfərlik backend komandasına rəhbərlik etdim: orta cavab müddəti 1000 ms-dən 14 ms-ə endi, 75 endpoint üzrə ~95% test əhatəsinə çatdıq."
   portrait: ../../assets/photos/hero.jpg
   portraitAlt: İlkin İsmayılov ağ PASHA Hackathon köynəyində, boynunda ad kartı ilə sponsor divarının qarşısında dayanıb.
   tag:
@@ -18,9 +18,9 @@ hero:
     text: orta API cavab müddəti
 
 status:
-  now: VersePay-də Java Backend Team Lead
-  focus: Ödənişlər, Spring Boot, performans və testlər
-  next: Bank və ya FinTech backend sahəsində ilk korporativ rol axtarıram
+  now: Renter.az-da həmtəsisçi və CMO · UNEC-də tələbə
+  focus: Java, Spring Boot, API dizaynı, performans və testlər
+  next: Bank və FinTech sahəsində Java backend rolları axtarıram
   easterEgg: Əvvəlcə çay, sonra növbəti endpoint
 
 work:
